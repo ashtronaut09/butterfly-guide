@@ -1,16 +1,20 @@
 /**
  * labels.js — PDF label generator for Butterfly Collection Manager
  *
- * Generates two styles of pinned-specimen labels:
+ * Generates two styles of pinned-specimen labels with text wrapping:
  *
- *   Title label  — 30mm × 8mm
+ *   Title label  — 30mm × 8mm base, grows up to 12mm for wrapped text
  *     Line 1: English name + sex symbol  (bold, centered)
  *     Line 2: Latin name                 (italic, centered)
  *     Black border, 0.3 mm stroke
  *
- *   Details label — 15mm × 15mm
+ *   Details label — 15mm × 15mm base, grows up to 18mm for wrapped text
  *     Location / Altitude / Date / Collector  (centered, lines omitted if null)
  *     Black border, 0.3 mm stroke
+ *
+ * Uses jsPDF's built-in text wrapping (maxWidth / splitTextToSize) instead of
+ * manual truncation with ellipsis. Labels can grow slightly in height when
+ * text wraps, ensuring all content is visible.
  *
  * Public API
  * ──────────
@@ -29,22 +33,21 @@ const MARGIN_H = 6;     // left & right margin mm
 const MARGIN_V = 10;    // top & bottom margin  mm
 const GUTTER   = 3;     // gap between labels    mm
 
-// Title label dimensions
-const TL_W     = 30;    // mm
-const TL_H     = 8;     // mm
+// Title label
+const TL_W      = 30;    // mm
+const TL_H_BASE = 8;     // base height mm
+const TL_H_MAX  = 12;    // max height mm when text wraps
 
-// Details label dimensions
-const DL_W     = 15;    // mm
-const DL_H     = 15;    // mm
+// Details label
+const DL_W      = 15;    // mm
+const DL_H_BASE = 15;    // base height mm
+const DL_H_MAX  = 18;    // max height mm when text wraps
 
-// Labels per page — derived from constants
+// Columns per page — derived from constants
 const TL_COLS  = Math.floor((PAGE_W - 2 * MARGIN_H) / (TL_W + GUTTER)); // 6
-const TL_ROWS  = Math.floor((PAGE_H - 2 * MARGIN_V) / (TL_H + GUTTER)); // 25
-const TL_PER_PAGE = TL_COLS * TL_ROWS;                                   // 150
-
 const DL_COLS  = Math.floor((PAGE_W - 2 * MARGIN_H) / (DL_W + GUTTER)); // 11
-const DL_ROWS  = Math.floor((PAGE_H - 2 * MARGIN_V) / (DL_H + GUTTER)); // 15
-const DL_PER_PAGE = DL_COLS * DL_ROWS;                                   // 165
+
+const PT_TO_MM = 0.3528;  // 1 pt ≈ 0.3528 mm
 
 // ── Date helpers ───────────────────────────────────────────────────────────
 
@@ -64,180 +67,244 @@ function formatDate(iso) {
 // ── Text-fit helpers ───────────────────────────────────────────────────────
 
 /**
- * Truncates `text` with an ellipsis until it fits within `maxWidth` mm,
- * measuring with jsPDF's getTextWidth(). Tries reducing font size by one
- * point first (down to `minSize`), then falls back to character truncation.
+ * Measures how tall wrapped text will be in mm at a given font size.
+ * Uses doc.splitTextToSize() to find the line count.
  *
- * Returns { text, fontSize } — caller must apply doc.setFontSize(fontSize).
+ * @param {object} doc       jsPDF instance
+ * @param {string} text      text to measure
+ * @param {number} maxWidth  max width in mm
+ * @param {number} fontSize  font size in pt
+ * @returns {{ lines: string[], totalHeight: number, lineH: number }}
+ */
+function measureWrappedHeight(doc, text, maxWidth, fontSize) {
+  doc.setFontSize(fontSize);
+  const lines = doc.splitTextToSize(text, maxWidth);
+  const lineH = fontSize * PT_TO_MM * 1.2; // line-height ~1.2
+  return { lines, totalHeight: lines.length * lineH, lineH };
+}
+
+/**
+ * Finds the largest font size at which `text` fits within `maxWidth` ×
+ * `maxHeight` with wrapping. Steps down from `startSize` to `minSize` in
+ * 0.5 pt increments.
  *
  * @param {object} doc        jsPDF instance
- * @param {string} text
- * @param {number} maxWidth   mm
- * @param {number} fontSize   starting pt size
- * @param {number} minSize    minimum pt size before truncation kicks in
- * @returns {{ text: string, fontSize: number }}
+ * @param {string} text       text to fit
+ * @param {number} maxWidth   max width in mm
+ * @param {number} maxHeight  max height in mm
+ * @param {number} startSize  starting font size in pt
+ * @param {number} minSize    minimum font size in pt
+ * @param {string} fontStyle  'normal' | 'bold' | 'italic'
+ * @returns {{ fontSize: number, lines: string[], totalHeight: number, lineH: number }}
  */
-function fitText(doc, text, maxWidth, fontSize, minSize = 4) {
-  // Step 1 — try a slightly smaller font size first
-  let size = fontSize;
-  doc.setFontSize(size);
-  if (doc.getTextWidth(text) <= maxWidth) return { text, fontSize: size };
+function fitWrappedText(doc, text, maxWidth, maxHeight, startSize, minSize, fontStyle = 'normal') {
+  doc.setFont('helvetica', fontStyle);
 
-  const reduced = Math.max(minSize, size - 1);
-  doc.setFontSize(reduced);
-  if (doc.getTextWidth(text) <= maxWidth) return { text, fontSize: reduced };
-
-  // Step 2 — truncate with ellipsis at the reduced size
-  let truncated = text;
-  while (truncated.length > 1 && doc.getTextWidth(truncated + '…') > maxWidth) {
-    truncated = truncated.slice(0, -1);
+  for (let size = startSize; size >= minSize; size -= 0.5) {
+    const result = measureWrappedHeight(doc, text, maxWidth, size);
+    if (result.totalHeight <= maxHeight) {
+      return { fontSize: size, ...result };
+    }
   }
-  return { text: truncated + '…', fontSize: reduced };
+
+  // At minimum size, return whatever we get (content may clip slightly)
+  const result = measureWrappedHeight(doc, text, maxWidth, minSize);
+  return { fontSize: minSize, ...result };
 }
 
 // ── Label drawing ──────────────────────────────────────────────────────────
 
 /**
  * Draws a single Title label at (x, y) — top-left corner in mm.
+ * Text wraps with maxWidth; label height grows as needed up to TL_H_MAX.
  *
  * @param {object} doc       jsPDF instance
- * @param {number} x
- * @param {number} y
+ * @param {number} x         left edge mm
+ * @param {number} y         top edge mm
  * @param {object} specimen  raw data record
+ * @returns {number} actual label height used (mm)
  */
 function drawTitleLabel(doc, x, y, specimen) {
   const PADDING_H = 1.0;  // horizontal inner padding mm
+  const PADDING_V = 0.5;  // vertical inner padding   mm
   const innerW    = TL_W - 2 * PADDING_H;
+  const maxInnerH = TL_H_MAX - 2 * PADDING_V;
+
+  // Build text
+  const nameText  = [specimen.english_name || '(Unnamed)', specimen.sex || ''].filter(Boolean).join(' ');
+  const latinText = specimen.latin_name || '';
+
+  // Fit name (bold) — give it up to 60% of vertical space
+  const name     = fitWrappedText(doc, nameText, innerW, maxInnerH * 0.6, 5.5, 3, 'bold');
+
+  // Fit latin (italic) — use remaining space below name
+  const remainH  = Math.max(2, maxInnerH - name.totalHeight - 0.3);
+  const latin    = latinText
+    ? fitWrappedText(doc, latinText, innerW, remainH, 5, 3, 'italic')
+    : null;
+
+  // Calculate actual label height
+  const contentH = name.totalHeight + (latin ? 0.3 + latin.totalHeight : 0);
+  const labelH   = Math.max(TL_H_BASE, contentH + 2 * PADDING_V);
 
   // Border
   doc.setDrawColor(0, 0, 0);
   doc.setLineWidth(0.3);
-  doc.rect(x, y, TL_W, TL_H);
+  doc.rect(x, y, TL_W, labelH);
 
-  // ── Line 1: English name + sex symbol (bold) ──
-  const nameRaw = [specimen.english_name || '(Unnamed)', specimen.sex || ''].filter(Boolean).join(' ');
+  // Center content block vertically within the label
+  const startY = y + (labelH - contentH) / 2;
+  const cx     = x + TL_W / 2;
 
+  // Draw name (bold)
   doc.setFont('helvetica', 'bold');
-  const line1 = fitText(doc, nameRaw, innerW, 5.5, 4);
-  doc.setFontSize(line1.fontSize);
+  doc.setFontSize(name.fontSize);
+  name.lines.forEach((line, i) => {
+    doc.text(line, cx, startY + name.lineH * (i + 0.8), { align: 'center' });
+  });
 
-  // ── Line 2: Latin name (italic) ──
-  doc.setFont('helvetica', 'italic');
-  const line2 = fitText(doc, specimen.latin_name || '', innerW, 5, 4);
-  doc.setFontSize(line2.fontSize);
-
-  // Vertical centering: two lines with a small gap
-  // Approximate line height in mm: fontSize(pt) * 0.3528 ≈ pt → mm
-  const ptToMm  = 0.3528;
-  const lh1     = line1.fontSize * ptToMm;
-  const lh2     = line2.fontSize * ptToMm;
-  const lineGap = 0.5;  // mm between baselines of the two lines
-  const blockH  = lh1 + lineGap + lh2;
-  const startY  = y + (TL_H - blockH) / 2 + lh1;  // baseline of line 1
-
-  const cx = x + TL_W / 2;  // horizontal centre
-
-  // Draw line 1 (bold)
-  doc.setFont('helvetica', 'bold');
-  doc.setFontSize(line1.fontSize);
-  doc.text(line1.text, cx, startY, { align: 'center' });
-
-  // Draw line 2 (italic)
-  if (line2.text) {
+  // Draw latin (italic) below name
+  if (latin) {
+    const latinY = startY + name.totalHeight + 0.3;
     doc.setFont('helvetica', 'italic');
-    doc.setFontSize(line2.fontSize);
-    doc.text(line2.text, cx, startY + lineGap + lh2, { align: 'center' });
+    doc.setFontSize(latin.fontSize);
+    latin.lines.forEach((line, i) => {
+      doc.text(line, cx, latinY + latin.lineH * (i + 0.8), { align: 'center' });
+    });
   }
+
+  return labelH;
 }
 
 /**
  * Draws a single Details label at (x, y) — top-left corner in mm.
+ * Each data line wraps independently; label height grows up to DL_H_MAX.
  *
- * @param {object} doc
- * @param {number} x
- * @param {number} y
- * @param {object} specimen
+ * @param {object} doc       jsPDF instance
+ * @param {number} x         left edge mm
+ * @param {number} y         top edge mm
+ * @param {object} specimen  raw data record
+ * @returns {number} actual label height used (mm)
  */
 function drawDetailsLabel(doc, x, y, specimen) {
-  const FONT_SIZE  = 4.5;   // pt
-  const PADDING_H  = 0.8;   // mm
-  const innerW     = DL_W - 2 * PADDING_H;
+  const PADDING_H = 0.8;  // horizontal inner padding mm
+  const PADDING_V = 0.5;  // vertical inner padding   mm
+  const innerW    = DL_W - 2 * PADDING_H;
+  const maxInnerH = DL_H_MAX - 2 * PADDING_V;
+
+  // Build content lines — omit nulls / empties
+  const textLines = [];
+
+  if (specimen.location) {
+    textLines.push(specimen.location);
+  }
+  if (specimen.altitude_m != null) {
+    textLines.push(`${specimen.altitude_m}m`);
+  }
+  const dateFmt = formatDate(specimen.date_bought);
+  if (dateFmt) {
+    textLines.push(dateFmt);
+  }
+  // Collector: only if explicitly set, never default
+  if (specimen.collector != null && specimen.collector !== '') {
+    textLines.push(specimen.collector);
+  }
+
+  // No content — draw border at base height and return
+  if (textLines.length === 0) {
+    doc.setDrawColor(0, 0, 0);
+    doc.setLineWidth(0.3);
+    doc.rect(x, y, DL_W, DL_H_BASE);
+    return DL_H_BASE;
+  }
+
+  // Each line gets an equal share of the available vertical space
+  const perLineMax  = maxInnerH / textLines.length;
+  const lineGap     = 0.4; // mm between wrapped line blocks
+
+  const fitted = textLines.map(text =>
+    fitWrappedText(doc, text, innerW, perLineMax, 4.5, 3, 'normal')
+  );
+
+  const contentH = fitted.reduce((sum, f) => sum + f.totalHeight, 0) + (fitted.length - 1) * lineGap;
+  const labelH   = Math.max(DL_H_BASE, contentH + 2 * PADDING_V);
 
   // Border
   doc.setDrawColor(0, 0, 0);
   doc.setLineWidth(0.3);
-  doc.rect(x, y, DL_W, DL_H);
+  doc.rect(x, y, DL_W, labelH);
 
-  // Build content lines — omit nulls/empties
-  const lines = [];
+  // Center content block vertically within the label
+  const cx  = x + DL_W / 2;
+  let curY  = y + (labelH - contentH) / 2;
 
-  if (specimen.location) {
-    lines.push(specimen.location);
-  }
-  if (specimen.altitude_m != null) {
-    lines.push(`${specimen.altitude_m}m`);
-  }
-  const dateFmt = formatDate(specimen.date_bought);
-  if (dateFmt) {
-    lines.push(dateFmt);
-  }
-  // Collector: only if explicitly set, never default
-  if (specimen.collector != null && specimen.collector !== '') {
-    lines.push(specimen.collector);
-  }
-
-  if (lines.length === 0) return;  // border only, nothing to render
-
-  // Measure each line and fit to width
-  const ptToMm  = 0.3528;
-  const lineH   = FONT_SIZE * ptToMm;
-  const lineGap = 0.6;  // mm between lines
-
-  const fittedLines = lines.map(raw => {
+  fitted.forEach((f) => {
     doc.setFont('helvetica', 'normal');
-    return fitText(doc, raw, innerW, FONT_SIZE, 3.5);
+    doc.setFontSize(f.fontSize);
+    f.lines.forEach((line, i) => {
+      doc.text(line, cx, curY + f.lineH * (i + 0.8), { align: 'center' });
+    });
+    curY += f.totalHeight + lineGap;
   });
 
-  const blockH = fittedLines.length * lineH +
-                 (fittedLines.length - 1) * lineGap;
-  const startY = y + (DL_H - blockH) / 2 + lineH;  // baseline of first line
-
-  const cx = x + DL_W / 2;
-
-  fittedLines.forEach((fl, i) => {
-    doc.setFont('helvetica', 'normal');
-    doc.setFontSize(fl.fontSize);
-    doc.text(fl.text, cx, startY + i * (lineH + lineGap), { align: 'center' });
-  });
+  return labelH;
 }
 
-// ── Page layout helpers ────────────────────────────────────────────────────
+// ── Page layout ────────────────────────────────────────────────────────────
 
 /**
- * Returns the top-left (x, y) position of a cell in a label grid.
+ * Lays out labels row by row, allowing each label to report its actual height.
+ * When a row is complete, Y advances by the tallest label in that row plus
+ * gutter. Starts a new page when the next row would exceed the page bottom.
  *
- * @param {number} index       0-based position within the current page
- * @param {number} cols        labels per row
- * @param {number} labelW      label width mm
- * @param {number} labelH      label height mm
- * @returns {{ x: number, y: number }}
+ * @param {object}   doc         jsPDF instance
+ * @param {object[]} specimens   array of specimen records
+ * @param {function} drawFn      function(doc, x, y, specimen) → height mm
+ * @param {number}   labelW      label width mm (used for column spacing)
+ * @param {number}   baseLabelH  minimum label height mm (used for page-break check)
+ * @param {number}   cols        number of columns per page
  */
-function cellPosition(index, cols, labelW, labelH) {
-  const col = index % cols;
-  const row = Math.floor(index / cols);
-  return {
-    x: MARGIN_H + col * (labelW + GUTTER),
-    y: MARGIN_V + row * (labelH + GUTTER),
-  };
+function layoutLabels(doc, specimens, drawFn, labelW, baseLabelH, cols) {
+  let pageX   = MARGIN_H;
+  let pageY   = MARGIN_V;
+  let colIdx  = 0;
+  let rowMaxH = 0;
+
+  specimens.forEach((specimen, i) => {
+    // Before drawing the first label of a new row, check if a page break is needed
+    if (i > 0 && colIdx === 0 && pageY + baseLabelH > PAGE_H - MARGIN_V) {
+      doc.addPage();
+      pageY  = MARGIN_V;
+      colIdx = 0;
+      // pageX is already MARGIN_H, rowMaxH is 0
+    }
+
+    // Draw the label and capture its actual height
+    const h = drawFn(doc, pageX, pageY, specimen);
+    rowMaxH = Math.max(rowMaxH, h);
+
+    colIdx++;
+
+    if (colIdx >= cols) {
+      // Row complete — advance Y for the next row
+      pageY  += rowMaxH + GUTTER;
+      pageX   = MARGIN_H;
+      colIdx  = 0;
+      rowMaxH = 0;
+    } else {
+      pageX += labelW + GUTTER;
+    }
+  });
 }
 
 // ── PDF generation ─────────────────────────────────────────────────────────
 
 /**
  * Generates a print-ready A4 PDF containing:
- *   1. All title  labels (30mm × 8mm)  for the selected specimens
- *   2. All details labels (15mm × 15mm) for the selected specimens
+ *   1. All title  labels (30mm × 8-12mm) for the selected specimens
+ *   2. All details labels (15mm × 15-18mm) for the selected specimens
  *
+ * Text wraps within each label using jsPDF's maxWidth support.
  * Triggers a browser download named 'labels-YYYY-MM-DD.pdf'.
  *
  * @param {object[]} specimens  — array of selected specimen records
@@ -267,38 +334,19 @@ export function generateLabelsPDF(specimens) {
   doc.setTextColor(0, 0, 0);
 
   // ── Title labels ──────────────────────────────────────────────────────────
-  specimens.forEach((specimen, i) => {
-    const posInPage = i % TL_PER_PAGE;
-
-    // New page needed (but not for the very first label — page 1 already exists)
-    if (i > 0 && posInPage === 0) {
-      doc.addPage();
-    }
-
-    const { x, y } = cellPosition(posInPage, TL_COLS, TL_W, TL_H);
-    drawTitleLabel(doc, x, y, specimen);
-  });
+  layoutLabels(doc, specimens, drawTitleLabel, TL_W, TL_H_BASE, TL_COLS);
 
   // ── Details labels ────────────────────────────────────────────────────────
-  specimens.forEach((specimen, i) => {
-    const posInPage = i % DL_PER_PAGE;
-
-    // Always add a new page before the first details label block
-    if (posInPage === 0) {
-      doc.addPage();
-    }
-
-    const { x, y } = cellPosition(posInPage, DL_COLS, DL_W, DL_H);
-    drawDetailsLabel(doc, x, y, specimen);
-  });
+  doc.addPage();
+  layoutLabels(doc, specimens, drawDetailsLabel, DL_W, DL_H_BASE, DL_COLS);
 
   // ── Save (manual blob download for Firefox compatibility) ──────────────────
-  const today = new Date().toISOString().slice(0, 10);  // YYYY-MM-DD
+  const today    = new Date().toISOString().slice(0, 10); // YYYY-MM-DD
   const filename = `labels-${today}.pdf`;
-  const blob = doc.output('blob');
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url;
+  const blob     = doc.output('blob');
+  const url      = URL.createObjectURL(blob);
+  const a        = document.createElement('a');
+  a.href    = url;
   a.download = filename;
   document.body.appendChild(a);
   a.click();
@@ -310,9 +358,12 @@ export function generateLabelsPDF(specimens) {
 
 /**
  * Returns a human-readable description of how many labels will be generated
- * and how many pages they will span.
+ * and approximately how many pages they will span.
  *
- * Example: "12 title labels + 12 details labels across 2 pages"
+ * Example: "12 title labels + 12 details labels across ~2 pages"
+ *
+ * Since labels now have variable heights (text wrapping can grow labels),
+ * the page count is an estimate based on ~120 labels per page.
  *
  * @param {object[]} specimens
  * @returns {string}
@@ -324,9 +375,10 @@ export function generatePreview(specimens) {
 
   const n = specimens.length;
 
-  const titlePages   = Math.ceil(n / TL_PER_PAGE);
-  const detailsPages = Math.ceil(n / DL_PER_PAGE);
+  // Estimate: with wrapping, ~120 labels fit per page for each label type
+  const titlePages   = Math.ceil(n / 120);
+  const detailsPages = Math.ceil(n / 120);
   const totalPages   = titlePages + detailsPages;
 
-  return `${n} title label${n === 1 ? '' : 's'} + ${n} details label${n === 1 ? '' : 's'} across ${totalPages} page${totalPages === 1 ? '' : 's'}`;
+  return `${n} title label${n === 1 ? '' : 's'} + ${n} details label${n === 1 ? '' : 's'} across ~${totalPages} page${totalPages === 1 ? '' : 's'}`;
 }

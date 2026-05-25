@@ -104,15 +104,15 @@
   </button>
 
   <button id="btn-export" class="btn btn-secondary" type="button"
-          aria-label="Export collection as JSON backup">
-    Export JSON
+          aria-label="Export collection as ZIP backup with photos">
+    Export Backup
   </button>
 
   <button id="btn-import" class="btn btn-secondary" type="button"
-          aria-label="Import collection from JSON backup">
-    Import JSON
+          aria-label="Import collection from ZIP or JSON backup">
+    Import Backup
   </button>
-  <input id="import-file-input" type="file" accept=".json" style="display:none">
+  <input id="import-file-input" type="file" accept=".json,.zip" style="display:none">
 
 </div>
 
@@ -156,6 +156,14 @@
 <div id="toast" class="toast" role="alert" aria-live="assertive" aria-atomic="true"></div>
 
 <!-- ── Scripts ───────────────────────────────────────────────────────────── -->
+<!--
+  JSZip — used by the zip export/import feature for bundling specimen data
+  and photos into a single downloadable file. Loaded before jsPDF so it's
+  available when the export function runs.
+-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
 <!--
   jsPDF — used by the label generation feature (WP3).
   Loaded here so collection-app.js can reference window.jspdf without

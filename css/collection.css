@@ -1115,17 +1115,6 @@ body.panel-open .status-bar { right: var(--panel-width); }
   color:         var(--text-light);
 }
 
-/* ── Detail panel: delete button in header ──────────────────────────────── */
-.detail-delete-btn {
-  position:    absolute;
-  top:         14px;
-  right:       50px;   /* sits left of the ✕ close button */
-  padding:     4px 8px;
-  font-size:   0.82rem;
-  border-radius: var(--radius-sm);
-  line-height: 1;
-}
-
 /* ── Detail panel: photo wrap ───────────────────────────────────────────── */
 .detail-photo-wrap {
   border-bottom: 1px solid var(--border);
