@@ -245,6 +245,12 @@ function cellPosition(index, cols, labelW, labelH) {
 export function generateLabelsPDF(specimens) {
   if (!specimens || specimens.length === 0) return;
 
+  if (!window.jspdf || typeof window.jspdf.jsPDF !== 'function') {
+    console.error('[labels] jsPDF not loaded — check CDN script tag');
+    alert('PDF library failed to load. Check your internet connection and reload.');
+    return;
+  }
+
   const { jsPDF } = window.jspdf;
   const doc = new jsPDF({ orientation: 'portrait', unit: 'mm', format: 'a4' });
 
@@ -286,9 +292,18 @@ export function generateLabelsPDF(specimens) {
     drawDetailsLabel(doc, x, y, specimen);
   });
 
-  // ── Save ──────────────────────────────────────────────────────────────────
+  // ── Save (manual blob download for Firefox compatibility) ──────────────────
   const today = new Date().toISOString().slice(0, 10);  // YYYY-MM-DD
-  doc.save(`labels-${today}.pdf`);
+  const filename = `labels-${today}.pdf`;
+  const blob = doc.output('blob');
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  setTimeout(() => URL.revokeObjectURL(url), 500);
 }
 
 // ── Preview helper ─────────────────────────────────────────────────────────

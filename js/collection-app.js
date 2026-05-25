@@ -589,7 +589,7 @@ function makeTableRow(s) {
     <td class="col-price editable" data-field="price" data-id="${s.id}" data-type="price">
       ${priceText}
     </td>
-    <td class="col-location editable" data-field="location" data-id="${s.id}" data-type="text">
+    <td class="col-location editable" data-field="location" data-id="${s.id}" data-type="text" title="${escHtml(s.location || '')}">
       ${locationDisplay}
     </td>
     <td class="col-date editable" data-field="date_bought" data-id="${s.id}" data-type="date">
@@ -1599,11 +1599,13 @@ async function addSpecimen() {
  * Full jsPDF implementation is deferred to WP4.
  */
 function generateLabels() {
+  let selected;
   if (selectedIds.size === 0) {
-    showToast('Select at least one specimen first');
-    return;
+    if (!confirm(`No specimens selected.\n\nGenerate labels for all ${filteredSpecimens.length} visible specimens?`)) return;
+    selected = filteredSpecimens;
+  } else {
+    selected = specimens.filter(s => selectedIds.has(s.id));
   }
-  const selected = specimens.filter(s => selectedIds.has(s.id));
   const preview = generatePreview(selected);
   generateLabelsPDF(selected);
   showToast(`PDF downloaded — ${preview}`);
