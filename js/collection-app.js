@@ -234,7 +234,7 @@ function buildFilterOptions() {
   )].sort((a, b) => a.toLowerCase().localeCompare(b.toLowerCase()));
 
   const sexValues     = [...new Set(specimens.map(s => s.sex).filter(Boolean))].sort();
-  const locationValues = [...new Set(specimens.map(s => s.location).filter(Boolean))]
+  const locationValues = [...new Set(specimens.map(s => s.location_country).filter(Boolean))]
                           .sort((a, b) => a.localeCompare(b));
 
   populateSelect('filter-supplier', supplierKeys, 'All Suppliers');
@@ -728,6 +728,11 @@ async function renderDetailPanel(id) {
           <span class="detail-label">Location</span>
           <span class="detail-value editable" data-field="location" data-id="${s.id}"
                 data-type="text">${escHtml(s.location || '–')}</span>
+        </div>
+
+        <div class="detail-row">
+          <span class="detail-label">Country</span>
+          <span class="detail-value">${escHtml(s.location_country || '–')}</span>
         </div>
 
         <div class="detail-row">
@@ -1290,7 +1295,7 @@ function applyFilters(list) {
     }
 
     // Location
-    if (activeFilters.location.length && !activeFilters.location.includes(s.location)) {
+    if (activeFilters.location.length && !activeFilters.location.includes(s.location_country)) {
       return false;
     }
 
