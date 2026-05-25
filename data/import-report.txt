@@ -1,0 +1,282 @@
+========================================================================
+BUTTERFLY COLLECTION IMPORT REPORT
+Generated: 2026-05-25 15:04:27
+========================================================================
+
+Total rows with issues: 92
+
+── Row 33 ──────────────────────────────────
+  • unparseable sent date: '00/06/11'
+
+── Row 34 ──────────────────────────────────
+  • unparseable sent date: '00/6/11'
+
+── Row 1773 ──────────────────────────────────
+  • unparseable received date: 'not sent but free female on 24/1/14'
+
+── Row 1774 ──────────────────────────────────
+  • unparseable received date: 'Received'
+
+── Row 1775 ──────────────────────────────────
+  • unparseable received date: 'Received'
+
+── Row 1776 ──────────────────────────────────
+  • unparseable received date: 'Received'
+
+── Row 1777 ──────────────────────────────────
+  • unparseable received date: 'Received'
+
+── Row 1778 ──────────────────────────────────
+  • unparseable received date: 'Received'
+
+── Row 1779 ──────────────────────────────────
+  • unparseable received date: 'Received'
+
+── Row 1780 ──────────────────────────────────
+  • unparseable received date: 'Received'
+
+── Row 1781 ──────────────────────────────────
+  • unparseable received date: 'Received'
+
+── Row 1782 ──────────────────────────────────
+  • unparseable received date: 'Received'
+
+── Row 1783 ──────────────────────────────────
+  • unparseable received date: 'Received'
+
+── Row 1784 ──────────────────────────────────
+  • unparseable received date: 'Received'
+
+── Row 1785 ──────────────────────────────────
+  • unparseable received date: 'Received'
+
+── Row 1786 ──────────────────────────────────
+  • unparseable received date: 'Received'
+
+── Row 1787 ──────────────────────────────────
+  • unparseable received date: 'Received'
+
+── Row 1788 ──────────────────────────────────
+  • unparseable received date: 'Received'
+
+── Row 1789 ──────────────────────────────────
+  • unparseable received date: 'Received'
+
+── Row 1790 ──────────────────────────────────
+  • unparseable received date: 'Received'
+
+── Row 1791 ──────────────────────────────────
+  • unparseable received date: 'Received'
+
+── Row 1792 ──────────────────────────────────
+  • unparseable received date: 'Received'
+
+── Row 1793 ──────────────────────────────────
+  • unparseable received date: 'Received'
+
+── Row 1794 ──────────────────────────────────
+  • unparseable received date: 'Received'
+
+── Row 1795 ──────────────────────────────────
+  • unparseable received date: 'Received'
+
+── Row 1796 ──────────────────────────────────
+  • unparseable received date: 'Received'
+
+── Row 1797 ──────────────────────────────────
+  • unparseable received date: 'Received'
+
+── Row 1798 ──────────────────────────────────
+  • unparseable received date: 'Received'
+
+── Row 1799 ──────────────────────────────────
+  • unparseable received date: 'Received'
+
+── Row 1800 ──────────────────────────────────
+  • unparseable received date: 'Received'
+
+── Row 1801 ──────────────────────────────────
+  • unparseable received date: 'Received'
+
+── Row 1802 ──────────────────────────────────
+  • unparseable received date: 'Received'
+
+── Row 1803 ──────────────────────────────────
+  • unparseable received date: 'Received'
+
+── Row 1804 ──────────────────────────────────
+  • unparseable received date: 'Received'
+
+── Row 1805 ──────────────────────────────────
+  • unparseable received date: 'Received'
+
+── Row 1806 ──────────────────────────────────
+  • unparseable received date: 'Received'
+
+── Row 1807 ──────────────────────────────────
+  • unparseable received date: 'Received'
+
+── Row 1808 ──────────────────────────────────
+  • unparseable received date: 'Received'
+
+── Row 1809 ──────────────────────────────────
+  • unparseable received date: 'Received'
+
+── Row 1810 ──────────────────────────────────
+  • unparseable received date: 'Received'
+
+── Row 1811 ──────────────────────────────────
+  • unparseable received date: 'Received'
+
+── Row 1812 ──────────────────────────────────
+  • unparseable received date: 'Received'
+
+── Row 1813 ──────────────────────────────────
+  • unparseable received date: 'Received'
+
+── Row 1814 ──────────────────────────────────
+  • unparseable received date: 'Received'
+
+── Row 1815 ──────────────────────────────────
+  • unparseable received date: 'Received'
+
+── Row 1816 ──────────────────────────────────
+  • unparseable received date: 'Received'
+
+── Row 1817 ──────────────────────────────────
+  • unparseable received date: 'Received'
+
+── Row 1818 ──────────────────────────────────
+  • unparseable received date: 'Received'
+
+── Row 1819 ──────────────────────────────────
+  • unparseable received date: 'Received'
+
+── Row 1820 ──────────────────────────────────
+  • unparseable received date: 'Received'
+
+── Row 1821 ──────────────────────────────────
+  • unparseable received date: 'Received'
+
+── Row 1822 ──────────────────────────────────
+  • unparseable received date: 'Received'
+
+── Row 1823 ──────────────────────────────────
+  • unparseable received date: 'Received'
+
+── Row 1824 ──────────────────────────────────
+  • unparseable received date: 'Received'
+
+── Row 1825 ──────────────────────────────────
+  • unparseable received date: 'Received'
+
+── Row 1826 ──────────────────────────────────
+  • unparseable received date: 'Received'
+
+── Row 1827 ──────────────────────────────────
+  • unparseable received date: 'Received'
+
+── Row 1828 ──────────────────────────────────
+  • unparseable received date: 'Received'
+
+── Row 1829 ──────────────────────────────────
+  • unparseable received date: 'Received'
+
+── Row 1830 ──────────────────────────────────
+  • unparseable received date: 'Received'
+
+── Row 1831 ──────────────────────────────────
+  • unparseable received date: 'Received'
+
+── Row 1832 ──────────────────────────────────
+  • unparseable received date: 'Received'
+
+── Row 1833 ──────────────────────────────────
+  • unparseable received date: 'Received'
+
+── Row 1834 ──────────────────────────────────
+  • unparseable received date: 'Received'
+
+── Row 1835 ──────────────────────────────────
+  • unparseable received date: 'Received'
+
+── Row 1836 ──────────────────────────────────
+  • unparseable received date: 'Received'
+
+── Row 1837 ──────────────────────────────────
+  • unparseable received date: 'Received'
+
+── Row 1838 ──────────────────────────────────
+  • unparseable received date: 'Received'
+
+── Row 1839 ──────────────────────────────────
+  • unparseable received date: 'Received'
+
+── Row 1840 ──────────────────────────────────
+  • unparseable received date: 'Received'
+
+── Row 1841 ──────────────────────────────────
+  • unparseable received date: 'Received'
+
+── Row 1842 ──────────────────────────────────
+  • unparseable received date: 'Received'
+
+── Row 1843 ──────────────────────────────────
+  • unparseable received date: 'Received'
+
+── Row 1844 ──────────────────────────────────
+  • unparseable received date: 'Received'
+
+── Row 1845 ──────────────────────────────────
+  • unparseable received date: 'Received'
+
+── Row 1846 ──────────────────────────────────
+  • unparseable received date: 'Received'
+
+── Row 1847 ──────────────────────────────────
+  • unparseable received date: 'Received'
+
+── Row 1848 ──────────────────────────────────
+  • unparseable received date: 'Received'
+
+── Row 1849 ──────────────────────────────────
+  • unparseable received date: 'Received'
+
+── Row 1850 ──────────────────────────────────
+  • unparseable received date: 'Received'
+
+── Row 1851 ──────────────────────────────────
+  • unparseable received date: 'Received'
+
+── Row 1852 ──────────────────────────────────
+  • unparseable received date: 'Received'
+
+── Row 1853 ──────────────────────────────────
+  • unparseable received date: 'Received'
+
+── Row 1854 ──────────────────────────────────
+  • unparseable received date: 'Received'
+
+── Row 1855 ──────────────────────────────────
+  • unparseable received date: 'Received'
+
+── Row 1856 ──────────────────────────────────
+  • unparseable received date: 'Received'
+
+── Row 1857 ──────────────────────────────────
+  • unparseable received date: 'Received'
+
+── Row 1858 ──────────────────────────────────
+  • unparseable received date: 'Received'
+
+── Row 1859 ──────────────────────────────────
+  • unparseable received date: 'Received'
+
+── Row 1860 ──────────────────────────────────
+  • unparseable received date: 'Received'
+
+── Row 1861 ──────────────────────────────────
+  • unparseable received date: 'Received'
+
+── Row 1862 ──────────────────────────────────
+  • unparseable received date: 'Sold by mistake to another collector for £6 - Refunded £30'

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>European Butterfly Guide</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<!-- Header -->
+<header>
+  <div class="header-title">
+    <span style="font-size:1.6rem">🦋</span>
+    <div>
+      <h1>European Butterfly Guide</h1>
+      <div class="subtitle">~488 species · Visual ID &amp; Reference</div>
+    </div>
+  </div>
+  <div class="search-wrap">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+      <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+    </svg>
+    <input id="search" type="search" placeholder="Search species, family…" autocomplete="off">
+  </div>
+</header>
+
+<!-- Filter bar -->
+<div id="filter-bar">
+  <!-- Built dynamically by app.js -->
+</div>
+
+<!-- Active filter chips -->
+<div id="active-filters"></div>
+
+<!-- Toolbar -->
+<div id="toolbar">
+  <span id="result-count"></span>
+  <div class="toolbar-right">
+    <div class="groupby-wrap" id="groupby-wrap">
+      <label for="groupby-select" style="font-size:0.82rem;color:var(--text-muted)">Group by</label>
+      <select id="groupby-select" class="groupby-select">
+        <option value="family">Family</option>
+        <option value="color">Color</option>
+        <option value="size">Size</option>
+        <option value="pattern">Pattern</option>
+        <option value="habitat">Habitat</option>
+      </select>
+    </div>
+    <select id="sort-select" class="sort-select" aria-label="Sort by">
+      <option value="common">A–Z by name</option>
+      <option value="sci">A–Z scientific</option>
+      <option value="family">By family</option>
+      <option value="size-asc">Smallest first</option>
+      <option value="size-desc">Largest first</option>
+      <option value="obs">Most observed</option>
+    </select>
+    <div class="view-toggle">
+      <button class="view-btn active" data-view="grid" title="Grid view">⊞ Grid</button>
+      <button class="view-btn" data-view="grouped" title="Grouped view">≡ Grouped</button>
+    </div>
+  </div>
+</div>
+
+<!-- Loading state -->
+<div id="loading">
+  <div class="spinner"></div>
+  Loading species data…
+</div>
+
+<!-- Species grid -->
+<div id="grid"></div>
+
+<!-- Modal overlay -->
+<div id="modal-overlay" role="dialog" aria-modal="true" aria-label="Species detail">
+  <div id="modal">
+    <button id="modal-close" aria-label="Close">✕</button>
+    <img id="modal-img" src="" alt="" style="display:none">
+    <div id="modal-body"></div>
+  </div>
+</div>
+
+<script type="module" src="js/app.js"></script>
+</body>
+</html>
