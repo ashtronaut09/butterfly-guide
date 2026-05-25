@@ -74,6 +74,12 @@
 
   <div class="toolbar-divider" aria-hidden="true"></div>
 
+  <!-- View toggle -->
+  <div class="view-toggle" role="group" aria-label="View mode">
+    <button class="view-btn view-btn--active" data-view="table" title="Table view" aria-label="Table view">☰</button>
+    <button class="view-btn" data-view="grid" title="Grid view" aria-label="Grid view">⊞</button>
+  </div>
+
   <!-- Sort -->
   <select id="sort-select" class="sort-select" aria-label="Sort specimens">
     <option value="english_name">A–Z by name</option>
@@ -166,6 +172,7 @@
 -->
 <script type="module" src="js/db.js"></script>
 <script type="module" src="js/photos.js"></script>
+<script type="module" src="js/photo-seeder.js"></script>
 <script type="module" src="js/labels.js"></script>
 <script type="module" src="js/collection-app.js"></script>
 

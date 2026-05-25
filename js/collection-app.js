@@ -12,6 +12,7 @@ import { openDB, getAllSpecimens, putSpecimen, deleteSpecimen,
          searchSpecimens, getStats, seedFromJSON, exportJSON, importJSON } from './db.js';
 import { initPhotoDB, renderPhotoGallery, getCardThumbnailURL } from './photos.js';
 import { generateLabelsPDF, generatePreview } from './labels.js';
+import { seedPhotos } from './photo-seeder.js';
 
 // ── App state ──────────────────────────────────────────────────────────────
 
@@ -45,6 +46,9 @@ let currentSort = 'english_name';
 
 /** Whether the app is in "select for labels" mode. */
 let labelSelectMode = false;
+
+/** Current view mode: 'table' or 'grid'. */
+let currentView = 'table';
 
 // ── DOM refs ────────────────────────────────────────────────────────────────
 
@@ -85,12 +89,37 @@ async function init() {
 
     await updateStats();
     buildFilterOptions();
-    renderGrid();
+    renderView();
     renderFilterChips();
     showStatus(`${specimens.length} specimens loaded`);
+
+    // Seed photos in the background — don't block the UI
+    seedPhotosInBackground();
   } catch (err) {
     console.error('[app] init failed:', err);
     showStatus(`Error: ${err.message}`, 'error');
+  }
+}
+
+/**
+ * Seeds specimen photos from data/specimen-photos/ into IndexedDB in the
+ * background so the user can browse the table immediately.
+ * After seeding, re-renders the view to show newly-imported thumbnails.
+ */
+async function seedPhotosInBackground() {
+  try {
+    const result = await seedPhotos((loaded, total) => {
+      showStatus(`Importing photos: ${loaded} / ${total}`);
+    });
+    if (result.seeded > 0) {
+      showStatus(`${result.seeded} photos imported — refreshing thumbnails…`);
+      // Re-render to show the newly imported thumbnails
+      renderView();
+      showStatus(`${specimens.length} specimens loaded`);
+    }
+  } catch (err) {
+    console.error('[app] photo seeding failed:', err);
+    showStatus('Photo import failed — see console');
   }
 }
 
@@ -117,6 +146,7 @@ function pushHashState() {
   const q = searchInput ? searchInput.value.trim() : '';
   if (q)                           params.set('q',        q);
   if (currentSort !== 'english_name') params.set('sort',  currentSort);
+  if (currentView !== 'table')     params.set('view',     currentView);
   if (activeFilters.supplier.length)  params.set('supplier', activeFilters.supplier.join('|'));
   if (activeFilters.sex.length)       params.set('sex',      activeFilters.sex.join('|'));
   if (activeFilters.location.length)  params.set('location', activeFilters.location.join('|'));
@@ -156,6 +186,17 @@ function restoreHashState() {
     currentSort = params.get('sort');
     const sortEl = $('sort-select');
     if (sortEl) sortEl.value = currentSort;
+  }
+
+  if (params.has('view')) {
+    const v = params.get('view');
+    if (v === 'grid' || v === 'table') {
+      currentView = v;
+      // Sync toggle button UI
+      document.querySelectorAll('.view-btn').forEach(b => {
+        b.classList.toggle('view-btn--active', b.dataset.view === currentView);
+      });
+    }
   }
 
   if (params.has('supplier'))
@@ -273,6 +314,9 @@ function renderGrid() {
 
     for (const img of lazyImgs) observer.observe(img);
   }
+
+  // Load IndexedDB thumbnails for cards that still show the placeholder
+  loadCardThumbnails();
 }
 
 /**
@@ -351,6 +395,280 @@ function makeCard(s) {
   });
 
   return card;
+}
+
+// ── View dispatcher ──────────────────────────────────────────────────────────
+
+/**
+ * Dispatches to the correct renderer based on `currentView`.
+ */
+function renderView() {
+  if (currentView === 'table') renderTable();
+  else renderGrid();
+}
+
+// ── Date formatting helper ────────────────────────────────────────────────────
+
+/**
+ * Converts an ISO YYYY-MM-DD date string to the display format DD.MM.YYYY.
+ * Returns '–' for missing or non-conforming values.
+ * @param {string} iso
+ * @returns {string}
+ */
+function formatDateDisplay(iso) {
+  if (!iso || !/^\d{4}-\d{2}-\d{2}$/.test(iso)) return '–';
+  const [y, m, d] = iso.split('-');
+  return `${d}.${m}.${y}`;
+}
+
+// ── Table rendering ──────────────────────────────────────────────────────────
+
+/**
+ * Renders a spreadsheet-style <table> into #specimen-grid.
+ * Replaces the grid CSS mode via a class toggle.
+ */
+function renderTable() {
+  if (!specimenGrid) return;
+  specimenGrid.innerHTML = '';
+  specimenGrid.classList.add('specimen-grid--table');
+
+  if (filteredSpecimens.length === 0) {
+    specimenGrid.innerHTML = `
+      <div class="empty-state">
+        <div class="empty-icon">🦋</div>
+        <h3>No specimens found</h3>
+        <p>Try adjusting your search or filters, or add a new specimen.</p>
+      </div>`;
+    return;
+  }
+
+  // Determine sort arrow for each sortable column
+  const sortArrow = (colKey) => {
+    if (currentSort === colKey) return ' ▾';
+    // price has two keys: price_asc / price_desc
+    if (colKey === 'price_asc' && currentSort === 'price_desc') return ' ▴';
+    if (colKey === 'date_acquired' && currentSort === 'date_oldest') return ' ▴';
+    return '';
+  };
+
+  const activeCls = (colKey) => {
+    if (currentSort === colKey) return ' sort-active';
+    if (colKey === 'price_asc' && (currentSort === 'price_asc' || currentSort === 'price_desc')) return ' sort-active';
+    if (colKey === 'date_acquired' && (currentSort === 'date_acquired' || currentSort === 'date_oldest')) return ' sort-active';
+    return '';
+  };
+
+  const table = document.createElement('table');
+  table.className = 'specimen-table';
+  table.setAttribute('role', 'grid');
+
+  table.innerHTML = `
+    <thead>
+      <tr>
+        <th class="col-select"><input type="checkbox" id="select-all" title="Select all" aria-label="Select all"></th>
+        <th class="col-photo">Photo</th>
+        <th class="col-name sortable${activeCls('english_name')}" data-sort="english_name">Name${sortArrow('english_name')}</th>
+        <th class="col-latin sortable${activeCls('latin_name')}" data-sort="latin_name">Latin Name${sortArrow('latin_name')}</th>
+        <th class="col-supplier sortable${activeCls('supplier_name')}" data-sort="supplier_name">Supplier${sortArrow('supplier_name')}</th>
+        <th class="col-price sortable${activeCls('price_asc')}" data-sort="price_asc">Price${sortArrow('price_asc')}</th>
+        <th class="col-location sortable${activeCls('location')}" data-sort="location">Location${sortArrow('location')}</th>
+        <th class="col-date sortable${activeCls('date_acquired')}" data-sort="date_acquired">Date${sortArrow('date_acquired')}</th>
+        <th class="col-desc">Description</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  `;
+
+  const tbody = table.querySelector('tbody');
+  const frag = document.createDocumentFragment();
+  for (const s of filteredSpecimens) {
+    frag.appendChild(makeTableRow(s));
+  }
+  tbody.appendChild(frag);
+
+  specimenGrid.appendChild(table);
+
+  // Wire sortable column headers
+  table.querySelectorAll('th.sortable').forEach(th => {
+    th.addEventListener('click', () => {
+      const col = th.dataset.sort;
+      let newSort = col;
+      // Toggle price direction
+      if (col === 'price_asc') {
+        newSort = (currentSort === 'price_asc') ? 'price_desc' : 'price_asc';
+      }
+      // Toggle date direction
+      if (col === 'date_acquired') {
+        newSort = (currentSort === 'date_acquired') ? 'date_oldest' : 'date_acquired';
+      }
+      // Toggle alpha columns
+      if (col !== 'price_asc' && col !== 'date_acquired' && currentSort === col) {
+        // For alpha sorts, re-click does nothing special (single direction),
+        // but we keep the same key to show the indicator
+        newSort = col;
+      }
+      handleSort(newSort);
+    });
+  });
+
+  // Wire select-all checkbox
+  const selectAll = table.querySelector('#select-all');
+  if (selectAll) {
+    // Reflect current selection state
+    const allSelected = filteredSpecimens.length > 0 &&
+      filteredSpecimens.every(s => selectedIds.has(s.id));
+    selectAll.checked = allSelected;
+    selectAll.indeterminate = !allSelected && filteredSpecimens.some(s => selectedIds.has(s.id));
+
+    selectAll.addEventListener('change', () => {
+      if (selectAll.checked) {
+        filteredSpecimens.forEach(s => selectedIds.add(s.id));
+      } else {
+        filteredSpecimens.forEach(s => selectedIds.delete(s.id));
+      }
+      // Re-render rows to reflect new selection state
+      renderTable();
+      updateLabelButtonState();
+    });
+  }
+
+  // Attach inline editing to all editable cells
+  table.querySelectorAll('.editable').forEach(el => {
+    makeEditable(el, el.dataset.field, el.dataset.id, el.dataset.type || 'text');
+  });
+
+  // Load thumbnails asynchronously after the table is in the DOM
+  loadTableThumbnails();
+}
+
+/**
+ * Builds a single <tr> for one specimen in table view.
+ * @param {Object} s — specimen record
+ * @returns {HTMLTableRowElement}
+ */
+function makeTableRow(s) {
+  const tr = document.createElement('tr');
+  tr.dataset.id = s.id;
+  if (selectedIds.has(s.id)) tr.classList.add('selected');
+
+  // Price display
+  let priceText;
+  if (s.price_is_collected) {
+    priceText = 'collected';
+  } else if (s.price != null && s.price !== '') {
+    const cur = s.currency || '£';
+    priceText = `${escHtml(cur)}${Number(s.price).toFixed(2)}`;
+  } else {
+    priceText = '–';
+  }
+
+  const sexSym = s.sex ? `<span class="sex-sym">${escHtml(s.sex)}</span>` : '';
+  const supplierDisplay = escHtml(s.supplier_username || s.supplier_name || '–');
+  const locationDisplay = escHtml(s.location || '–');
+  const descDisplay = escHtml((s.description || '').slice(0, 80) + ((s.description || '').length > 80 ? '…' : '')) || '–';
+  const dateDisplay = formatDateDisplay(s.date_bought || s.date_received || '');
+
+  tr.innerHTML = `
+    <td class="col-select">
+      <input type="checkbox" class="row-checkbox" data-id="${s.id}"
+             ${selectedIds.has(s.id) ? 'checked' : ''}
+             aria-label="Select ${escHtml(s.english_name || s.latin_name || 'specimen')}">
+    </td>
+    <td class="col-photo">
+      <div class="table-thumb" data-specimen-id="${s.id}">🦋</div>
+    </td>
+    <td class="col-name editable" data-field="english_name" data-id="${s.id}" data-type="text">
+      ${escHtml(s.english_name || '(Unnamed)')}${sexSym}
+    </td>
+    <td class="col-latin editable" data-field="latin_name" data-id="${s.id}" data-type="text">
+      <em>${escHtml(s.latin_name || '–')}</em>
+    </td>
+    <td class="col-supplier editable" data-field="supplier_username" data-id="${s.id}" data-type="text">
+      ${supplierDisplay}
+    </td>
+    <td class="col-price editable" data-field="price" data-id="${s.id}" data-type="price">
+      ${priceText}
+    </td>
+    <td class="col-location editable" data-field="location" data-id="${s.id}" data-type="text">
+      ${locationDisplay}
+    </td>
+    <td class="col-date editable" data-field="date_bought" data-id="${s.id}" data-type="date">
+      ${dateDisplay}
+    </td>
+    <td class="col-desc editable" data-field="description" data-id="${s.id}" data-type="text">
+      ${descDisplay}
+    </td>
+  `;
+
+  // Row click → open detail panel (except on checkbox or an actively-editing cell)
+  tr.addEventListener('click', e => {
+    if (e.target.closest('.row-checkbox') || e.target.closest('.editing')) return;
+    if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.target.tagName === 'SELECT') return;
+    renderDetailPanel(s.id);
+  });
+
+  // Checkbox toggles label selection
+  const cb = tr.querySelector('.row-checkbox');
+  if (cb) {
+    cb.addEventListener('change', e => {
+      e.stopPropagation();
+      toggleLabelSelection(s.id, cb.checked);
+      tr.classList.toggle('selected', cb.checked);
+      // Keep select-all in sync
+      const selectAll = specimenGrid?.querySelector('#select-all');
+      if (selectAll) {
+        const allSelected = filteredSpecimens.every(s2 => selectedIds.has(s2.id));
+        const anySelected = filteredSpecimens.some(s2 => selectedIds.has(s2.id));
+        selectAll.checked = allSelected;
+        selectAll.indeterminate = !allSelected && anySelected;
+      }
+    });
+  }
+
+  return tr;
+}
+
+// ── Thumbnail loaders ─────────────────────────────────────────────────────────
+
+/**
+ * After the table is rendered, asynchronously fills in thumbnail images for
+ * every visible row. Cells that have no photo keep the 🦋 placeholder.
+ */
+async function loadTableThumbnails() {
+  const thumbCells = specimenGrid.querySelectorAll('.table-thumb[data-specimen-id]');
+  for (const cell of thumbCells) {
+    const id = cell.dataset.specimenId;
+    try {
+      const url = await getCardThumbnailURL(id);
+      if (url) {
+        cell.innerHTML = `<img src="${url}" alt="" loading="lazy">`;
+      }
+    } catch (_) { /* keep placeholder */ }
+  }
+}
+
+/**
+ * After the grid is rendered, asynchronously replaces card placeholder divs
+ * with real thumbnail images from IndexedDB.
+ */
+async function loadCardThumbnails() {
+  const photoWraps = specimenGrid.querySelectorAll('.card-photo--placeholder');
+  for (const placeholder of photoWraps) {
+    const card = placeholder.closest('.specimen-card');
+    if (!card) continue;
+    const id = card.dataset.id;
+    try {
+      const url = await getCardThumbnailURL(id);
+      if (url) {
+        const img = document.createElement('img');
+        img.className = 'card-photo';
+        img.src = url;
+        img.alt = '';
+        img.loading = 'lazy';
+        placeholder.replaceWith(img);
+      }
+    } catch (_) { /* keep placeholder */ }
+  }
 }
 
 // ── Detail panel ─────────────────────────────────────────────────────────────
@@ -868,13 +1186,29 @@ function formatFieldDisplay(specimen, field) {
   }
 }
 
-/** Refreshes a single card in the grid without re-rendering everything. */
+/** Refreshes a single card (grid view) or row (table view) without re-rendering everything. */
 function refreshCard(id) {
-  const s    = specimens.find(sp => String(sp.id) === String(id));
-  const card = specimenGrid?.querySelector(`[data-id="${id}"]`);
-  if (!s || !card) return;
-  const newCard = makeCard(s);
-  card.replaceWith(newCard);
+  const s = specimens.find(sp => String(sp.id) === String(id));
+  if (!s) return;
+
+  // Refresh card in grid view
+  const card = specimenGrid?.querySelector(`.specimen-card[data-id="${id}"]`);
+  if (card) {
+    const newCard = makeCard(s);
+    card.replaceWith(newCard);
+    return;
+  }
+
+  // Refresh row in table view
+  const row = specimenGrid?.querySelector(`tr[data-id="${id}"]`);
+  if (row) {
+    const newRow = makeTableRow(s);
+    row.replaceWith(newRow);
+    // Re-attach inline editing
+    newRow.querySelectorAll('.editable').forEach(el => {
+      makeEditable(el, el.dataset.field, el.dataset.id, el.dataset.type || 'text');
+    });
+  }
 }
 
 // ── Search ─────────────────────────────────────────────────────────────────────
@@ -922,7 +1256,7 @@ function handleSearch(query) {
   let base = q ? specimens.filter(s => specimenMatchesQuery(s, q)) : specimens;
   filteredSpecimens = applyFilters(base);
   sortSpecimens();
-  renderGrid();
+  renderView();
   updateSpecimenCountDisplay();
   pushHashState();
 }
@@ -1013,7 +1347,7 @@ function applyFiltersAndSort() {
   let base = q ? specimens.filter(s => specimenMatchesQuery(s, q)) : specimens;
   filteredSpecimens = applyFilters(base);
   sortSpecimens();
-  renderGrid();
+  renderView();
   updateSpecimenCountDisplay();
 }
 
@@ -1447,10 +1781,25 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Close detail panel when clicking the backdrop (outside panel, not on a card)
+  // View toggle buttons
+  document.querySelectorAll('.view-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const view = btn.dataset.view;
+      if (view === currentView) return;
+      currentView = view;
+      document.querySelectorAll('.view-btn').forEach(b => b.classList.remove('view-btn--active'));
+      btn.classList.add('view-btn--active');
+      renderView();
+      pushHashState();
+    });
+  });
+
+  // Close detail panel when clicking the backdrop (outside panel, not on a card or table row)
   document.addEventListener('click', e => {
     if (detailPanel && detailPanel.classList.contains('open')) {
-      if (!detailPanel.contains(e.target) && !e.target.closest('.specimen-card')) {
+      if (!detailPanel.contains(e.target) &&
+          !e.target.closest('.specimen-card') &&
+          !e.target.closest('tr[data-id]')) {
         closeDetailPanel();
       }
     }
