@@ -433,7 +433,7 @@
   },
   {
     "id": "2b41acfa-80a9-4d3a-ac47-0fba13aadbdd",
-    "english_name": "Spanish Chalkhill Blue . Lysandra asturiensis manleyi, a Chalk-hill Blue",
+    "english_name": "Spanish Chalkhill Blue",
     "sex": null,
     "latin_name": "Lysandra asturiensis manleyi",
     "description": "Ab postcaeca; This is one of several confusing species in the Iberian peninsular that are very similar to L. coridon. Until full studies have been completed, probably best to keep them as separate entities",
@@ -452,7 +452,7 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null,
+    "notes": ". Lysandra asturiensis manleyi, a Chalk-hill Blue",
     "location_country": "Spain"
   },
   {
@@ -961,7 +961,7 @@
   },
   {
     "id": "83ca36e3-d867-422c-8265-b1ff2c3458d4",
-    "english_name": "Mountain Alcon Blue. This species is extremely local in Europe, with widely separated populatons, though becomes relatively common further east This is a lovely pair",
+    "english_name": "Mountain Alcon Blue",
     "sex": null,
     "latin_name": "Phengaris rebel",
     "description": null,
@@ -980,7 +980,7 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null,
+    "notes": ". This species is extremely local in Europe, with widely separated populatons, though becomes relatively common further east This is a lovely pair",
     "location_country": "France"
   },
   {
@@ -1033,7 +1033,7 @@
   },
   {
     "id": "974de56d-dec8-4afe-bd3c-5d13b3e67286",
-    "english_name": "Duke of Burgundy Fritillary, Sussex 1948. lovely female specimens",
+    "english_name": "Duke of Burgundy Fritillary, Sussex 1948",
     "sex": null,
     "latin_name": "Hamaeris Hamearis lucina",
     "description": null,
@@ -1052,7 +1052,7 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null,
+    "notes": ". lovely female specimens",
     "location_country": "UK"
   },
   {
@@ -1273,7 +1273,7 @@
   },
   {
     "id": "318d745f-d4cf-4e4c-a1c5-28bc8c350c1f",
-    "english_name": "Canary Speckled Wood. Endemic to the canaries, this species is widespread and common there",
+    "english_name": "Canary Speckled Wood",
     "sex": null,
     "latin_name": "Parage xiphioides,",
     "description": null,
@@ -1292,12 +1292,12 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null,
+    "notes": ". Endemic to the canaries, this species is widespread and common there",
     "location_country": null
   },
   {
     "id": "4f3ef224-f093-43a1-89a5-6118d6af21aa",
-    "english_name": "False Comma. M. This is a very rare butterfly in Europe and genuine European specimens are very difficult to obtain",
+    "english_name": "False Comma",
     "sex": null,
     "latin_name": "Nymphalis vau-album",
     "description": null,
@@ -1316,12 +1316,12 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null,
+    "notes": ". M. This is a very rare butterfly in Europe and genuine European specimens are very difficult to obtain",
     "location_country": null
   },
   {
     "id": "9e9a14a8-9d50-45ca-ae16-cec188b52fda",
-    "english_name": "Great Sooty Satyr. 3 1 Reasonably common in its habitats in southern Europe, this butterfly is almost impossible to obtain in perfect condition, due to its flight through long grasses. Notwithstanding these are in lovely condition and for the species. They are",
+    "english_name": "Great Sooty Satyr",
     "sex": "♂♀",
     "latin_name": "Satyrus ferula",
     "description": null,
@@ -1340,12 +1340,12 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null,
+    "notes": ". 3 1 Reasonably common in its habitats in southern Europe, this butterfly is almost impossible to obtain in perfect condition, due to its flight through long grasses. Notwithstanding these are in lovely condition and for the species. They are",
     "location_country": "France"
   },
   {
     "id": "17b0a5c3-5268-4a82-ac10-0dd6e182b259",
-    "english_name": "Greenish Black Tip. This species is very rare in Europe and a couple of very similar species are found on mainland Spain and in Greece. This one is",
+    "english_name": "Greenish Black Tip",
     "sex": null,
     "latin_name": "Elphinstonia charlonia",
     "description": null,
@@ -1364,7 +1364,7 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null,
+    "notes": ". This species is very rare in Europe and a couple of very similar species are found on mainland Spain and in Greece. This one is",
     "location_country": "Canary Islands"
   },
   {
@@ -1417,7 +1417,7 @@
   },
   {
     "id": "f7aad6cd-27b7-4339-925d-ed223a9dc43c",
-    "english_name": "Large Copper 2 1 female late summer brood and 1 large female 1st late spring brood in good condition. Both Ex. Wood Walton Fen stock",
+    "english_name": "Large Copper",
     "sex": "♀",
     "latin_name": "Lycaena dispar batavus",
     "description": "var. 2nd",
@@ -1436,7 +1436,7 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null,
+    "notes": ". Both Ex. Wood Walton Fen stock | 2 1 female late summer brood and 1 large female 1st late spring brood in good condition",
     "location_country": null
   },
   {
@@ -2065,7 +2065,7 @@
   },
   {
     "id": "78cb6e8c-5277-4a77-b568-d20194f9485b",
-    "english_name": "Odd Spot Blue. 1 X Extremely local in SW Greece, though can be frequent in its habitat. Almost entirely confined to Mt Chelmos massif in Europe, the species is much more frequent in the Middle East This one is",
+    "english_name": "Odd Spot Blue",
     "sex": "♀",
     "latin_name": "Turunama endymion",
     "description": null,
@@ -2084,12 +2084,12 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null,
+    "notes": ". 1 X Extremely local in SW Greece, though can be frequent in its habitat. Almost entirely confined to Mt Chelmos massif in Europe, the species is much more frequent in the Middle East This one is",
     "location_country": "Armenia"
   },
   {
     "id": "bd32784a-0ef9-47f8-99ae-78c5357912bc",
-    "english_name": "Odd Spot Blue. 1 X Extremely local in SW Greece, though can be frequent in its habitat. Almost entirely confined to Mt Chelmos massif in Europe, the species is much more frequent in the Middle East This one is",
+    "english_name": "Odd Spot Blue",
     "sex": "♂",
     "latin_name": "Turunama endymion",
     "description": null,
@@ -2108,12 +2108,12 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null,
+    "notes": ". 1 X Extremely local in SW Greece, though can be frequent in its habitat. Almost entirely confined to Mt Chelmos massif in Europe, the species is much more frequent in the Middle East This one is",
     "location_country": "Armenia"
   },
   {
     "id": "71ace7f9-04a5-444e-a5a5-d1dc93b285a2",
-    "english_name": "Spanish Fritillary. This one is of the race found in Portugal",
+    "english_name": "Spanish Fritillary",
     "sex": null,
     "latin_name": "Euphydryas desfontainei baetica",
     "description": null,
@@ -2132,7 +2132,7 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null,
+    "notes": ". This one is of the race found in Portugal",
     "location_country": null
   },
   {
@@ -2281,7 +2281,7 @@
   },
   {
     "id": "afad1602-e636-43ab-9728-ee30cb4d1087",
-    "english_name": "Chequered Skipper Castor Hanglands, Northhants. June 1936. This species became extinct there about 1971 and in England about 1976",
+    "english_name": "Chequered Skipper Castor Hanglands, Northhants",
     "sex": null,
     "latin_name": "Carterocephalus palaemon",
     "description": "collection of the late W T Hay",
@@ -2300,7 +2300,7 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null,
+    "notes": ". June 1936. This species became extinct there about 1971 and in England about 1976",
     "location_country": null
   },
   {
@@ -2329,7 +2329,7 @@
   },
   {
     "id": "0c791f9a-98f6-4004-8071-d6d6fb28f7dc",
-    "english_name": "New Forest Burnet EXTINCT since 1927 A specimen of this long-extinct species",
+    "english_name": "New Forest Burnet",
     "sex": null,
     "latin_name": "Zygaenidae Z. viciae ytenensis ( British)",
     "description": "magnificent collection of W T Hay",
@@ -2348,12 +2348,12 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null,
+    "notes": "EXTINCT since 1927 A specimen of this long-extinct species",
     "location_country": null
   },
   {
     "id": "759c3250-b64e-4eb3-aae5-f7c6bf355fed",
-    "english_name": "Canary Blue. + very local and only found in the Canaries, though can be frequent in its localities. A very special butterfly and one that took me years to obtain",
+    "english_name": "Canary Blue",
     "sex": "♂♀",
     "latin_name": "Cyclyrius webbianus",
     "description": null,
@@ -2372,12 +2372,12 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null,
+    "notes": ". + very local and only found in the Canaries, though can be frequent in its localities. A very special butterfly and one that took me years to obtain",
     "location_country": null
   },
   {
     "id": "ddd33f33-10f0-496d-91ef-61213a442693",
-    "english_name": "Chapman’s Blue. widespread in Europe and very similar to the Common Blue, with which it often flies",
+    "english_name": "Chapman’s Blue",
     "sex": "♀",
     "latin_name": "Polyommatus thersites",
     "description": null,
@@ -2396,12 +2396,12 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null,
+    "notes": ". widespread in Europe and very similar to the Common Blue, with which it often flies",
     "location_country": null
   },
   {
     "id": "32118fdd-c8b0-452b-ba8c-f71118ade6b6",
-    "english_name": "Iberian Marbled White. Reasonably common in Spain and Portugal with a hybrid zone in southern France with our own Marbled White. Controversy continues with whether or not it is a full species. These are",
+    "english_name": "Iberian Marbled White",
     "sex": null,
     "latin_name": "Melanargia lachesis",
     "description": null,
@@ -2420,12 +2420,12 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null,
+    "notes": ". Reasonably common in Spain and Portugal with a hybrid zone in southern France with our own Marbled White. Controversy continues with whether or not it is a full species. These are",
     "location_country": "Spain"
   },
   {
     "id": "a80f5bef-d675-451c-929c-bf5e6b43219c",
-    "english_name": "Inky Skipper. Not a rare species in SE Europe, though extremely difficult to catch. This one is",
+    "english_name": "Inky Skipper",
     "sex": null,
     "latin_name": "Erynnis marloyi",
     "description": null,
@@ -2444,12 +2444,12 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null,
+    "notes": ". Not a rare species in SE Europe, though extremely difficult to catch. This one is",
     "location_country": "Armenia"
   },
   {
     "id": "738b0c4d-9483-45e5-8f9a-bc9ecbbb854b",
-    "english_name": "Marsh Fritillary. +f local in Europe extremely local in the British Isles. Now fully protected .These specimens were bred prior to protection. Specimens are",
+    "english_name": "Marsh Fritillary",
     "sex": "♂",
     "latin_name": "Euphydryas aurinia",
     "description": null,
@@ -2468,7 +2468,7 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null,
+    "notes": ". +f local in Europe extremely local in the British Isles. Now fully protected .These specimens were bred prior to protection. Specimens are",
     "location_country": "UK"
   },
   {
@@ -2593,7 +2593,7 @@
   },
   {
     "id": "1b72070e-a4c1-47ab-b475-050d99ad5fa8",
-    "english_name": "Monarch rare in Europe only resident in the Canaries and southern Spain. They are very scarce in collections. These are",
+    "english_name": "Monarch",
     "sex": "♂♀",
     "latin_name": "Danaus plexippus",
     "description": null,
@@ -2612,7 +2612,7 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null,
+    "notes": ". They are very scarce in collections. These are | rare in Europe only resident in the Canaries and southern Spain",
     "location_country": "Canary Islands"
   },
   {
@@ -2641,7 +2641,7 @@
   },
   {
     "id": "b29395fa-001a-47ce-b561-bcacb03e3c09",
-    "english_name": "Chapman’s Blue. widespread in Europe and very similar to the Common Blue, with which it often flies",
+    "english_name": "Chapman’s Blue",
     "sex": "♂♀",
     "latin_name": "Polyommatus thersites",
     "description": null,
@@ -2660,7 +2660,7 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null,
+    "notes": ". widespread in Europe and very similar to the Common Blue, with which it often flies",
     "location_country": null
   },
   {
@@ -2881,7 +2881,7 @@
   },
   {
     "id": "95b56ae4-3345-43af-950e-146962fe2e60",
-    "english_name": "Duke of Burgundy species has been becoming scarcer in the UK over the past 40 years due to Downland degradation and modern forestry practices though remains common and widespread throughout much of Europe, these specimens are bred",
+    "english_name": "Duke of Burgundy",
     "sex": "♂♀",
     "latin_name": "Hemaeris Hamearis lucina",
     "description": "They are protected for sale under the Wildlife and Countryside act. However, these are bred specimens from legally collected stock and as such do not require any license to sell",
@@ -2900,12 +2900,12 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null,
+    "notes": "these specimens are bred | species has been becoming scarcer in the UK over the past 40 years due to Downland degradation and modern forestry practices though remains common and widespread throughout much of Europe,",
     "location_country": "France"
   },
   {
     "id": "6b15dc7b-bde3-4b5b-9cfa-0dcad32f7663",
-    "english_name": "Freyja’s Fritillary This species is only found in the most northern areas of Europe and is very difficult to obtain in good condition",
+    "english_name": "Freyja’s Fritillary",
     "sex": "♂",
     "latin_name": "Boloria freija",
     "description": null,
@@ -2924,12 +2924,12 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null,
+    "notes": "This species is only found in the most northern areas of Europe and is very difficult to obtain in good condition",
     "location_country": null
   },
   {
     "id": "15b09af5-fecb-4145-9daa-0dcdd3ae1409",
-    "english_name": "Frigga’s Fritillary This species is only found in the most northern areas of Europe and is very difficult to obtain in good condition",
+    "english_name": "Frigga’s Fritillary",
     "sex": "♂",
     "latin_name": "Clossiana frigga",
     "description": null,
@@ -2948,12 +2948,12 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null,
+    "notes": "This species is only found in the most northern areas of Europe and is very difficult to obtain in good condition",
     "location_country": null
   },
   {
     "id": "e0dc1e24-fffe-41b6-9e02-4299c405d614",
-    "english_name": "Glandon Blue. only found in the most inhospitable regions of the high mountains in Europe except in the far north where it occurs in a different level. This one is",
+    "english_name": "Glandon Blue",
     "sex": "♂",
     "latin_name": "Agriades glandon",
     "description": "2 x m, form close to sea; and does not often come up for sale",
@@ -2972,12 +2972,12 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null,
+    "notes": ". only found in the most inhospitable regions of the high mountains in Europe except in the far north where it occurs in a different level. This one is",
     "location_country": "Alps"
   },
   {
     "id": "296418ce-5463-408f-972d-c2e75e0a5bef",
-    "english_name": "Sardinian Chalk-hill Blue. M. recognised as a separate species far removed",
+    "english_name": "Sardinian Chalk-hill Blue",
     "sex": null,
     "latin_name": "Lysandra gennargenti",
     "description": "our own species Extremely local and remains rare in collections",
@@ -2996,7 +2996,7 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null,
+    "notes": ". M. recognised as a separate species far removed",
     "location_country": null
   },
   {
@@ -3601,7 +3601,7 @@
   },
   {
     "id": "e19c6394-a7c0-463b-b4c0-b26e639d9de6",
-    "english_name": "New Forest Burnet EXTINCT since 1927 A specimen of this long-extinct species",
+    "english_name": "New Forest Burnet",
     "sex": null,
     "latin_name": "Zygaenidae Z. viciae ytenensis ( British)",
     "description": "magnificent collection of W T Hay",
@@ -3620,7 +3620,7 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null,
+    "notes": "EXTINCT since 1927 A specimen of this long-extinct species",
     "location_country": null
   },
   {
@@ -3721,7 +3721,7 @@
   },
   {
     "id": "2a45fde5-bf02-43be-85bc-e2d595c15e65",
-    "english_name": "Small Tortoiseshell common species in Europe and these are of the small bright race",
+    "english_name": "Small Tortoiseshell",
     "sex": null,
     "latin_name": "Aglais urticae polaris",
     "description": "far north",
@@ -3740,7 +3740,7 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null,
+    "notes": "common species in Europe and these are of the small bright race",
     "location_country": null
   },
   {
@@ -3769,7 +3769,7 @@
   },
   {
     "id": "18cf179a-af5c-4ca3-9e65-3e6c6804a967",
-    "english_name": "Freyer’s Purple Emperor. This species is very rare and local in Europe, though becomes common in Asia and is found as far east as Japan",
+    "english_name": "Freyer’s Purple Emperor",
     "sex": null,
     "latin_name": "Apatura metis substituta",
     "description": null,
@@ -3788,12 +3788,12 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null,
+    "notes": ". This species is very rare and local in Europe, though becomes common in Asia and is found as far east as Japan",
     "location_country": null
   },
   {
     "id": "26ccb505-95d7-4e9f-a0a4-578bd397dd0f",
-    "english_name": "Piedmont Ringlet. widespread in the mountains of Europe, this butterfly is a denizen of the low to mid altitudes. These are",
+    "english_name": "Piedmont Ringlet",
     "sex": "♂♀",
     "latin_name": "Erebia meolans",
     "description": null,
@@ -3812,12 +3812,12 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null,
+    "notes": ". widespread in the mountains of Europe, this butterfly is a denizen of the low to mid altitudes. These are",
     "location_country": "France"
   },
   {
     "id": "e5976838-5434-47cb-9595-025b25e34e2a",
-    "english_name": "Pyrenesian Fritillary New species, ally regarded as a . pales, Shepherd’s Fritillary. Endemic to the Pyrenees and the Cantabrians only found at altitude, though is frequent in its habitat",
+    "english_name": "Pyrenesian Fritillary",
     "sex": "♀",
     "latin_name": "Boloria pyrenesmiscens",
     "description": "form, subspecies of B",
@@ -3836,12 +3836,12 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null,
+    "notes": ". pales, Shepherd’s Fritillary. Endemic to the Pyrenees and the Cantabrians only found at altitude, though is frequent in its habitat  New species, ally regarded as a",
     "location_country": null
   },
   {
     "id": "51b74686-2e1c-475b-9ef8-bf6ba9c26145",
-    "english_name": "Reverdin’s Blue. Found over large parts central and East Europe, this species is very local and difficult to find. This one is",
+    "english_name": "Reverdin’s Blue",
     "sex": "♀",
     "latin_name": "Plebejus argyrognomon",
     "description": null,
@@ -3860,12 +3860,12 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null,
+    "notes": ". Found over large parts central and East Europe, this species is very local and difficult to find. This one is",
     "location_country": "France"
   },
   {
     "id": "e907eea9-4de4-4b95-b906-d191ef34417d",
-    "english_name": "Short Tailed Blue. widespread in south and migrates to northern Europe regularly, though only rarely reaches the UK. It is",
+    "english_name": "Short Tailed Blue",
     "sex": "♀",
     "latin_name": "Everes argiades",
     "description": null,
@@ -3884,7 +3884,7 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null,
+    "notes": ". widespread in south and migrates to northern Europe regularly, though only rarely reaches the UK. It is",
     "location_country": "France"
   },
   {
@@ -4585,7 +4585,7 @@
   },
   {
     "id": "4c806fcc-d631-4e2e-ac65-b1bc2623909d",
-    "english_name": "Reverdin’s Blue. Found over large parts central and East Europe, this species is very local and difficult to find",
+    "english_name": "Reverdin’s Blue",
     "sex": "♂♀",
     "latin_name": "Plebejus argyrognomon",
     "description": null,
@@ -4604,7 +4604,7 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null,
+    "notes": ". Found over large parts central and East Europe, this species is very local and difficult to find",
     "location_country": null
   },
   {
@@ -5305,7 +5305,7 @@
   },
   {
     "id": "31bdd241-b9e6-4717-967a-7c3cc90fb056",
-    "english_name": "Escher’s blue. This butterfly is widespread in southern Europe though they are very local. These specimens are",
+    "english_name": "Escher’s blue",
     "sex": null,
     "latin_name": "Polyommatus escheri splendens",
     "description": null,
@@ -5324,12 +5324,12 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null,
+    "notes": ". This butterfly is widespread in southern Europe though they are very local. These specimens are",
     "location_country": "France"
   },
   {
     "id": "d242ccf1-85d3-4dbf-94c6-ae6dd9f8b437",
-    "english_name": "Scarce Large Blue. Rarely found in high numbers, species becomes commoner further east. specimen",
+    "english_name": "Scarce Large Blue",
     "sex": null,
     "latin_name": "Phengaris teleius",
     "description": null,
@@ -5348,12 +5348,12 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null,
+    "notes": ". Rarely found in high numbers, species becomes commoner further east. specimen",
     "location_country": "Poland"
   },
   {
     "id": "eb516c50-db15-49b7-ae36-92dffa6c8d10",
-    "english_name": "Large Skipper Common species and is found across Europe. These are",
+    "english_name": "Large Skipper Common species and is found across Europe",
     "sex": null,
     "latin_name": "Ochlodes sylvanus",
     "description": null,
@@ -5372,12 +5372,12 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null,
+    "notes": ". These are",
     "location_country": "UK"
   },
   {
     "id": "94fcbc02-2497-49d7-b0d7-c5b7b6119f36",
-    "english_name": "Swallowtail. in central Europe and further east. These specimens are",
+    "english_name": "Swallowtail",
     "sex": null,
     "latin_name": "Papilio machaon gorganus",
     "description": "Subspecies gorganus is widespread; and they are generally larger than those found in Europe",
@@ -5396,7 +5396,7 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null,
+    "notes": ". in central Europe and further east. These specimens are",
     "location_country": "Russia"
   },
   {
@@ -5545,7 +5545,7 @@
   },
   {
     "id": "7abb5ac6-3b39-4004-8980-924cddf182a0",
-    "english_name": "Woodland Brown. This species is very scarce in Europe and only found in isolated areas of natural, undisturbed woodland. As such it has disappeared",
+    "english_name": "Woodland Brown",
     "sex": null,
     "latin_name": "Lopinga achine",
     "description": "many areas and is afforded full protection under the European Habitat Directive. These specimens are from Mongolia and the Transbaical; as such they fall outside the aegis of the directive",
@@ -5564,7 +5564,7 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null,
+    "notes": ". This species is very scarce in Europe and only found in isolated areas of natural, undisturbed woodland. As such it has disappeared",
     "location_country": null
   },
   {
@@ -5761,7 +5761,7 @@
   },
   {
     "id": "63786d39-12d1-454f-aa69-c19484959457",
-    "english_name": "Iberian Marbled White. Reasonably common in Spain and Portugal with a hybrid zone in southern France with our own Marbled White. Controversy continues with whether or not it is a full species.This is",
+    "english_name": "Iberian Marbled White",
     "sex": null,
     "latin_name": "Melanargia lachesis",
     "description": null,
@@ -5780,7 +5780,7 @@
     "cat_number": null,
     "collector": "E.D. Adamson",
     "photos": [],
-    "notes": null,
+    "notes": ". Reasonably common in Spain and Portugal with a hybrid zone in southern France with our own Marbled White. Controversy continues with whether or not it is a full species.This is",
     "location_country": "France"
   },
   {
@@ -6289,7 +6289,7 @@
   },
   {
     "id": "6a1088fc-77d7-4099-8fbe-8125b053f983",
-    "english_name": "Purple-edged Copper Possible wrongly identified. Should be perhaps Balkan Copper collected Stanke Dimitrov, Bulgaria. - 2500m",
+    "english_name": "Purple-edged Copper Possible wrongly identified",
     "sex": "♂",
     "latin_name": "Palaeochrysophanus hippothoe leonhardi",
     "description": null,
@@ -6308,12 +6308,12 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": "price: job lot",
+    "notes": "price: job lot\n. Should be perhaps Balkan Copper collected Stanke Dimitrov, Bulgaria. - 2500m",
     "location_country": null
   },
   {
     "id": "a58b96d2-dc43-4796-9ac0-3acec9d59ceb",
-    "english_name": "Purple-shot Copper Collected Luberon 84360 France. July 1986",
+    "english_name": "Purple-shot Copper",
     "sex": "♂",
     "latin_name": "Lycaena alciphron",
     "description": null,
@@ -6332,12 +6332,12 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": "price: job lot",
+    "notes": "price: job lot\n. July 1986  Collected Luberon 84360 France",
     "location_country": null
   },
   {
     "id": "3ce97a20-2da6-4cc0-a7a4-4e3868f21fd0",
-    "english_name": "Purple-shot Copper Collected Luberon 84360 France. July 1986",
+    "english_name": "Purple-shot Copper",
     "sex": "♂",
     "latin_name": "Lycaena alciphron gordius",
     "description": null,
@@ -6356,7 +6356,7 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": "price: job lot",
+    "notes": "price: job lot\n. July 1986  Collected Luberon 84360 France",
     "location_country": null
   },
   {
@@ -7825,7 +7825,7 @@
   },
   {
     "id": "7cbafe7a-4e7f-47ef-967f-769c64cfc2c2",
-    "english_name": "Furry Blue Endemic to Cévennes in SW France. Males almost white upper sides",
+    "english_name": "Furry Blue",
     "sex": "♂",
     "latin_name": "Agrodiaetus dolus ss vittaltus",
     "description": null,
@@ -7844,12 +7844,12 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null,
+    "notes": ". Males almost white upper sides  Endemic to Cévennes in SW France",
     "location_country": null
   },
   {
     "id": "da3eb310-fcae-471c-a258-f4bae6c7d1ff",
-    "english_name": "Clouded Yellow aberattion BRED TRING (HERTS.) 11. 10. 1933. G. B. RIVER. The upper-side looks typical and doesn't have the black lines that are present on the under-side. Looks like it is probably Colias alfacariensis but could be Colias hyale",
+    "english_name": "Clouded Yellow aberattion",
     "sex": "♀",
     "latin_name": "Colias alfacariensis ?",
     "description": null,
@@ -7868,7 +7868,7 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null,
+    "notes": ". 10. 1933. G. B. RIVER. The upper-side looks typical and doesn't have the black lines that are present on the under-side. Looks like it is probably Colias alfacariensis but could be Colias hyale  BRED TRING (HERTS.) 11",
     "location_country": null
   },
   {
@@ -10729,7 +10729,7 @@
   },
   {
     "id": "5c584ff6-dfda-40ea-b700-dd37ba5ef6f0",
-    "english_name": "Freija’s Fritillary. This species is only found in the most northern areas of Europe and is very difficult to obtain in good condition",
+    "english_name": "Freija’s Fritillary",
     "sex": null,
     "latin_name": "Clossiana freija",
     "description": null,
@@ -10748,7 +10748,7 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null,
+    "notes": ". This species is only found in the most northern areas of Europe and is very difficult to obtain in good condition",
     "location_country": null
   },
   {
@@ -10777,7 +10777,7 @@
   },
   {
     "id": "30341c76-518e-4e41-87ca-3c8c42483975",
-    "english_name": "Eastern Brown Argus. This is a very rare species in Europe and only found in two small areas of Greece. The nominate Samos and this is of that , though",
+    "english_name": "Eastern Brown Argus",
     "sex": null,
     "latin_name": "Kretania eurypilus",
     "description": "form is found on, form; a little further east in Armenia. Remains rare in collections",
@@ -10796,12 +10796,12 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null,
+    "notes": ". This is a very rare species in Europe and only found in two small areas of Greece. The nominate Samos and this is of that , though",
     "location_country": null
   },
   {
     "id": "fca95d0e-4718-4001-8584-184d0bf88abc",
-    "english_name": "Ripart’s Ano+C497malous Blue. This species is local and found in widely scattered localities throughout southern Europe and hence in to the Middle East. This one is",
+    "english_name": "Ripart’s Ano+C497malous Blue",
     "sex": null,
     "latin_name": "Agrodiaetus ripartii paralcestis",
     "description": null,
@@ -10820,7 +10820,7 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null,
+    "notes": ". This species is local and found in widely scattered localities throughout southern Europe and hence in to the Middle East. This one is",
     "location_country": "Armenia"
   },
   {
@@ -10849,7 +10849,7 @@
   },
   {
     "id": "4d88c96a-ea3e-47f2-8fe8-fd44e7925e7f",
-    "english_name": "High Brown Fritillary. Generally common in Europe, though extremely local in the British Isles and has suffered a massive decline in the past 60 years due to forest mismanagement. As a result it is now fully protected under the Wildlife and Countryside act. These specimens were bred prior to their protection and thus are perfectly legal to sell and own; the only way to legally acquire it nowadays",
+    "english_name": "High Brown Fritillary",
     "sex": null,
     "latin_name": "Argynnis adippe ssp vulgoadippe",
     "description": null,
@@ -10868,12 +10868,12 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null,
+    "notes": ". Generally common in Europe, though extremely local in the British Isles and has suffered a massive decline in the past 60 years due to forest mismanagement. As a result it is now fully protected under the Wildlife and Countryside act. These specimens were bred prior to their protection and thus are perfectly legal to sell and own; the only way to legally acquire it nowadays",
     "location_country": null
   },
   {
     "id": "d13f339b-310b-4047-baa1-2cec49db7b62",
-    "english_name": "Amanda’s Blue. Widespread in Europe and this one is",
+    "english_name": "Amanda’s Blue",
     "sex": "♀",
     "latin_name": "Polyommatus amandus",
     "description": null,
@@ -10892,12 +10892,12 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null,
+    "notes": ". Widespread in Europe and this one is",
     "location_country": "Estonia"
   },
   {
     "id": "7c1423b6-204b-4fd7-a909-bfe106a45c68",
-    "english_name": "Yellow Banded Skipper. Quite uncommon in south east Europe, with an outlying populations further west to central Spain. It is extremely difficult to catch due to its rapid flight. Specimens are usually very poor in condition in collections. This one is",
+    "english_name": "Yellow Banded Skipper",
     "sex": "♂",
     "latin_name": "Pyrgus sidae",
     "description": null,
@@ -10916,12 +10916,12 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null,
+    "notes": ". Quite uncommon in south east Europe, with an outlying populations further west to central Spain. It is extremely difficult to catch due to its rapid flight. Specimens are usually very poor in condition in collections. This one is",
     "location_country": "Armenia"
   },
   {
     "id": "4a1def06-be83-4650-ba79-04573b3666a1",
-    "english_name": "Dewy Ringlet. Found at high elevations in the mountains of southern Europe and at lower elevations in Lapland. It is",
+    "english_name": "Dewy Ringlet",
     "sex": null,
     "latin_name": "Erebia pandrose laponnica",
     "description": "and is quite different from Alpine specimens",
@@ -10940,12 +10940,12 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null,
+    "notes": ". Found at high elevations in the mountains of southern Europe and at lower elevations in Lapland. It is",
     "location_country": "Sweden"
   },
   {
     "id": "24f56a10-779b-4974-9124-b125d2781259",
-    "english_name": "False Ilex Hairstreak. Very local and uncommon in the Iberian peninsular and the adjoining area of southern France. Scarce in collections, this is",
+    "english_name": "False Ilex Hairstreak",
     "sex": null,
     "latin_name": "Satyrium esculi",
     "description": null,
@@ -10964,12 +10964,12 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null,
+    "notes": ". Very local and uncommon in the Iberian peninsular and the adjoining area of southern France. Scarce in collections, this is",
     "location_country": "France"
   },
   {
     "id": "8ba6c722-16d3-4f10-87e9-84eb5769f5d6",
-    "english_name": "Green Veined White Generally common in Europe and these are of the North Cape. They are",
+    "english_name": "Green Veined White",
     "sex": "♂♀",
     "latin_name": "Pieris napi laponna",
     "description": "form found at the",
@@ -10988,12 +10988,12 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null,
+    "notes": ". They are | Generally common in Europe and these are of the North Cape",
     "location_country": "Sweden"
   },
   {
     "id": "0838d460-4321-4ab4-add6-f46f986cd3be",
-    "english_name": "Mountain Fritillary. 2 X Fairly common in the Alps and Pyrenees and the female is well known for having some very dark s with purple reflections",
+    "english_name": "Mountain Fritillary",
     "sex": "♀",
     "latin_name": "Boloria napaea",
     "description": "form",
@@ -11012,12 +11012,12 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null,
+    "notes": ". 2 X Fairly common in the Alps and Pyrenees and the female is well known for having some very dark s with purple reflections",
     "location_country": null
   },
   {
     "id": "18fae39c-b7b3-41b0-af13-8ffa096dc956",
-    "english_name": "Pale Arctic Clouded Yellow. Rare and confined to the northernmost areas of Europe where it flies rapidly. They are unrepresented in most collections and specimens rarely come up for sale. When they do the cost is often prohibitively high",
+    "english_name": "Pale Arctic Clouded Yellow",
     "sex": null,
     "latin_name": "Colias tyche werdandi",
     "description": null,
@@ -11036,12 +11036,12 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null,
+    "notes": ". Rare and confined to the northernmost areas of Europe where it flies rapidly. They are unrepresented in most collections and specimens rarely come up for sale. When they do the cost is often prohibitively high",
     "location_country": null
   },
   {
     "id": "a3547da0-096e-4f6c-aecf-a603ba5506f3",
-    "english_name": "Escher’s blue. Widespread in southern Europe though they are very local. This one is of the distinctive race found in Italy",
+    "english_name": "Escher’s blue",
     "sex": "♂",
     "latin_name": "Polyommatus escheri splendens",
     "description": null,
@@ -11060,12 +11060,12 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null,
+    "notes": ". Widespread in southern Europe though they are very local. This one is of the distinctive race found in Italy",
     "location_country": null
   },
   {
     "id": "03357c5e-a15a-4b92-9971-45faa23d6983",
-    "english_name": "Esper’s Marbled White Species is common in Spain, though local; however, this",
+    "english_name": "Esper’s Marbled White",
     "sex": "♂♀",
     "latin_name": "Melanargia russiae japygia",
     "description": "form is extremely local; henceforth eastwards to Greece These are from Italy",
@@ -11084,12 +11084,12 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null,
+    "notes": "Species is common in Spain, though local; however, this",
     "location_country": "Italy"
   },
   {
     "id": "02d13392-2ad8-4813-ac2b-d994cd13df08",
-    "english_name": "Great Banded Grayling. Species is widespread in southern Europe, though is difficult to obtain in perfect condition due to their habit of flying through long grasses",
+    "english_name": "Great Banded Grayling",
     "sex": null,
     "latin_name": "Brintesia circe",
     "description": null,
@@ -11108,7 +11108,7 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null,
+    "notes": ". Species is widespread in southern Europe, though is difficult to obtain in perfect condition due to their habit of flying through long grasses",
     "location_country": null
   },
   {
@@ -11425,7 +11425,7 @@
   },
   {
     "id": "4aaf9fc3-62fe-42db-9e8f-a502b95dc57c",
-    "english_name": "Eros Blue. Uncommon in the higher parts of most of the massifs of Europe. Often difficult to find, and very difficult to capture in its often very rugged terrain",
+    "english_name": "Eros Blue",
     "sex": "♂",
     "latin_name": "Polyommatus eros",
     "description": null,
@@ -11444,7 +11444,7 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null,
+    "notes": ". Uncommon in the higher parts of most of the massifs of Europe. Often difficult to find, and very difficult to capture in its often very rugged terrain",
     "location_country": null
   },
   {
@@ -11977,7 +11977,7 @@
   },
   {
     "id": "b18836a4-7656-4758-a551-4ec6b2bada2e",
-    "english_name": "Short Tailed Blue. widespread in south and migrates to northern Europe regularly, though only rarely reaches the UK. It is",
+    "english_name": "Short Tailed Blue",
     "sex": "♂",
     "latin_name": "Everes argiades",
     "description": null,
@@ -11996,12 +11996,12 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null,
+    "notes": ". widespread in south and migrates to northern Europe regularly, though only rarely reaches the UK. It is",
     "location_country": "Poland"
   },
   {
     "id": "8d87af4f-84b1-4150-ad97-84299b33bc1e",
-    "english_name": "Eastern Brown Argus. Very rare species in Europe and only found in two small areas of Greece. The nominate samos and this is of that , though",
+    "english_name": "Eastern Brown Argus",
     "sex": null,
     "latin_name": "Kretania eurypilus",
     "description": "form is found on, form; a little further east in Armenia. Remains rare in collections",
@@ -12020,12 +12020,12 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null,
+    "notes": ". Very rare species in Europe and only found in two small areas of Greece. The nominate samos and this is of that , though",
     "location_country": null
   },
   {
     "id": "a1ca61dc-04af-44bd-bb35-d6159ffa0f4e",
-    "english_name": "New Knapweed Fritillary. Only recently been found as new to the European list following accidental discovery whilst breeding. Very close to the common Knapweed Fritillary, current distribution maps put this one as ornata. This one is",
+    "english_name": "New Knapweed Fritillary",
     "sex": "♀",
     "latin_name": "Melitaea ornata emipunica",
     "description": "Unfortunately in poor condition, but still a good one for the European collector",
@@ -12044,12 +12044,12 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null,
+    "notes": ". Only recently been found as new to the European list following accidental discovery whilst breeding. Very close to the common Knapweed Fritillary, current distribution maps put this one as ornata. This one is",
     "location_country": "Italy"
   },
   {
     "id": "32b67bbf-425f-40de-ad9e-8afd965f8ead",
-    "english_name": "False Apollo. Only found in the most south easterly parts of Europe and henceforth to the near east. Difficult to obtain due to its very early flight time. Not uncommon in the wild, it is scarce in collections. This is",
+    "english_name": "False Apollo",
     "sex": "♂♀",
     "latin_name": "Archon apollonius",
     "description": null,
@@ -12068,7 +12068,7 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": "EDA Damaged female",
+    "notes": "EDA Damaged female\n. Only found in the most south easterly parts of Europe and henceforth to the near east. Difficult to obtain due to its very early flight time. Not uncommon in the wild, it is scarce in collections. This is",
     "location_country": "Turkey"
   },
   {
@@ -12457,7 +12457,7 @@
   },
   {
     "id": "e5249089-e901-4f94-a424-6da1c3fd5abb",
-    "english_name": "Foulquier’s Grizzled Skipper. Very local species only found in Spain, France and Italy. This one is",
+    "english_name": "Foulquier’s Grizzled Skipper",
     "sex": null,
     "latin_name": "Pyrgus bellieri formaly know as Pyrgus foulquieri",
     "description": null,
@@ -12476,12 +12476,12 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null,
+    "notes": ". Very local species only found in Spain, France and Italy. This one is",
     "location_country": "Italy"
   },
   {
     "id": "fb9e012e-50d3-41ad-9995-c56b2aca0be0",
-    "english_name": "Great Sooty Satyr. Reasonably common in its habitats in southern Europe. It is almost impossible to obtain in perfect condition, due to its flight through long grasses. lovely condition. This one is",
+    "english_name": "Great Sooty Satyr",
     "sex": null,
     "latin_name": "Satyrus ferula",
     "description": null,
@@ -12500,12 +12500,12 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null,
+    "notes": ". Reasonably common in its habitats in southern Europe. It is almost impossible to obtain in perfect condition, due to its flight through long grasses. lovely condition. This one is",
     "location_country": "Italy"
   },
   {
     "id": "a3f43955-cc27-4e3a-9e6e-f04116aad44b",
-    "english_name": "Silvery Argus. M. High altitude species in the Alps, though occurs much lower in Scandinavia where it is a scarce and local species. This one is",
+    "english_name": "Silvery Argus",
     "sex": null,
     "latin_name": "Agriades nicias scandica",
     "description": null,
@@ -12524,12 +12524,12 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null,
+    "notes": ". M. High altitude species in the Alps, though occurs much lower in Scandinavia where it is a scarce and local species. This one is",
     "location_country": "Finland"
   },
   {
     "id": "dbb65851-48e5-469f-9e01-b3329d11d3ce",
-    "english_name": "Glandon Blue Found in the most inhospitable regions of the high mountains in Europe except in the far north where it occurs in a different level. These are",
+    "english_name": "Glandon Blue",
     "sex": "♂",
     "latin_name": "Agriades glandon",
     "description": "2 x m, form close to sea; and very rarely come up for sale",
@@ -12548,12 +12548,12 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null,
+    "notes": ". These are  Found in the most inhospitable regions of the high mountains in Europe except in the far north where it occurs in a different level",
     "location_country": "Spain"
   },
   {
     "id": "81614818-b1f4-4bb6-b991-74f6d13ea4ea",
-    "english_name": "Southern Festoon. Widespread and fairly common in eastern Europe, though becomes very rare in more westerly areas to SE France",
+    "english_name": "Southern Festoon",
     "sex": null,
     "latin_name": "Zerynthia polyxena",
     "description": null,
@@ -12572,7 +12572,7 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null,
+    "notes": ". Widespread and fairly common in eastern Europe, though becomes very rare in more westerly areas to SE France",
     "location_country": null
   },
   {
@@ -13345,7 +13345,7 @@
   },
   {
     "id": "6177a844-2b7d-40cb-8a17-04bbdd470fd0",
-    "english_name": "High Brown Fritillary. in Europe, though extremely local in the British Isles and has suffered a massive decline in the past 60 years due to forest mismanagement. As a result it is now fully protected under the Wildlife and Countryside ac",
+    "english_name": "High Brown Fritillary",
     "sex": null,
     "latin_name": "Argynnis adippe",
     "description": "Form adippe Generally common",
@@ -13364,7 +13364,7 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null,
+    "notes": ". in Europe, though extremely local in the British Isles and has suffered a massive decline in the past 60 years due to forest mismanagement. As a result it is now fully protected under the Wildlife and Countryside ac",
     "location_country": null
   },
   {
@@ -13969,7 +13969,7 @@
   },
   {
     "id": "f189dd18-17d3-4585-bfac-d649703b6445",
-    "english_name": "Furry Blue Endemic to Cévennes in SW France. Males almost white upper sides",
+    "english_name": "Furry Blue",
     "sex": "♂",
     "latin_name": "Agrodiaetus dolus ss vittaltus",
     "description": null,
@@ -13988,12 +13988,12 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null,
+    "notes": ". Males almost white upper sides  Endemic to Cévennes in SW France",
     "location_country": null
   },
   {
     "id": "0c1b6377-66bc-424b-882f-4ac1f9e4d701",
-    "english_name": "Furry Blue Endemic to Cévennes in SW France. Males almost white upper sides",
+    "english_name": "Furry Blue",
     "sex": "♂",
     "latin_name": "Agrodiaetus dolus ss vittaltus",
     "description": null,
@@ -14012,7 +14012,7 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null,
+    "notes": ". Males almost white upper sides  Endemic to Cévennes in SW France",
     "location_country": null
   },
   {
@@ -14329,7 +14329,7 @@
   },
   {
     "id": "1e9647fd-32d0-4818-96fa-fbc60f23fb89",
-    "english_name": "Short Tailed Blue. widespread in south and migrates to northern Europe regularly, though only rarely reaches the UK. It is",
+    "english_name": "Short Tailed Blue",
     "sex": "♂♀",
     "latin_name": "Everes argiades",
     "description": null,
@@ -14348,7 +14348,7 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null,
+    "notes": ". widespread in south and migrates to northern Europe regularly, though only rarely reaches the UK. It is",
     "location_country": "Poland"
   },
   {
@@ -15361,7 +15361,7 @@
   },
   {
     "id": "06a54c0f-6001-4949-ba8b-a2b2bb8c94a1",
-    "english_name": "Southern Comma. This is an uncommon butterfly that is Mediterranean in habits",
+    "english_name": "Southern Comma",
     "sex": null,
     "latin_name": "Polygonia egea",
     "description": null,
@@ -15380,7 +15380,7 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null,
+    "notes": ". This is an uncommon butterfly that is Mediterranean in habits",
     "location_country": null
   },
   {
@@ -15577,7 +15577,7 @@
   },
   {
     "id": "be894f93-7bf1-45c3-9b9f-9c331da91f44",
-    "english_name": "Ringlet aberattion 'arete' abdomen broken in transit",
+    "english_name": "Ringlet aberattion 'arete'",
     "sex": null,
     "latin_name": "Aphantopus hyperantus",
     "description": null,
@@ -15596,7 +15596,7 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null,
+    "notes": "abdomen broken in transit",
     "location_country": null
   },
   {
@@ -17641,7 +17641,7 @@
   },
   {
     "id": "7ee4f074-ed5c-4734-b2e9-32a993ba43a9",
-    "english_name": "High Brown Fritillary. in Europe, though extremely local in the British Isles and has suffered a massive decline in the past 60 years due to forest mismanagement. As a result it is now fully protected under the Wildlife",
+    "english_name": "High Brown Fritillary",
     "sex": "♂♀",
     "latin_name": "Argynnis adyppe",
     "description": "Form adippe Generally common",
@@ -17660,7 +17660,7 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null,
+    "notes": ". in Europe, though extremely local in the British Isles and has suffered a massive decline in the past 60 years due to forest mismanagement. As a result it is now fully protected under the Wildlife",
     "location_country": null
   },
   {
@@ -18865,7 +18865,7 @@
   },
   {
     "id": "b2521c42-7aa1-4850-acbb-8dd32d53bcae",
-    "english_name": "Pale Arctic Clouded Yellow. Rare and confined to the northernmost areas of Europe where it flies rapidly. They are unrepresented in most collections and specimens rarely come up for sale. When they do the cost is often prohibitivel",
+    "english_name": "Pale Arctic Clouded Yellow",
     "sex": "♀",
     "latin_name": "Colias nastes",
     "description": null,
@@ -18884,7 +18884,7 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null,
+    "notes": ". Rare and confined to the northernmost areas of Europe where it flies rapidly. They are unrepresented in most collections and specimens rarely come up for sale. When they do the cost is often prohibitivel",
     "location_country": null
   },
   {
@@ -20641,7 +20641,7 @@
   },
   {
     "id": "cfa7bd9e-ffb5-41b2-a21c-c0221dd70810",
-    "english_name": "Forster’s Furry Blue. Very local and confined to a small area in northern Spain (Jaca). Rare in collections, this is a very good opportunity to add a key species to your collection",
+    "english_name": "Forster’s Furry Blue",
     "sex": "♂",
     "latin_name": "Agrodiaetus ainsae",
     "description": null,
@@ -20660,12 +20660,12 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null,
+    "notes": ". Very local and confined to a small area in northern Spain (Jaca). Rare in collections, this is a very good opportunity to add a key species to your collection",
     "location_country": null
   },
   {
     "id": "09f03eb6-c697-4d7b-8781-1b748b00e684",
-    "english_name": "Cranberry Blue. Not particularly rare, but not often encountered as this species usually flies on inaccessible slopes at high altitude. Found lower in northern Europe, where it is scarce",
+    "english_name": "Cranberry Blue",
     "sex": "♂",
     "latin_name": "Vacciniina optilete",
     "description": null,
@@ -20684,12 +20684,12 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null,
+    "notes": ". Not particularly rare, but not often encountered as this species usually flies on inaccessible slopes at high altitude. Found lower in northern Europe, where it is scarce",
     "location_country": null
   },
   {
     "id": "e7904ad7-45e6-429c-b258-7fadc3d4175d",
-    "english_name": "Freija’s Fritillary. This species is only found in the most northern areas of Europe and is very difficult to obtain in good condition",
+    "english_name": "Freija’s Fritillary",
     "sex": "♂",
     "latin_name": "Clossiana freija",
     "description": null,
@@ -20708,7 +20708,7 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null,
+    "notes": ". This species is only found in the most northern areas of Europe and is very difficult to obtain in good condition",
     "location_country": null
   },
   {
@@ -20785,7 +20785,7 @@
   },
   {
     "id": "6f6a59c3-86ec-4e6f-bfdc-b539a30db024",
-    "english_name": "Eros Blue. M. Uncommon in the higher parts of most of the massifs of Europe. Often difficult to find, and very difficult to capture in its often very rugged terrain",
+    "english_name": "Eros Blue",
     "sex": null,
     "latin_name": "Polyommatus eros",
     "description": null,
@@ -20804,7 +20804,7 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null,
+    "notes": ". M. Uncommon in the higher parts of most of the massifs of Europe. Often difficult to find, and very difficult to capture in its often very rugged terrain",
     "location_country": null
   },
   {
@@ -21169,7 +21169,7 @@
   },
   {
     "id": "9ee2302b-abcb-4a14-9ae8-33c9b1bc82f8",
-    "english_name": "Ringlet A SMALL AND BEAUTIFULLY MARKED UNDERSIDE SET EXAMPLE",
+    "english_name": "Ringlet",
     "sex": null,
     "latin_name": "Aphantopus hyperantus",
     "description": "BY WM.G.PETHER IN CUCKFIELD, SUSSEX ON THE 1ST JULY 1917. THIS SPECIMEN IS SMALL AND HAS MINUTE EYE MARKINGS TO THE UNDERSIDE. AN UNUSUAL AND INTERESTING ABERRATION",
@@ -21188,12 +21188,12 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null,
+    "notes": "A SMALL AND BEAUTIFULLY MARKED UNDERSIDE SET EXAMPLE",
     "location_country": null
   },
   {
     "id": "eb469e7b-01f9-4eb9-a061-61ed521917b7",
-    "english_name": "Foulquier’s Grizzled Skipper. This is a very local species and only found in Spain, France and Italy. This one is",
+    "english_name": "Foulquier’s Grizzled Skipper",
     "sex": null,
     "latin_name": "Pyrgus bellieri formaly know as Pyrgus foulquieri",
     "description": null,
@@ -21212,7 +21212,7 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null,
+    "notes": ". This is a very local species and only found in Spain, France and Italy. This one is",
     "location_country": "Italy"
   },
   {
@@ -22441,7 +22441,7 @@
   },
   {
     "id": "79863b97-fb4f-40d1-ae43-e79fadfec663",
-    "english_name": "Knapweed Fritillary 'occitanica', Min Speckled Wood, min Eastern Orange Tip",
+    "english_name": "Knapweed Fritillary 'occitanica'",
     "sex": "♀",
     "latin_name": "Melitaea phoebe form occitanica",
     "description": null,
@@ -22460,7 +22460,7 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null,
+    "notes": "Min Speckled Wood, min Eastern Orange Tip",
     "location_country": null
   },
   {
@@ -23065,7 +23065,7 @@
   },
   {
     "id": "06020ab7-1d33-4ac7-9fa6-384097497cf2",
-    "english_name": "Piedmont Ringlet. widespread in the mountains of Europe, this butterfly is a denizen of the low to mid altitudes. This is",
+    "english_name": "Piedmont Ringlet",
     "sex": "♂",
     "latin_name": "Erebia meolans",
     "description": null,
@@ -23084,7 +23084,7 @@
     "cat_number": "Case 1;Freezer 29/9/14",
     "collector": null,
     "photos": [],
-    "notes": null,
+    "notes": ". widespread in the mountains of Europe, this butterfly is a denizen of the low to mid altitudes. This is",
     "location_country": "Spain"
   },
   {
@@ -23233,7 +23233,7 @@
   },
   {
     "id": "db8d26c6-89cb-47e6-b44f-911dabe27083",
-    "english_name": "False Ringlet. This is a very rare butterfly in Europe and is now protected by European legislation. These are",
+    "english_name": "False Ringlet",
     "sex": null,
     "latin_name": "Coenonympha oedippus",
     "description": "and were caught prior to the law that now protects them Legal to sell and own",
@@ -23252,12 +23252,12 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null,
+    "notes": ". This is a very rare butterfly in Europe and is now protected by European legislation. These are",
     "location_country": "France"
   },
   {
     "id": "d5493f58-4fbe-4f6a-9381-627e0d2fbafe",
-    "english_name": "Green-Underside Blue. This species is widespread and fairly common in Europe, though not found in the UK. This is",
+    "english_name": "Green-Underside Blue",
     "sex": null,
     "latin_name": "Glaucopscyche alexis",
     "description": "This specimen is a major aberration in that the underside spots are totally absent on the hindwing and reduced on the forewing",
@@ -23276,7 +23276,7 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null,
+    "notes": ". This species is widespread and fairly common in Europe, though not found in the UK. This is",
     "location_country": "France"
   },
   {
@@ -23329,7 +23329,7 @@
   },
   {
     "id": "ad155eb7-face-4b55-9655-97672f8aa008",
-    "english_name": "Black Satyr. Reasonably common in its habitats in south west Europe, this butterfly is almost impossible to obtain in perfect condition, due to its flight through long grasses. These specimens are",
+    "english_name": "Black Satyr",
     "sex": null,
     "latin_name": "Satyrus actaea",
     "description": null,
@@ -23348,12 +23348,12 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null,
+    "notes": ". Reasonably common in its habitats in south west Europe, this butterfly is almost impossible to obtain in perfect condition, due to its flight through long grasses. These specimens are",
     "location_country": "France"
   },
   {
     "id": "1052cea3-16dd-426d-b4f4-a61096810eb4",
-    "english_name": "Dusky Meadow Brown. . This species is reasonably common in Southern Europe, extending to the Middle East. This specimen is",
+    "english_name": "Dusky Meadow Brown",
     "sex": null,
     "latin_name": "Hyponephele lycaon",
     "description": "abberation; The specimen for sale today is an incredible aberration with extensive white marking, giving it the appearance of having had bleach dropped on it. Very rare in collections. I have had to unfortunately start it at a reasonable price, as I am not prepared to let it go for nothing",
@@ -23372,12 +23372,12 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null,
+    "notes": ". . This species is reasonably common in Southern Europe, extending to the Middle East. This specimen is",
     "location_country": "France"
   },
   {
     "id": "3af27eb6-b482-48e5-955a-eccbacf746f0",
-    "english_name": "Escher’s blue. This butterfly is widespread in southern Europe though it is very local. This specimen is",
+    "english_name": "Escher’s blue",
     "sex": null,
     "latin_name": "Polyommatus escheri",
     "description": null,
@@ -23396,12 +23396,12 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null,
+    "notes": ". This butterfly is widespread in southern Europe though it is very local. This specimen is",
     "location_country": "Spain"
   },
   {
     "id": "5dce5fb3-db01-4a7e-b962-a4022504cdbb",
-    "english_name": "Scarce Copper. This beautiful species is a reasonably common sight in Europe, though not found in the UK. This one is",
+    "english_name": "Scarce Copper",
     "sex": null,
     "latin_name": "Lycaena virgaureae",
     "description": null,
@@ -23420,7 +23420,7 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null,
+    "notes": ". This beautiful species is a reasonably common sight in Europe, though not found in the UK. This one is",
     "location_country": "Alps"
   },
   {
@@ -24313,7 +24313,7 @@
   },
   {
     "id": "29a08a83-7986-4cf5-aeed-dfd96088788c",
-    "english_name": "Poplar Admiral Damaged and mended rare with broad white bands",
+    "english_name": "Poplar Admiral",
     "sex": "♀",
     "latin_name": "Limentis populi",
     "description": null,
@@ -24332,7 +24332,7 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null,
+    "notes": "Damaged and mended rare with broad white bands",
     "location_country": null
   },
   {
@@ -24985,7 +24985,7 @@
   },
   {
     "id": "3dd51494-dfcd-4fe6-8e3f-a70ef114a54b",
-    "english_name": "Black Satyr. Reasonably common in its habitats in south west Europe, this butterfly is almost impossible to obtain in perfect condition, due to its flight through long grasses. These specimens are",
+    "english_name": "Black Satyr",
     "sex": "♂",
     "latin_name": "Satyrus actaea",
     "description": "2 x m",
@@ -25004,7 +25004,7 @@
     "cat_number": "Case 1;Freezer 29/9/14",
     "collector": null,
     "photos": [],
-    "notes": null,
+    "notes": ". Reasonably common in its habitats in south west Europe, this butterfly is almost impossible to obtain in perfect condition, due to its flight through long grasses. These specimens are",
     "location_country": "France"
   },
   {
@@ -25969,7 +25969,7 @@
   },
   {
     "id": "be612b8f-dd5c-4973-ae75-d917f8d921af",
-    "english_name": "Cranberry Blue. Not particularly rare, but not often encountered as this species usually flies on inaccessible slopes at high altitude. Found lower in northern Europe, where it is scarce",
+    "english_name": "Cranberry Blue",
     "sex": "♂",
     "latin_name": "Vacciniina optilete",
     "description": null,
@@ -25988,7 +25988,7 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null,
+    "notes": ". Not particularly rare, but not often encountered as this species usually flies on inaccessible slopes at high altitude. Found lower in northern Europe, where it is scarce",
     "location_country": null
   },
   {
@@ -26233,7 +26233,7 @@
   },
   {
     "id": "010e98c4-84f5-4dfd-ab23-9b7360126654",
-    "english_name": "- Cabinet draw of 109 + Cabinet draw of 50ish specimens + box of pappered specimens",
+    "english_name": "Butterfly Collection",
     "sex": null,
     "latin_name": "Cabinet draw of 109 + Cabinet draw of 50ish specimens",
     "description": "Various",
@@ -26252,7 +26252,7 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null,
+    "notes": "Cabinet draw of 109 + Cabinet draw of 50ish specimens + box of pappered specimens",
     "location_country": null
   },
   {
@@ -27289,7 +27289,7 @@
   },
   {
     "id": "0bbf88dc-58ae-486d-b5c4-b71a1c187c12",
-    "english_name": "Greenish Black Tip. This species is very rare in Europe and a couple of very similar species are found on mainland Spain and in Greece. This one is",
+    "english_name": "Greenish Black Tip",
     "sex": null,
     "latin_name": "Elphinstonia charlonia",
     "description": null,
@@ -27308,7 +27308,7 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null,
+    "notes": ". This species is very rare in Europe and a couple of very similar species are found on mainland Spain and in Greece. This one is",
     "location_country": "Morocco"
   },
   {
@@ -28441,7 +28441,7 @@
   },
   {
     "id": "970df765-8c5c-4de6-8a47-ed2d42289fb7",
-    "english_name": "Chalkhill Blue specimen is an example of the rare ground colour , in which both fore and hind wings are affected. In 1938 Bright and Leeds noted this to be rare (in contrast to the uncommon Postfulvescens, in which only the hindwings are affected) and commented, “The forewings distinctly tinted with buff, sandy, foxy, or bright brown, but in most cases a little inferior in brightness to that of the hindwings”. This is an English specimen, which bears a French sale label dated 1909. It was subsequently in the collection of CHS Oberthur and, by reason of its importance, re-set by L. W. Newman in 1925 on a black, English pin",
+    "english_name": "Chalkhill Blue",
     "sex": "♀",
     "latin_name": "Lysandra coridon Fulvescens",
     "description": "aberation Fulvescens This female, aberration Fulvescens",
@@ -28460,7 +28460,7 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null,
+    "notes": ". In 1938 Bright and Leeds noted this to be rare (in contrast to the uncommon Postfulvescens, in which only the hindwings are affected) and commented, “The forewings distinctly tinted with buff, sandy, foxy, or bright brown, but in most cases a little inferior in brightness to that of the hindwings”. This is an English specimen, which bears a French sale label dated 1909. It was subsequently in the collection of CHS Oberthur and, by reason of its importance, re-set by L. W. Newman in 1925 on a black, English pin  specimen is an example of the rare ground colour , in which both fore and hind wings are affected",
     "location_country": null
   },
   {
@@ -28585,7 +28585,7 @@
   },
   {
     "id": "53d30008-cb34-48e1-b1fa-73f295a56047",
-    "english_name": "Cranberry Blue. Not particularly rare, but not often encountered as this species usually flies on inaccessible slopes at high altitude. Found lower in northern Europe, where it is scarce",
+    "english_name": "Cranberry Blue",
     "sex": "♂",
     "latin_name": "Plebejus optilete (aka vacciniina)",
     "description": "2 x m",
@@ -28604,7 +28604,7 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null,
+    "notes": ". Not particularly rare, but not often encountered as this species usually flies on inaccessible slopes at high altitude. Found lower in northern Europe, where it is scarce",
     "location_country": null
   },
   {
@@ -29017,7 +29017,7 @@
   },
   {
     "id": "6be3b550-2ae1-4436-bac0-08e711750424",
-    "english_name": "Northern Brown Argus 19/7 but no other data but this species only comes",
+    "english_name": "Northern Brown Argus",
     "sex": "♂",
     "latin_name": "Aricia artaxerxes artaxerxes",
     "description": null,
@@ -29036,7 +29036,7 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null,
+    "notes": "19/7 but no other data but this species only comes",
     "location_country": "UK"
   },
   {
@@ -29089,7 +29089,7 @@
   },
   {
     "id": "c8aee08e-4e15-4fd6-9a8f-fa93eb722ab7",
-    "english_name": "Common Blue Female - . Transiens. L. D. Young, Surrey, 22nd September 1988 This female specimen is tiny Transiens. It was bred by L. D. Young on 22nd September 1988",
+    "english_name": "Common Blue Female -",
     "sex": null,
     "latin_name": "Polyommatus icarus",
     "description": "form of the aberration, ab; a female caught in Surrey. It is set on a modern double-ended stainless steel pin. It is shown upperside in the second photograph – but the glory of this specimen is its underside",
@@ -29108,7 +29108,7 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null,
+    "notes": ". Transiens. L. D. Young, Surrey, 22nd September 1988 This female specimen is tiny Transiens. It was bred by L. D. Young on 22nd September 1988",
     "location_country": null
   },
   {
@@ -29161,7 +29161,7 @@
   },
   {
     "id": "a805312d-4de7-42b8-a033-d8ba7a1c11af",
-    "english_name": "Large Blue extinct English sub-species eutyphron, is an example of the . It was caught in North Cornwall in July 1944 by C. Greenwood. The specimen is set on a black, English pin. Ford (1945) describes specimens",
+    "english_name": "Large Blue",
     "sex": "♀",
     "latin_name": "Phengaris arion eytyphron ab conjuncta",
     "description": "aberration Conjuncta; peninsular of Devon and Cornwall as being of a clearer and brighter blue compared with those originating from the Cotswolds",
@@ -29180,12 +29180,12 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null,
+    "notes": ". It was caught in North Cornwall in July 1944 by C. Greenwood. The specimen is set on a black, English pin. Ford (1945) describes specimens  extinct English sub-species eutyphron, is an example of the",
     "location_country": null
   },
   {
     "id": "2bb64c9f-6e29-459a-8980-7b7d93049be9",
-    "english_name": "Large Blue extinct English sub-species eutyphron, is an example of the . It was caught in North Cornwall on 2nd July 1947 by the noted collector, O. A. Alexander. The specimen is set on a black, English pin. Ford (1945) describes specimens",
+    "english_name": "Large Blue",
     "sex": "♂",
     "latin_name": "Phengaris arion eutyphron ab Isufica vorbrot",
     "description": "aberration Insubrica; peninsular of Devon and Cornwall as being of a clearer and brighter blue compared with those originating from the Cotswolds",
@@ -29204,7 +29204,7 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null,
+    "notes": ". It was caught in North Cornwall on 2nd July 1947 by the noted collector, O. A. Alexander. The specimen is set on a black, English pin. Ford (1945) describes specimens  extinct English sub-species eutyphron, is an example of the",
     "location_country": null
   },
   {
@@ -29305,7 +29305,7 @@
   },
   {
     "id": "05311920-e951-4087-8e38-ecd8457352d3",
-    "english_name": "Amanda’s Blue. This species is widespread in southern Europe and North Africa, where this specimen is",
+    "english_name": "Amanda’s Blue",
     "sex": "♀",
     "latin_name": "Agrodiaetus amanda abdelaziz",
     "description": null,
@@ -29324,12 +29324,12 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null,
+    "notes": ". This species is widespread in southern Europe and North Africa, where this specimen is",
     "location_country": null
   },
   {
     "id": "b1a24571-615f-4703-936a-b891f77e0813",
-    "english_name": "Macedonian Chalk-hill Blue. F This species is endemic to north east Greece and almost totally confined to Mt. Phalakron and Mt Pangeon. Very scarce in collections",
+    "english_name": "Macedonian Chalk-hill Blue",
     "sex": null,
     "latin_name": "Lysandra philippi",
     "description": null,
@@ -29348,12 +29348,12 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null,
+    "notes": ". F This species is endemic to north east Greece and almost totally confined to Mt. Phalakron and Mt Pangeon. Very scarce in collections",
     "location_country": null
   },
   {
     "id": "ac70ec1a-0bfd-45e6-bfcd-7c3855e6666a",
-    "english_name": "Niobe Fritillary. This is a reasonably common species throughout the mountains of Europe, these are",
+    "english_name": "Niobe Fritillary",
     "sex": null,
     "latin_name": "Argynnis niobe form eris",
     "description": null,
@@ -29372,12 +29372,12 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null,
+    "notes": ". This is a reasonably common species throughout the mountains of Europe, these are",
     "location_country": "Italy"
   },
   {
     "id": "4e0e4628-bfbe-4f09-9b80-cb3ac64ccb30",
-    "english_name": "Provence Chalk-hill Blue. This species is endemic to northern Spain southern France. It is scarce in collections and often unrecognised in the field due to flying with the much commoner L. Coridon",
+    "english_name": "Provence Chalk-hill Blue",
     "sex": null,
     "latin_name": "Lysandra hispana",
     "description": null,
@@ -29396,12 +29396,12 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null,
+    "notes": ". This species is endemic to northern Spain southern France. It is scarce in collections and often unrecognised in the field due to flying with the much commoner L. Coridon",
     "location_country": null
   },
   {
     "id": "36a28420-b9bd-4a0e-96ae-6a1dcc2fa4e2",
-    "english_name": "Shepherd’s Fritillary This species is only found at altitude and is much rarer than the Mountain Fritillary, though usually flies with it. These specimens are",
+    "english_name": "Shepherd’s Fritillary",
     "sex": "♂",
     "latin_name": "Boloria pales",
     "description": "2 x m",
@@ -29420,12 +29420,12 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null,
+    "notes": ". These specimens are  This species is only found at altitude and is much rarer than the Mountain Fritillary, though usually flies with it",
     "location_country": "Alps"
   },
   {
     "id": "9552baf9-692b-4384-a789-a1f5ea941bf9",
-    "english_name": "Silvery Argus. M. High altitude species in the Alps, though occurs much lower in Scandinavia where it is a scarce and local species. This one is",
+    "english_name": "Silvery Argus",
     "sex": null,
     "latin_name": "Agriades nicias",
     "description": null,
@@ -29444,7 +29444,7 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null,
+    "notes": ". M. High altitude species in the Alps, though occurs much lower in Scandinavia where it is a scarce and local species. This one is",
     "location_country": "France"
   },
   {
@@ -29497,7 +29497,7 @@
   },
   {
     "id": "6546d17a-6175-4857-b786-aa2de3021a4c",
-    "english_name": "Bog Fritillary. Very scarce in Central and northern Europe and not found in all collections. This is of the northern dark race",
+    "english_name": "Bog Fritillary",
     "sex": null,
     "latin_name": "Proclossiana eunomia ossiana",
     "description": null,
@@ -29516,12 +29516,12 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null,
+    "notes": ". Very scarce in Central and northern Europe and not found in all collections. This is of the northern dark race",
     "location_country": null
   },
   {
     "id": "7c2e2384-0a4a-436f-a57a-fda2ee57261c",
-    "english_name": "Freija’s Fritillary. Only found in the most northern areas of Europe and is very difficult to obtain in good condition",
+    "english_name": "Freija’s Fritillary",
     "sex": null,
     "latin_name": "Clossiana freija",
     "description": null,
@@ -29540,12 +29540,12 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null,
+    "notes": ". Only found in the most northern areas of Europe and is very difficult to obtain in good condition",
     "location_country": null
   },
   {
     "id": "f33f2b92-0fd0-461f-ae1e-f98e01670615",
-    "english_name": "Meadow Fritillary. Endemic to SW Europe, and locally common. These are",
+    "english_name": "Meadow Fritillary",
     "sex": null,
     "latin_name": "Mellicta parthenoides",
     "description": null,
@@ -29564,7 +29564,7 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null,
+    "notes": ". Endemic to SW Europe, and locally common. These are",
     "location_country": "France"
   },
   {
@@ -29665,7 +29665,7 @@
   },
   {
     "id": "34d047fb-b05d-480f-adbd-45669631a55c",
-    "english_name": "Chapman's Ringlet f? species is rare and confined to NW Spain, not found in many collections and the female is especially hard to find. This is the largest of the European Erebias and looks quite striking in a collection of its congeners",
+    "english_name": "Chapman's Ringlet f?",
     "sex": null,
     "latin_name": "Erebia palarica",
     "description": null,
@@ -29684,12 +29684,12 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null,
+    "notes": ". This is the largest of the European Erebias and looks quite striking in a collection of its congeners  species is rare and confined to NW Spain, not found in many collections and the female is especially hard to find",
     "location_country": null
   },
   {
     "id": "4e150c1d-e83b-450b-a821-70c38d0c590a",
-    "english_name": "Lesser Clouded Yellow. This beautiful species is scarce in Eastern Europe. This one is",
+    "english_name": "Lesser Clouded Yellow",
     "sex": "♂",
     "latin_name": "Colias chrysotheme",
     "description": "A very good chance to obtain a key species, in perfect condition, for your collection",
@@ -29708,7 +29708,7 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null,
+    "notes": ". This beautiful species is scarce in Eastern Europe. This one is",
     "location_country": "Hungary"
   },
   {
@@ -29737,7 +29737,7 @@
   },
   {
     "id": "36f0e4f5-bd33-40ad-9604-6093f1df355e",
-    "english_name": "Southern Grayling. This the Corsica and Sardinia where they are fairly frequent at all altitudes; they are difficult to get in good condition",
+    "english_name": "Southern Grayling",
     "sex": "♂",
     "latin_name": "Hipparchia aristaeus aristaeus",
     "description": "subspecies is endemic to",
@@ -29756,12 +29756,12 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null,
+    "notes": ". This the Corsica and Sardinia where they are fairly frequent at all altitudes; they are difficult to get in good condition",
     "location_country": null
   },
   {
     "id": "225f6eb6-0ca4-4a98-aaf7-3c4fe63dc379",
-    "english_name": "Spanish Chalk-hill Blue. This species is endemic to Spain and a small area of Morocco. Another of the fascinating s of this butterfly; some of which are given specific rank by some authors. This",
+    "english_name": "Spanish Chalk-hill Blue",
     "sex": "♂",
     "latin_name": "Lysandra albicans",
     "description": "form, form is",
@@ -29780,12 +29780,12 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null,
+    "notes": ". This species is endemic to Spain and a small area of Morocco. Another of the fascinating s of this butterfly; some of which are given specific rank by some authors. This",
     "location_country": "Spain"
   },
   {
     "id": "5e3fd047-7451-4b67-981c-a787ece26021",
-    "english_name": "Spanish Marbled White Endemic to northern Africa, this butterfly is a typical member of the local fauna. Usually common where it occurs",
+    "english_name": "Spanish Marbled White",
     "sex": "♂♀",
     "latin_name": "Melanargia lucasi",
     "description": null,
@@ -29804,12 +29804,12 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null,
+    "notes": ". Usually common where it occurs  Endemic to northern Africa, this butterfly is a typical member of the local fauna",
     "location_country": null
   },
   {
     "id": "be8bb5bd-072f-46d1-a39a-771ac863b2df",
-    "english_name": "Spanish Marbled White. Endemic to the Iberian peninsular and northern Africa, this is a typical member of the local fauna. Usually common where it occurs",
+    "english_name": "Spanish Marbled White",
     "sex": null,
     "latin_name": "Melanargia ines",
     "description": null,
@@ -29828,7 +29828,7 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null,
+    "notes": ". Endemic to the Iberian peninsular and northern Africa, this is a typical member of the local fauna. Usually common where it occurs",
     "location_country": "Morocco"
   },
   {
@@ -29953,7 +29953,7 @@
   },
   {
     "id": "deba3738-66cc-4527-a525-e3e65b274571",
-    "english_name": "Meadow Brown s + minor Top left damaged by museum beetle and destroyed",
+    "english_name": "Meadow Brown s + minor",
     "sex": "♀",
     "latin_name": "Maniola jurtina",
     "description": "Aberation",
@@ -29972,12 +29972,12 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null,
+    "notes": "Top left damaged by museum beetle and destroyed",
     "location_country": null
   },
   {
     "id": "47901da5-0253-47bd-9e48-49a98d76dd49",
-    "english_name": "Orange Tips ( minor) Top left destroyed by museum beetle",
+    "english_name": "Orange Tips ( minor)",
     "sex": "♂♀",
     "latin_name": "Anthocharis cardamines",
     "description": "2 x p, 1 p",
@@ -29996,12 +29996,12 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null,
+    "notes": "Top left destroyed by museum beetle",
     "location_country": null
   },
   {
     "id": "0221e2cb-c818-4e97-8d3c-f16fa76b53b5",
-    "english_name": "Common Blue Irish sub-species mariscolore, caught in Co. Mayo, Ireland, in July 1927 by S. B. Hodgson. It is set on a black, English, pin. I bought this specimen about 45 years ago",
+    "english_name": "Common Blue Irish sub-species mariscolore",
     "sex": "♀",
     "latin_name": "Polyommatus icarus",
     "description": "Butterfly Farm, whose proprietor kindly sent me a large box of the aberrations of the Chalk-Hill, Adonis, and Common Blue butterflies from which to select specimens on approval. I thought this specimen the most eye-catching example I had ever seen – and I still do! It is the last one (and the best) that I have left",
@@ -30020,12 +30020,12 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null,
+    "notes": ". Mayo, Ireland, in July 1927 by S. B. Hodgson. It is set on a black, English, pin. I bought this specimen about 45 years ago , caught in Co",
     "location_country": null
   },
   {
     "id": "718b0528-660c-4906-9ad2-b3c1415ef2e9",
-    "english_name": "Common Blue Dwarf : J. W. Tutt classed as minor a specimen which did not exceed two-thirds of normal size, and with a wing span of 26mm or less. It was caught on 1st August 1962. The label is written in pencil. The handwriting was, no doubt, perfectly clear to the collector, but, alas, not to me: it looks like Barnes. Whatever the locality, it seems to have given rise to an inbred colony showing very similar characteristics: this is one of three specimens in my collection",
+    "english_name": "Common Blue",
     "sex": "♂",
     "latin_name": "Polyommatus icarus",
     "description": "aberration Minor; there within a matter of a few days in August 1962. The name of the collector is not given. It is set on a black, English, pin",
@@ -30044,12 +30044,12 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null,
+    "notes": ". W. Tutt classed as minor a specimen which did not exceed two-thirds of normal size, and with a wing span of 26mm or less. It was caught on 1st August 1962. The label is written in pencil. The handwriting was, no doubt, perfectly clear to the collector, but, alas, not to me: it looks like Barnes. Whatever the locality, it seems to have given rise to an inbred colony showing very similar characteristics: this is one of three specimens in my collection  Dwarf : J",
     "location_country": null
   },
   {
     "id": "d03d43dc-e27a-4492-8782-dde501de60d0",
-    "english_name": "Large Blue Extinct English sub-species eutyphron. an example of the double , and Alconides. caught on Painswick Hill, Gloucestershire on 18th June 1933 and is set on a black, English pin. The name of the collector is not given",
+    "english_name": "Large Blue",
     "sex": "♂",
     "latin_name": "Phengaris arion",
     "description": "aberration major",
@@ -30068,7 +30068,7 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null,
+    "notes": ". an example of the double , and Alconides. caught on Painswick Hill, Gloucestershire on 18th June 1933 and is set on a black, English pin. The name of the collector is not given  Extinct English sub-species eutyphron",
     "location_country": null
   },
   {
@@ -30961,7 +30961,7 @@
   },
   {
     "id": "1a3cf504-a6d9-44ca-a574-e0e0253d54ab",
-    "english_name": "Southern Festoon Species is widespread & fairly common in eastern Europe, very rare in more westerly areas to SE France. This is",
+    "english_name": "Southern Festoon",
     "sex": "♀",
     "latin_name": "Zerynthia polyxena",
     "description": null,
@@ -30980,7 +30980,7 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null,
+    "notes": ". This is  Species is widespread & fairly common in eastern Europe, very rare in more westerly areas to SE France",
     "location_country": "Ukraine"
   },
   {
@@ -31321,7 +31321,7 @@
   },
   {
     "id": "b14889cf-1b67-4f4d-8058-0ac555e7ddd9",
-    "english_name": "Common Blue f Isle of Sark – L. W. Newman A somewhat worn specimen with a little damage – but a blue female caught on the Isle of Sark by L. W. Newman on 16th June 1931. Set on a black, un-headed, pin",
+    "english_name": "Common Blue f Isle of Sark – L",
     "sex": null,
     "latin_name": "Polyommatus icarus",
     "description": null,
@@ -31340,12 +31340,12 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null,
+    "notes": ". W. Newman A somewhat worn specimen with a little damage – but a blue female caught on the Isle of Sark by L. W. Newman on 16th June 1931. Set on a black, un-headed, pin",
     "location_country": null
   },
   {
     "id": "47446aad-8c9d-46fa-829d-de42e7834322",
-    "english_name": "Adonis Blue m . Crassipuncta This male specimen is set underside and shows enlarged spotting to all wings. It was caught at Mere, on the South Wiltshire Downs, in August 1979 and is set on a modern, un-headed, Stainless steel, pin",
+    "english_name": "Adonis Blue m",
     "sex": null,
     "latin_name": "Polyommatus bellargus",
     "description": "ab",
@@ -31364,12 +31364,12 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null,
+    "notes": ". Crassipuncta This male specimen is set underside and shows enlarged spotting to all wings. It was caught at Mere, on the South Wiltshire Downs, in August 1979 and is set on a modern, un-headed, Stainless steel, pin",
     "location_country": null
   },
   {
     "id": "6235644b-7664-4cb2-860e-ae6258ee12d1",
-    "english_name": "Adonis Blue m . Antipluripuncta This male specimen was caught in Kent on 28th August 1936 and is set underside on a black, English, pin as a fairly extreme example of the , in which there are additional submedian black dots or spots (the upper submedian spots are, in fact, starting to elongate to join the discoidal spot)",
+    "english_name": "Adonis Blue m",
     "sex": null,
     "latin_name": "Polyommatus bellargus",
     "description": "aberration Antipluripuncta, ab",
@@ -31388,12 +31388,12 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null,
+    "notes": ". Antipluripuncta This male specimen was caught in Kent on 28th August 1936 and is set underside on a black, English, pin as a fairly extreme example of the , in which there are additional submedian black dots or spots (the upper submedian spots are, in fact, starting to elongate to join the discoidal spot)",
     "location_country": null
   },
   {
     "id": "311721a2-edae-4c68-971a-7ec453f852e3",
-    "english_name": "Adonis Blue Male . Anticrassilunulata-Antipluripuncta-Tripuncta Kent 28.8.1936",
+    "english_name": "Adonis Blue Male",
     "sex": null,
     "latin_name": "Polyommatus bellargus",
     "description": "ab",
@@ -31412,12 +31412,12 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null,
+    "notes": ". Anticrassilunulata-Antipluripuncta-Tripuncta Kent 28.8.1936",
     "location_country": null
   },
   {
     "id": "f7c6967e-30ba-42f6-ab83-4de643ed18a9",
-    "english_name": "Common Blue f Jon Young at Jaywick, Essex, by Jon Young, on 16th May 2008. Set on a modern, un-headed, stainless steel pin. There is a small chip to the left hindwing",
+    "english_name": "Common Blue",
     "sex": null,
     "latin_name": "Polyommatus icarus",
     "description": "aberration A female caught",
@@ -31436,12 +31436,12 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null,
+    "notes": ". Set on a modern, un-headed, stainless steel pin. There is a small chip to the left hindwing | f Jon Young at Jaywick, Essex, by Jon Young, on 16th May 2008",
     "location_country": null
   },
   {
     "id": "898198f7-45df-47ed-a46c-7925cbf46922",
-    "english_name": "Common Blue f This superb blue female was bred on 10th August 1955",
+    "english_name": "Common Blue f",
     "sex": null,
     "latin_name": "Polyommatus icarus",
     "description": "stock originating from Kop Hill (in the Chilterns) and is set on a ‘white’ pin",
@@ -31460,7 +31460,7 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null,
+    "notes": "This superb blue female was bred on 10th August 1955",
     "location_country": null
   },
   {
@@ -31873,7 +31873,7 @@
   },
   {
     "id": "c53daafb-dc21-4961-ab8d-f1095dcd9614",
-    "english_name": "Silvery Argus. High altitude species in the Alps, though occurs much lower in Scandinavia where it is a scarce and local species. This is",
+    "english_name": "Silvery Argus",
     "sex": "♂",
     "latin_name": "Psedoaricia nicias",
     "description": "lapland",
@@ -31892,7 +31892,7 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": "Picture from Internet not specimen",
+    "notes": "Picture from Internet not specimen\n. High altitude species in the Alps, though occurs much lower in Scandinavia where it is a scarce and local species. This is",
     "location_country": "Finland"
   },
   {
@@ -32353,7 +32353,7 @@
   },
   {
     "id": "ee67a20e-4528-4d3e-a271-1c0e3f202d08",
-    "english_name": "Silver-studded Blue Wild caught said to be ssp Masseyi",
+    "english_name": "Silver-studded Blue",
     "sex": "♂",
     "latin_name": "Plebejus argus ssp masseyi",
     "description": null,
@@ -32372,7 +32372,7 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null,
+    "notes": "Wild caught said to be ssp Masseyi",
     "location_country": "UK"
   },
   {
@@ -32401,7 +32401,7 @@
   },
   {
     "id": "50808a9f-1855-4d84-bcca-fb45aebc5e46",
-    "english_name": "Northern Brown Argus Wild caught British Northern brown argus ssp Salmacis",
+    "english_name": "Northern Brown Argus",
     "sex": "♂",
     "latin_name": "Aricia artaxerxes sss salmacis",
     "description": null,
@@ -32420,7 +32420,7 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null,
+    "notes": "Wild caught British Northern brown argus ssp Salmacis",
     "location_country": "Cumberland1906"
   },
   {
@@ -33025,7 +33025,7 @@
   },
   {
     "id": "b5f2f79c-198c-4e8c-8330-298b8ff256e1",
-    "english_name": "Swallowtails 1X Papilio hippocrates female bred, Ex stock China. 7. 5. 2010. Bolton Lancs. 1X Papilio machaon britannicus male, Bred, Bolton, Lancs. 14. 6. 2004 slight chip out of hind wing otherwise fine condition. 1X Papilio machaon gorganus, male. St. Peters, Guernsey, 20. 8. 1982 V. rare. . asterias X machaon hybrid. Bred, Notts, July 1989, D. Whitehead",
+    "english_name": "Swallowtails 1X Papilio hippocrates female bred,",
     "sex": "♂♀",
     "latin_name": "Papilio hippocrates Papilio machaon britannicus Papilio machaon gorganus Papilio machaon/asterias cross",
     "description": "1 x p, Various",
@@ -33044,12 +33044,12 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null,
+    "notes": ". 7. 5. 2010. Bolton Lancs. 1X Papilio machaon britannicus male, Bred, Bolton, Lancs. 14. 6. 2004 slight chip out of hind wing otherwise fine condition. 1X Papilio machaon gorganus, male. St. Peters, Guernsey, 20. 8. 1982 V. rare. . asterias X machaon hybrid. Bred, Notts, July 1989, D. Whitehead  Ex stock China",
     "location_country": null
   },
   {
     "id": "bc09ea69-a47a-4fcb-8428-ef6cafac1d6f",
-    "english_name": "Canary Large White stunning female example of this unique Island race. Pieris",
+    "english_name": "Canary Large White",
     "sex": "♀",
     "latin_name": "Pieris cheiranthi",
     "description": "chiranthi; bred, Bolton, Lancashire",
@@ -33068,12 +33068,12 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null,
+    "notes": ". Pieris | stunning female example of this unique Island race",
     "location_country": "Canary Islands"
   },
   {
     "id": "71a71c96-6865-419f-ad00-6f1a89b2610a",
-    "english_name": "Canary Large White bred Bolton, Lancashire. This specimen is more extreme on upper and underside, having broader black bands",
+    "english_name": "Canary Large White",
     "sex": "♀",
     "latin_name": "Pieris cheiranthi",
     "description": null,
@@ -33092,12 +33092,12 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null,
+    "notes": ". This specimen is more extreme on upper and underside, having broader black bands  bred Bolton, Lancashire",
     "location_country": null
   },
   {
     "id": "ceb993a1-63db-4aa6-9b8c-453db0ba623c",
-    "english_name": "Swallowtail Mchaon/asterias hybrid. Bred, Notts, July 1989, D. Whitehead",
+    "english_name": "Swallowtail Mchaon/asterias hybrid",
     "sex": null,
     "latin_name": "Papilio machaon/asterias cross",
     "description": null,
@@ -33116,7 +33116,7 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null,
+    "notes": ". Bred, Notts, July 1989, D. Whitehead",
     "location_country": null
   },
   {
@@ -33817,7 +33817,7 @@
   },
   {
     "id": "8bbee2ca-cd99-4fb9-8c51-3af5cf7d6828",
-    "english_name": "Canary Speckled Wood. 2 Endemic to the canaries, this species is widespread and common there",
+    "english_name": "Canary Speckled Wood",
     "sex": "♂",
     "latin_name": "Parage xiphioides,",
     "description": null,
@@ -33836,7 +33836,7 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null,
+    "notes": ". 2 Endemic to the canaries, this species is widespread and common there",
     "location_country": null
   },
   {
@@ -34321,7 +34321,7 @@
   },
   {
     "id": "df9e12db-2661-4af6-9f20-2d0fb5bbc4f8",
-    "english_name": "Chapman's Ringlet f? species is rare and confined to NW Spain, not found in many collections and the female is especially hard to find. This is the largest of the European Erebias and looks quite striking in a collection of its congeners",
+    "english_name": "Chapman's Ringlet f?",
     "sex": null,
     "latin_name": "Erebia palarica",
     "description": null,
@@ -34340,7 +34340,7 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null,
+    "notes": ". This is the largest of the European Erebias and looks quite striking in a collection of its congeners  species is rare and confined to NW Spain, not found in many collections and the female is especially hard to find",
     "location_country": null
   },
   {
@@ -34753,7 +34753,7 @@
   },
   {
     "id": "5c1a5f96-4502-45db-b55a-90f44da0e9be",
-    "english_name": "Freija’s Fritillary. Only found in the most northern areas of Europe and is very difficult to obtain in good condition",
+    "english_name": "Freija’s Fritillary",
     "sex": "♂",
     "latin_name": "Closiana freija",
     "description": null,
@@ -34772,7 +34772,7 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null,
+    "notes": ". Only found in the most northern areas of Europe and is very difficult to obtain in good condition",
     "location_country": null
   },
   {
@@ -35137,7 +35137,7 @@
   },
   {
     "id": "40b2a038-6e35-4cc2-97a9-0d7811b6d54e",
-    "english_name": "Clouded Yellow ½helice intermediate between the normal . Yellow/peach in colouration. The underside is nearly obsolete of any normal markings. A rare lot",
+    "english_name": "Clouded Yellow ½helice intermediate between the normal",
     "sex": "♀",
     "latin_name": "Colias crocea ½ helice",
     "description": "form and helice",
@@ -35156,12 +35156,12 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null,
+    "notes": ". Yellow/peach in colouration. The underside is nearly obsolete of any normal markings. A rare lot",
     "location_country": null
   },
   {
     "id": "f52a0931-9085-4380-9c32-587a3ee7d05f",
-    "english_name": "Clouded Yellow helice Asymmetrical with unusual shaped wings. The specimen hatched",
+    "english_name": "Clouded Yellow helice",
     "sex": "♀",
     "latin_name": "Colias crocea form helice",
     "description": "a large pupa that was perfect. So the shape can't be explained. The hind wings are very dark with bright ornage cell spots. The underside is dark yellow green with large black fore wing spotting. The second example is intermediate between the normal form and helice. Yellow/peach in colouration. The underside is nearly obsolete of any normal markings. A rare lot",
@@ -35180,7 +35180,7 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null,
+    "notes": ". The specimen hatched | Asymmetrical with unusual shaped wings",
     "location_country": null
   },
   {
@@ -35233,7 +35233,7 @@
   },
   {
     "id": "743f6ba7-d782-4dc3-bc66-4a46a15b7197",
-    "english_name": "Common Blue Blue examples of this Yorkshire . The blue is very intense and one example has very well defined orange lunules, not dissimilar to the Scottish . The undersides are very well marked and one is slightly aberrant",
+    "english_name": "Common Blue Blue examples of this Yorkshire",
     "sex": "♀",
     "latin_name": "Polyommatus icarus",
     "description": "3 x f, form",
@@ -35252,12 +35252,12 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null,
+    "notes": ". The blue is very intense and one example has very well defined orange lunules, not dissimilar to the Scottish . The undersides are very well marked and one is slightly aberrant",
     "location_country": null
   },
   {
     "id": "81cc8658-7ea9-4eda-8519-a6113a3c2842",
-    "english_name": "Orange Tip shaped discoidal spot on the forewings. Hind wings are Ochre yellow typical of specimens",
+    "english_name": "Orange Tip shaped discoidal spot on the forewings",
     "sex": "♀",
     "latin_name": "Anthocharas cardamines",
     "description": "1 x f, ab parvipuncta large crescent; The underside also has more yellow colouration. Beautiful example for the collection. Specimen is in excellent condition",
@@ -35276,7 +35276,7 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null,
+    "notes": ". Hind wings are Ochre yellow typical of specimens",
     "location_country": "UK"
   },
   {
@@ -35665,11 +35665,11 @@
   },
   {
     "id": "976a4945-3456-4134-abff-f6a45950074d",
-    "english_name": "Duke of Burgundy Fritillary Dunstable, Bedfordshire",
+    "english_name": "Duke of Burgundy Fritillary",
     "sex": "♂",
     "latin_name": "Hamaeris Hamearis lucina",
     "description": "2 x m",
-    "location": null,
+    "location": "Dunstable, Bedfordshire",
     "altitude_m": null,
     "supplier_username": "oldpigsqueal",
     "supplier_name": "Pete Holdaway",
@@ -35684,16 +35684,16 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null,
+    "notes": "",
     "location_country": null
   },
   {
     "id": "dd399541-4475-4d17-82be-3749e9ecc0bf",
-    "english_name": "Stiped Grayling Great Banded Grayling Southern Spain",
+    "english_name": "Stiped Grayling / Great Banded Grayling",
     "sex": null,
     "latin_name": "Pseudotergumia fidia - top Brintesia circe",
     "description": null,
-    "location": null,
+    "location": "Southern Spain",
     "altitude_m": null,
     "supplier_username": "oldpigsqueal",
     "supplier_name": "Pete Holdaway",
@@ -35708,7 +35708,7 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null,
+    "notes": "",
     "location_country": null
   },
   {
@@ -36721,7 +36721,7 @@
   },
   {
     "id": "e5b5a3de-2600-48b8-b6c3-5206568f4040",
-    "english_name": "Mountain Ringlet captive bred Mountain Ringlet butterflies, in mint condition with full data",
+    "english_name": "Mountain Ringlet captive",
     "sex": "♂♀",
     "latin_name": "Erebia epiphrone ssp mnemon",
     "description": null,
@@ -36740,7 +36740,7 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null,
+    "notes": ", in mint condition with full data  bred Mountain Ringlet butterflies",
     "location_country": "1999, ex Cumbria"
   },
   {
@@ -36769,7 +36769,7 @@
   },
   {
     "id": "8f14708d-0803-4a9e-9701-029517bed462",
-    "english_name": "Large Copper dwarf ex Wood Walton Fen Cambs, the Dutch race",
+    "english_name": "Large Copper",
     "sex": "♂♀",
     "latin_name": "Lycaena dispar batavus",
     "description": null,
@@ -36788,7 +36788,7 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null,
+    "notes": "dwarf ex Wood Walton Fen Cambs, the Dutch race",
     "location_country": null
   },
   {
@@ -37729,7 +37729,7 @@
   },
   {
     "id": "1930bd80-b7f8-4530-a6c0-a82315b7515f",
-    "english_name": "Spanish Argus hesselbarthi, rare treatend only avail in Abejar, Soria Spain.This species is quite distinct",
+    "english_name": "Spanish Argus hesselbarthi",
     "sex": null,
     "latin_name": "Aricia morronensis hesselbarthi",
     "description": "other European ‘Brown Arguses’ and endemic to Spain and a small area in the east French Pyrenees. Always scarce and local, this is a difficult butterfly to obtain",
@@ -37748,7 +37748,7 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null,
+    "notes": "species is quite distinct | rare treatend only avail in Abejar, Soria Spain",
     "location_country": null
   },
   {
@@ -37777,7 +37777,7 @@
   },
   {
     "id": "54577bc6-1158-4e5d-85bb-1c8f82a1b553",
-    "english_name": "Meadow Brown hispulla Pos? Marocccan Meadow Brown or Dusky Meadow Brown ex Spain",
+    "english_name": "Meadow Brown hispulla",
     "sex": "♂♀",
     "latin_name": "Maniola jurtina hispulla",
     "description": null,
@@ -37796,12 +37796,12 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null,
+    "notes": "ex Spain | Pos? Marocccan Meadow Brown or Dusky Meadow Brown",
     "location_country": null
   },
   {
     "id": "31eb694c-ba52-48a1-a303-f0b2f24952b3",
-    "english_name": "Spanish Argus hesselbarthi, rare treatend only avail in Abejar, Soria Spain.This species is quite distinct",
+    "english_name": "Spanish Argus hesselbarthi",
     "sex": null,
     "latin_name": "Aricia morronensis hesselbarthi",
     "description": "other European ‘Brown Arguses’ and endemic to Spain and a small area in the east French Pyrenees. Always scarce and local,",
@@ -37820,7 +37820,7 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null,
+    "notes": "species is quite distinct | rare treatend only avail in Abejar, Soria Spain",
     "location_country": null
   },
   {
@@ -37849,7 +37849,7 @@
   },
   {
     "id": "3c24727e-3bda-4052-87fb-8554375d46e3",
-    "english_name": "Small Pearl Bordered Fritillary scotica ex Scotland",
+    "english_name": "Small Pearl Bordered Fritillary scotica",
     "sex": "♂",
     "latin_name": "Boloria selene scotica",
     "description": null,
@@ -37868,7 +37868,7 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null,
+    "notes": "ex Scotland",
     "location_country": null
   },
   {
@@ -37897,7 +37897,7 @@
   },
   {
     "id": "3f149fcc-001e-4f52-b08a-64aa2d813983",
-    "english_name": "Small Pearl Bordered Fritillary scotica ex Scotland",
+    "english_name": "Small Pearl Bordered Fritillary scotica",
     "sex": "♂",
     "latin_name": "Boloria selene scotica",
     "description": null,
@@ -37916,7 +37916,7 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null,
+    "notes": "ex Scotland",
     "location_country": null
   },
   {
@@ -38569,7 +38569,7 @@
   },
   {
     "id": "39163f03-ca1e-415a-a278-4eadc7564ba3",
-    "english_name": "Chalkhill Blue - Devils Chimney - Chelmsford - EXTINCT RACE",
+    "english_name": "Chalkhill Blue",
     "sex": null,
     "latin_name": "Lysandra corridon",
     "description": null,
@@ -38588,12 +38588,12 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null,
+    "notes": "- Devils Chimney - Chelmsford - EXTINCT RACE",
     "location_country": null
   },
   {
     "id": "5bfd34fd-3fa5-42ed-9375-022df1da2046",
-    "english_name": "Dingy Skippers - British with Data - Box Hill and Canfold 1963",
+    "english_name": "Dingy Skippers",
     "sex": null,
     "latin_name": "Erynnis tages",
     "description": null,
@@ -38612,7 +38612,7 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null,
+    "notes": "- British with Data - Box Hill and Canfold 1963",
     "location_country": null
   },
   {
@@ -38689,7 +38689,7 @@
   },
   {
     "id": "e0909ec1-07ed-475a-91a1-4ca523a727ca",
-    "english_name": "Wood White Brunnomaculata Salcey Forest 31/05/1970 F Harrison",
+    "english_name": "Wood White Brunnomaculata",
     "sex": null,
     "latin_name": "Leptidea sinapsis form Brunnomaculata",
     "description": null,
@@ -38708,7 +38708,7 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null,
+    "notes": "Salcey Forest 31/05/1970 F Harrison",
     "location_country": null
   },
   {
@@ -40177,7 +40177,7 @@
   },
   {
     "id": "e08608e2-4879-455b-96fd-75581e9e1af1",
-    "english_name": "Adonis Blue ceronius damaged in transit. Lost adomen and lr wing",
+    "english_name": "Adonis Blue ceronius",
     "sex": "♀",
     "latin_name": "Lycandra bellargus for ceronius",
     "description": null,
@@ -40196,7 +40196,7 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": "No Photo",
+    "notes": "No Photo\n. Lost adomen and lr wing  damaged in transit",
     "location_country": null
   },
   {
@@ -40537,7 +40537,7 @@
   },
   {
     "id": "b2d905f8-04ba-45f5-a980-7e0b3928e975",
-    "english_name": "Large Copper Bred Ex Harold Short Stock Ex Wood Walton Fen 1983 by S Baker",
+    "english_name": "Large Copper",
     "sex": "♂♀",
     "latin_name": "Lycaena batavus",
     "description": null,
@@ -40556,12 +40556,12 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null,
+    "notes": "Bred Ex Harold Short Stock Ex Wood Walton Fen 1983 by S Baker",
     "location_country": null
   },
   {
     "id": "64b08228-2c9a-42b3-ba6a-e4df7ac6d820",
-    "english_name": "Glanville Fritillary, (Captive bred 1982 Stanley Baker) ex Freshwater, Isle of Wight",
+    "english_name": "Glanville Fritillary",
     "sex": null,
     "latin_name": "Melitaea cinxia",
     "description": null,
@@ -40580,7 +40580,7 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null,
+    "notes": ", (Captive bred 1982 Stanley Baker) ex Freshwater, Isle of Wight",
     "location_country": null
   },
   {
@@ -41881,7 +41881,7 @@
   },
   {
     "id": "cb4cc423-8eac-444d-a5b4-a2bfae0a1bec",
-    "english_name": "Chapman's Ringlet species is rare and confined to NW Spain, not found in many collections and the female is especially hard to find. This is the largest of the European Erebias and looks quite striking in a collection of its congeners",
+    "english_name": "Chapman's Ringlet",
     "sex": "♂",
     "latin_name": "Erebia palarica",
     "description": null,
@@ -41900,7 +41900,7 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null,
+    "notes": ". This is the largest of the European Erebias and looks quite striking in a collection of its congeners  species is rare and confined to NW Spain, not found in many collections and the female is especially hard to find",
     "location_country": null
   },
   {
@@ -42073,7 +42073,7 @@
   },
   {
     "id": "0be3fa60-522d-4473-9939-507cecbef3f1",
-    "english_name": "Small Blue Rare [no spots] Red Copse West Sussex 1925",
+    "english_name": "Small Blue",
     "sex": "♀",
     "latin_name": "Cupido minimus ab obsoleta",
     "description": "Aberration Obsoleta",
@@ -42092,7 +42092,7 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null,
+    "notes": "Rare [no spots] Red Copse West Sussex 1925",
     "location_country": null
   },
   {
@@ -42889,7 +42889,7 @@
   },
   {
     "id": "4a71a297-2f61-40e3-913e-13551cc46b80",
-    "english_name": "Clouded Yellow Pair North Stow Suffolk Bred 7/8/1983",
+    "english_name": "Clouded Yellow",
     "sex": null,
     "latin_name": "Colias crocea",
     "description": null,
@@ -42908,12 +42908,12 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null,
+    "notes": "Pair North Stow Suffolk Bred 7/8/1983",
     "location_country": null
   },
   {
     "id": "4cb3b444-5721-4b01-a7ae-d7d6b000f5b7",
-    "english_name": "Common Blue Butterfly Double '' antidiscoelongata'' and ''basielongata' Hants Surrey Bred 1990",
+    "english_name": "Common Blue Butterfly Double antidiscoelongata and basielongata",
     "sex": null,
     "latin_name": "Polyommatus icarus ab antidiscoelongata + ab basielongata",
     "description": "Abberation",
@@ -42932,12 +42932,12 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null,
+    "notes": "Bred 1990 | Hants Surrey",
     "location_country": null
   },
   {
     "id": "01407b6d-5f69-4bbf-a535-a193a5ed4523",
-    "english_name": "Irish Speckled Wood Butterfly County Carlow Butterflies... (200669390499)",
+    "english_name": "Irish Speckled Wood Butterfly County Carlow Butterflies",
     "sex": null,
     "latin_name": "Pararge aegeria",
     "description": null,
@@ -42956,12 +42956,12 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null,
+    "notes": ". (200669390499)",
     "location_country": null
   },
   {
     "id": "652f864d-f2da-43da-a200-68f2be1c1c64",
-    "english_name": "Purple Hairstreak Digne Basses Alpes Moth In... (200666784502)",
+    "english_name": "Purple Hairstreak Digne Basses Alpes Moth In",
     "sex": "♀",
     "latin_name": "Neozephyrus quercus",
     "description": null,
@@ -42980,12 +42980,12 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null,
+    "notes": ". (200666784502)",
     "location_country": null
   },
   {
     "id": "5243bd13-b06c-4277-b533-50f8971c254c",
-    "english_name": "Glanville Fritillary, (Captive bred) ex Isle of Wight in mint condition",
+    "english_name": "Glanville Fritillary",
     "sex": null,
     "latin_name": "Melitaea cinxia",
     "description": null,
@@ -43004,12 +43004,12 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null,
+    "notes": ", (Captive bred) ex Isle of Wight in mint condition",
     "location_country": null
   },
   {
     "id": "c846c4b4-57ef-4455-ac60-139adc8a12bb",
-    "english_name": "Chalkhill Blue . (Captive bred) This is the rare nearly all blue female type, ex Normandy France in mint condition",
+    "english_name": "Chalkhill Blue",
     "sex": null,
     "latin_name": "Lysandra coridon, abberation syngrapha",
     "description": "abberation syngrapha",
@@ -43028,12 +43028,12 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null,
+    "notes": ". (Captive bred) This is the rare nearly all blue female type, ex Normandy France in mint condition",
     "location_country": null
   },
   {
     "id": "544a294c-cdd3-40df-8999-1888a8b14eb8",
-    "english_name": "Common Blue Butterfly, this specimen being the lovely blue , in mint condition. The specimen originates",
+    "english_name": "Common Blue Butterfly",
     "sex": null,
     "latin_name": "Polyommatus icarus",
     "description": "form of the female",
@@ -43052,12 +43052,12 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null,
+    "notes": ". The specimen originates , this specimen being the lovely blue , in mint condition",
     "location_country": "UK"
   },
   {
     "id": "a087e39f-7fdd-4507-885e-0ccc45bb8128",
-    "english_name": "Cynthia’s Fritillary. In Europe this butterfly is confined to high altitude in the Alpine arc. These specimens are",
+    "english_name": "Cynthia’s Fritillary",
     "sex": null,
     "latin_name": "Euphydryas cynthia",
     "description": null,
@@ -43076,12 +43076,12 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null,
+    "notes": ". In Europe this butterfly is confined to high altitude in the Alpine arc. These specimens are",
     "location_country": "France"
   },
   {
     "id": "34c1c43f-9ec0-45b3-9ee7-ee64682d30e8",
-    "english_name": "Mountain Argus. This species is widespread in Europe, though only found at high elevations. They are very difficult to obtain in good condition. France",
+    "english_name": "Mountain Argus",
     "sex": null,
     "latin_name": "Aricia allous",
     "description": null,
@@ -43100,7 +43100,7 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null,
+    "notes": ". This species is widespread in Europe, though only found at high elevations. They are very difficult to obtain in good condition. France",
     "location_country": null
   },
   {
@@ -43177,7 +43177,7 @@
   },
   {
     "id": "5d9d21cd-9a7e-4008-b4bc-c76825fdaf4e",
-    "english_name": "Knapweed Fritillary pair. Common in Europe, not found in the British Isles, very butterfly. These are dark France",
+    "english_name": "Knapweed Fritillary pair",
     "sex": null,
     "latin_name": "Melitaea phoebe",
     "description": "form found in S, variable",
@@ -43196,12 +43196,12 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null,
+    "notes": ". Common in Europe, not found in the British Isles, very butterfly. These are dark France",
     "location_country": null
   },
   {
     "id": "b6f68a74-f345-438d-a16a-dd9e966d2a02",
-    "english_name": "Large Blue (South Korea) Rare species in collections, easily the largest of all the ‘Large Blues’",
+    "english_name": "Large Blue",
     "sex": null,
     "latin_name": "Phengaris arionides",
     "description": null,
@@ -43220,12 +43220,12 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null,
+    "notes": "(South Korea) Rare species in collections, easily the largest of all the ‘Large Blues’",
     "location_country": null
   },
   {
     "id": "6cc2e82d-75c3-4c7c-bf25-316d6ed460b7",
-    "english_name": "Mountain Clouded Yellow. This species is endemic to Europe and found in 3 . These specimens are",
+    "english_name": "Mountain Clouded Yellow",
     "sex": null,
     "latin_name": "Colias phicomone phicomone",
     "description": "subspecies",
@@ -43244,12 +43244,12 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": "This photo found floating around, looks like phicomone",
+    "notes": "This photo found floating around, looks like phicomone\n. This species is endemic to Europe and found in 3 . These specimens are",
     "location_country": "France"
   },
   {
     "id": "b4ce9e95-e305-4eaa-ac75-343e0d77edbb",
-    "english_name": "Scarce Large Blue. Extremely local in Europe, with widely separated populations. This is a very distinctive race found in Japan",
+    "english_name": "Scarce Large Blue",
     "sex": null,
     "latin_name": "Phengaris teleius ogumae",
     "description": null,
@@ -43268,7 +43268,7 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null,
+    "notes": ". Extremely local in Europe, with widely separated populations. This is a very distinctive race found in Japan",
     "location_country": null
   },
   {
@@ -43297,7 +43297,7 @@
   },
   {
     "id": "f9f82f28-ef86-4ab4-be88-6da7e417fe9f",
-    "english_name": "Eros Blue. Uncommon in the higher parts of most of the massifs of Europe. Often difficult to find, and very difficult to capture in its often very rugged terrain. These are",
+    "english_name": "Eros Blue",
     "sex": null,
     "latin_name": "Polyommatus eros",
     "description": null,
@@ -43316,12 +43316,12 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null,
+    "notes": ". Uncommon in the higher parts of most of the massifs of Europe. Often difficult to find, and very difficult to capture in its often very rugged terrain. These are",
     "location_country": "France"
   },
   {
     "id": "6d0890f8-17ca-4327-abaf-3eb865b30fd6",
-    "english_name": "False Ilex Hairstreak. Very local and uncommon in the Iberian peninsular and the adjoining area of southern France. Scarce in collections, these are",
+    "english_name": "False Ilex Hairstreak",
     "sex": null,
     "latin_name": "Satyrium esculi",
     "description": null,
@@ -43340,12 +43340,12 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null,
+    "notes": ". Very local and uncommon in the Iberian peninsular and the adjoining area of southern France. Scarce in collections, these are",
     "location_country": "France"
   },
   {
     "id": "b03857e2-b25e-44de-8ecc-947e3b5d3d4d",
-    "english_name": "Mountain Argus. Species widespread in Europe, only found at high elevations. Very difficult to obtain in good condition. These specimens are",
+    "english_name": "Mountain Argus",
     "sex": null,
     "latin_name": "Aricia allous",
     "description": null,
@@ -43364,12 +43364,12 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null,
+    "notes": ". Species widespread in Europe, only found at high elevations. Very difficult to obtain in good condition. These specimens are",
     "location_country": "France"
   },
   {
     "id": "a64674b2-0d7d-4269-a85f-c8b774a73ac7",
-    "english_name": "Mountain Fritillary pair and a male fairly common in Alps and Pyrenees. female is well known for having some very dark s with purple reflections. The female offered here is of the pale",
+    "english_name": "Mountain Fritillary",
     "sex": null,
     "latin_name": "Boloria napaea",
     "description": "form, variety",
@@ -43388,12 +43388,12 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null,
+    "notes": ". female is well known for having some very dark s with purple reflections. The female offered here is of the pale  pair and a male fairly common in Alps and Pyrenees",
     "location_country": null
   },
   {
     "id": "b3077e61-0faf-4e14-9da7-45723734e1cd",
-    "english_name": "Purple-edged Copper. two males. Not a rare butterfly found on most of the mountains in Europe; these specimens are",
+    "english_name": "Purple-edged Copper",
     "sex": null,
     "latin_name": "Lycaena hippothoe eurydame",
     "description": "and are distinctive in that they lack the usual purple edges",
@@ -43412,12 +43412,12 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null,
+    "notes": ". two males. Not a rare butterfly found on most of the mountains in Europe; these specimens are",
     "location_country": "France"
   },
   {
     "id": "44bffb8b-d97f-4e73-b191-c194585a43ef",
-    "english_name": "Southern Comma. This is an uncommon butterfly that is Mediterranean in habits",
+    "english_name": "Southern Comma",
     "sex": null,
     "latin_name": "Polygonia egea",
     "description": null,
@@ -43436,12 +43436,12 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null,
+    "notes": ". This is an uncommon butterfly that is Mediterranean in habits",
     "location_country": null
   },
   {
     "id": "8f4463a6-9f7c-4536-b3a8-a91d45eb83dc",
-    "english_name": "Southern Festoon. Species is widespread & fairly common in eastern Europe, very rare in more westerly areas to SE France. These are",
+    "english_name": "Southern Festoon",
     "sex": null,
     "latin_name": "Zerynthia polyxena",
     "description": null,
@@ -43460,7 +43460,7 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null,
+    "notes": ". Species is widespread & fairly common in eastern Europe, very rare in more westerly areas to SE France. These are",
     "location_country": "France"
   },
   {
@@ -43513,7 +43513,7 @@
   },
   {
     "id": "d51c8e72-8af9-4968-8dcc-cae08c7abf79",
-    "english_name": "Mountain Alcon Blue. This species is extremely local in Europe, with widely separated populatons, though becomes relatively common further east This is a lovely pair",
+    "english_name": "Mountain Alcon Blue",
     "sex": null,
     "latin_name": "Phengaris rebeli",
     "description": null,
@@ -43532,7 +43532,7 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null,
+    "notes": ". This species is extremely local in Europe, with widely separated populatons, though becomes relatively common further east This is a lovely pair",
     "location_country": "France"
   },
   {
@@ -44929,7 +44929,7 @@
   },
   {
     "id": "c4790964-2adb-4bfc-ae31-3637f065f7b3",
-    "english_name": "Chalkhill Blue , small , mimus very small dwarf abboration all",
+    "english_name": "Chalkhill Blue",
     "sex": "♀",
     "latin_name": "Lysandra coridon",
     "description": null,
@@ -44948,7 +44948,7 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null,
+    "notes": ", small , mimus very small dwarf abboration all",
     "location_country": "UK"
   },
   {
@@ -45025,7 +45025,7 @@
   },
   {
     "id": "5115a59e-5a68-4ead-9e0d-2164cc9eaf74",
-    "english_name": "Knapweed Fritillary pair. Common in Europe, not found in the British Isles, very butterfly. These are dark",
+    "english_name": "Knapweed Fritillary pair",
     "sex": null,
     "latin_name": "Melitaea phoebe",
     "description": "form, variable",
@@ -45044,7 +45044,7 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null,
+    "notes": ". Common in Europe, not found in the British Isles, very butterfly. These are dark",
     "location_country": null
   },
   {

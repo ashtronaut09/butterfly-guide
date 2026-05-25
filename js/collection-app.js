@@ -9,10 +9,12 @@
  */
 
 import { openDB, getAllSpecimens, putSpecimen, deleteSpecimen,
-         searchSpecimens, getStats, seedFromJSON, exportJSON, importJSON } from './db.js';
+         searchSpecimens, getStats, seedFromJSON, exportJSON } from './db.js';
 import { initPhotoDB, renderPhotoGallery, getCardThumbnailURL, getPrimaryPhoto, getPhotoURL, getPhotos, createThumbnail } from './photos.js';
 import { generateLabelsPDF, generatePreview } from './labels.js';
 import { seedPhotos } from './photo-seeder.js';
+import { exportCollection } from './export-html.js';
+import { incrementChanges, resetChanges, getChangesSummary } from './change-tracker.js';
 
 // ── App state ──────────────────────────────────────────────────────────────
 
@@ -70,20 +72,30 @@ const toastEl       = $('toast');
  */
 async function init() {
   try {
-    showStatus('Opening database…');
+    document.title = '[1/6] Opening database…';
+    showLoadingProgress('Opening database…');
     await openDB();
+
+    document.title = '[2/6] Opening photo database…';
+    showLoadingProgress('Opening photo database…');
     await initPhotoDB();
 
-    showStatus('Checking for seed data…');
+    document.title = '[3/6] Checking for seed data…';
+    showLoadingProgress('Checking for seed data…');
     await seedFromJSON('data/collection.json', (loaded, total) => {
-      showStatus(`Seeding… ${loaded} / ${total}`);
+      document.title = `[3/6] Loading specimens… ${loaded} / ${total}`;
+      showLoadingProgress(`Loading specimens… ${loaded} / ${total}`);
     });
 
+    document.title = '[4/6] Reading specimens…';
+    showLoadingProgress('Reading specimens…');
     specimens = await getAllSpecimens();
 
     // Restore URL hash state before first render
     restoreHashState();
 
+    document.title = '[5/6] Rendering…';
+    showLoadingProgress('Rendering…');
     filteredSpecimens = applyFilters(specimens);
     sortSpecimens();
 
@@ -92,14 +104,41 @@ async function init() {
     updateStickyOffsets();
     renderView();
     renderFilterChips();
+
+    document.title = `Butterfly Collection (${specimens.length})`;
     showStatus(`${specimens.length} specimens loaded`);
 
     // Seed photos in the background — don't block the UI
     seedPhotosInBackground();
+
+    // In standalone mode, photos.js loads asynchronously after the app.
+    // When it finishes, refresh thumbnails so photos appear.
+    document.addEventListener('photodataready', () => {
+      console.log('[app] Photo data loaded — refreshing thumbnails');
+      showStatus('Photos loaded — refreshing…');
+      renderView();
+      showStatus(`${specimens.length} specimens loaded`);
+    });
   } catch (err) {
     console.error('[app] init failed:', err);
+    document.title = 'ERROR: ' + err.message;
+    showLoadingProgress(`Error: ${err.message}`);
     showStatus(`Error: ${err.message}`, 'error');
   }
+}
+
+/**
+ * Updates both the central loading message and the status bar during init.
+ * The central message is visible in the main content area; the status bar
+ * is the thin strip at the bottom of the page.
+ */
+function showLoadingProgress(message) {
+  showStatus(message);
+  // Update the central loading area if it's still showing
+  const h3 = specimenGrid?.querySelector('.empty-state h3');
+  const p  = specimenGrid?.querySelector('.empty-state p');
+  if (h3) h3.textContent = message;
+  if (p)  p.textContent = '';
 }
 
 /**
@@ -132,6 +171,23 @@ async function seedPhotosInBackground() {
 async function updateStats() {
   const stats = await getStats();
   updateSpecimenCountDisplay(stats.total);
+  updateChangeBadge();
+}
+
+/**
+ * Updates the change-tracking badge in the specimen count area.
+ */
+function updateChangeBadge() {
+  const summary = getChangesSummary();
+  let badge = document.getElementById('change-badge');
+  if (!badge) {
+    badge = document.createElement('div');
+    badge.id = 'change-badge';
+    badge.style.cssText = 'font-size:0.72rem;color:#c4a035;font-weight:500;';
+    specimenCount?.parentElement?.appendChild(badge);
+  }
+  badge.textContent = summary;
+  badge.hidden = !summary;
 }
 
 // ── URL hash state ───────────────────────────────────────────────────────────
@@ -918,6 +974,7 @@ async function renderDetailPanel(id) {
     if (!confirm(`Delete "${s.english_name || s.latin_name || 'this specimen'}"?\nThis cannot be undone.`)) return;
     try {
       await deleteSpecimen(s.id);
+      incrementChanges();
       specimens = await getAllSpecimens();
       applyFiltersAndSort();
       closeDetailPanel();
@@ -1142,6 +1199,7 @@ function makeEditable(element, field, specimenId, fieldType = 'text') {
         // Persist
         try {
           await putSpecimen(specimen);
+          incrementChanges();
         } catch (err) {
           console.error('[app] putSpecimen failed:', err);
           showToast('Save failed — see console', 'error');
@@ -1636,6 +1694,7 @@ async function addSpecimen() {
 
   try {
     await putSpecimen(newSpecimen);
+    incrementChanges();
     specimens = await getAllSpecimens();
     applyFiltersAndSort();
     await updateStats();
@@ -1730,183 +1789,20 @@ function showToast(message, type = 'info') {
 
 async function handleExport() {
   try {
-    if (typeof JSZip === 'undefined') {
-      showToast('Zip library not loaded — check internet connection', 'error');
-      return;
-    }
-    showStatus('Preparing backup…');
-
-    const zip = new JSZip();
-
-    // Add specimen data
-    const jsonStr = await exportJSON();
-    zip.file('collection.json', jsonStr);
-
-    // Add photos
-    const photoManifest = [];
-    let photoCount = 0;
-
-    for (let i = 0; i < specimens.length; i++) {
-      const s = specimens[i];
-      const photos = await getPhotos(s.id);
-
-      for (const photo of photos) {
-        if (!photo.blob) continue;
-        const ext = photo.mimeType === 'image/png' ? '.png'
-                  : photo.mimeType === 'image/gif' ? '.gif' : '.jpg';
-        const filename = `${photo.id}${ext}`;
-        zip.file(`photos/${s.id}/${filename}`, photo.blob);
-
-        photoManifest.push({
-          specimenId: s.id,
-          photoId: photo.id,
-          filename,
-          caption: photo.caption || '',
-          isPrimary: photo.isPrimary,
-          mimeType: photo.mimeType || 'image/jpeg',
-        });
-        photoCount++;
-      }
-
-      if (i > 0 && i % 100 === 0) showStatus(`Preparing backup… ${i}/${specimens.length} specimens`);
-    }
-
-    zip.file('photos/manifest.json', JSON.stringify(photoManifest, null, 2));
-
-    showStatus('Compressing…');
-    const blob = await zip.generateAsync({
-      type: 'blob',
-      compression: 'DEFLATE',
-      compressionOptions: { level: 6 }
-    }, (meta) => {
-      showStatus(`Compressing… ${Math.round(meta.percent)}%`);
+    await exportCollection((msg, current, total) => {
+      showStatus(msg);
     });
-
-    // Download
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = `butterfly-collection-${new Date().toISOString().slice(0, 10)}.zip`;
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    setTimeout(() => URL.revokeObjectURL(url), 1000);
-
-    showStatus(`Backup complete — ${specimens.length} specimens, ${photoCount} photos`);
-    showToast(`Backup downloaded — ${specimens.length} specimens, ${photoCount} photos`);
+    resetChanges();
+    updateChangeBadge();
+    showToast('Collection exported — share the ZIP file');
   } catch (err) {
     console.error('[app] export failed:', err);
     showStatus('Export failed — see console');
-    showToast('Export failed — see console', 'error');
+    showToast(err.message || 'Export failed', 'error');
   }
 }
 
-async function handleImport(file) {
-  if (!file) return;
 
-  const isZip = file.name.endsWith('.zip') || file.type === 'application/zip';
-
-  if (!isZip) {
-    // Legacy JSON import (data only, no photos)
-    if (!confirm('This will REPLACE your entire collection (data only, no photos). Are you sure?')) return;
-    try {
-      const text = await file.text();
-      const count = await importJSON(text);
-      specimens = await getAllSpecimens();
-      applyFiltersAndSort();
-      await updateStats();
-      buildFilterOptions();
-      closeDetailPanel();
-      showToast(`Imported ${count} specimens`);
-    } catch (err) {
-      console.error('[app] import failed:', err);
-      showToast('Import failed — see console', 'error');
-    }
-    return;
-  }
-
-  // Zip import (data + photos)
-  if (typeof JSZip === 'undefined') {
-    showToast('Zip library not loaded', 'error');
-    return;
-  }
-  if (!confirm('This will REPLACE your entire collection including all photos. Are you sure?')) return;
-
-  try {
-    showStatus('Reading backup…');
-    const zip = await JSZip.loadAsync(file);
-
-    // Import specimen data
-    const jsonFile = zip.file('collection.json');
-    if (!jsonFile) throw new Error('No collection.json found in zip');
-    const jsonStr = await jsonFile.async('string');
-    const count = await importJSON(jsonStr);
-    showStatus(`Imported ${count} specimens, loading photos…`);
-
-    // Import photos
-    const manifestFile = zip.file('photos/manifest.json');
-    if (manifestFile) {
-      const manifestStr = await manifestFile.async('string');
-      const manifest = JSON.parse(manifestStr);
-
-      // Open the photos DB for direct writes
-      const db = await initPhotoDB();
-
-      let imported = 0;
-      for (const entry of manifest) {
-        const photoFile = zip.file(`photos/${entry.specimenId}/${entry.filename}`);
-        if (!photoFile) continue;
-
-        const blob = await photoFile.async('blob');
-
-        // Create thumbnail
-        let thumbnailBlob;
-        try {
-          thumbnailBlob = await createThumbnail(blob);
-        } catch (_) {
-          thumbnailBlob = blob; // fallback
-        }
-
-        // Store directly in IndexedDB
-        const record = {
-          id: entry.photoId,
-          specimenId: entry.specimenId,
-          blob,
-          filename: entry.filename,
-          caption: entry.caption || '',
-          isPrimary: entry.isPrimary,
-          addedDate: new Date().toISOString(),
-          mimeType: entry.mimeType || 'image/jpeg',
-          thumbnailBlob,
-        };
-
-        const tx = db.transaction('photos', 'readwrite');
-        tx.objectStore('photos').put(record);
-        await new Promise((resolve, reject) => {
-          tx.oncomplete = resolve;
-          tx.onerror = () => reject(tx.error);
-        });
-
-        imported++;
-        if (imported % 50 === 0) showStatus(`Loading photos… ${imported}/${manifest.length}`);
-      }
-
-      showStatus(`Restored ${count} specimens, ${imported} photos`);
-      showToast(`Restored ${count} specimens, ${imported} photos`);
-    }
-
-    specimens = await getAllSpecimens();
-    applyFiltersAndSort();
-    await updateStats();
-    buildFilterOptions();
-    closeDetailPanel();
-
-  } catch (err) {
-    console.error('[app] zip import failed:', err);
-    showStatus('Import failed — see console');
-    showToast('Import failed — see console', 'error');
-  }
-}
 
 // ── Utilities ─────────────────────────────────────────────────────────────────
 
@@ -1995,17 +1891,6 @@ document.addEventListener('DOMContentLoaded', () => {
   // Export button
   const exportBtn = $('btn-export');
   if (exportBtn) exportBtn.addEventListener('click', handleExport);
-
-  // Import button + hidden file input
-  const importBtn = $('btn-import');
-  const importInput = $('import-file-input');
-  if (importBtn && importInput) {
-    importBtn.addEventListener('click', () => importInput.click());
-    importInput.addEventListener('change', () => {
-      if (importInput.files.length) handleImport(importInput.files[0]);
-      importInput.value = '';
-    });
-  }
 
   // View toggle buttons
   document.querySelectorAll('.view-btn').forEach(btn => {

@@ -103,16 +103,10 @@
     Generate Labels
   </button>
 
-  <button id="btn-export" class="btn btn-secondary" type="button"
-          aria-label="Export collection as ZIP backup with photos">
-    Export Backup
+  <button id="btn-export" class="btn btn-primary" type="button"
+          aria-label="Export collection as a standalone file you can share">
+    Export Collection
   </button>
-
-  <button id="btn-import" class="btn btn-secondary" type="button"
-          aria-label="Import collection from ZIP or JSON backup">
-    Import Backup
-  </button>
-  <input id="import-file-input" type="file" accept=".json,.zip" style="display:none">
 
 </div>
 
@@ -181,6 +175,8 @@
 <script type="module" src="js/photos.js"></script>
 <script type="module" src="js/photo-seeder.js"></script>
 <script type="module" src="js/labels.js"></script>
+<script type="module" src="js/export-html.js"></script>
+<script type="module" src="js/change-tracker.js"></script>
 <script type="module" src="js/collection-app.js"></script>
 
 </body>

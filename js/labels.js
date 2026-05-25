@@ -31,7 +31,7 @@ const PAGE_H   = 297;   // A4 height mm
 
 const MARGIN_H = 6;     // left & right margin mm
 const MARGIN_V = 10;    // top & bottom margin  mm
-const GUTTER   = 3;     // gap between labels    mm
+const GUTTER   = 1;     // gap between labels    mm
 
 // Title label
 const TL_W      = 30;    // mm
@@ -40,8 +40,8 @@ const TL_H_MAX  = 12;    // max height mm when text wraps
 
 // Details label
 const DL_W      = 15;    // mm
-const DL_H_BASE = 15;    // base height mm
-const DL_H_MAX  = 18;    // max height mm when text wraps
+const DL_H_BASE = 12;    // base height mm
+const DL_H_MAX  = 15;    // max height mm when text wraps
 
 // Columns per page — derived from constants
 const TL_COLS  = Math.floor((PAGE_W - 2 * MARGIN_H) / (TL_W + GUTTER)); // 6
@@ -130,8 +130,9 @@ function drawTitleLabel(doc, x, y, specimen) {
   const innerW    = TL_W - 2 * PADDING_H;
   const maxInnerH = TL_H_MAX - 2 * PADDING_V;
 
-  // Build text
-  const nameText  = [specimen.english_name || '(Unnamed)', specimen.sex || ''].filter(Boolean).join(' ');
+  // Build text - convert Unicode sex symbols to ASCII for PDF compatibility
+  const sexText = specimen.sex ? specimen.sex.replace(/♂/g, 'M').replace(/♀/g, 'F') : '';
+  const nameText  = [specimen.english_name || '(Unnamed)', sexText].filter(Boolean).join(' ');
   const latinText = specimen.latin_name || '';
 
   // Fit name (bold) — give it up to 60% of vertical space
@@ -160,7 +161,7 @@ function drawTitleLabel(doc, x, y, specimen) {
   doc.setFont('helvetica', 'bold');
   doc.setFontSize(name.fontSize);
   name.lines.forEach((line, i) => {
-    doc.text(line, cx, startY + name.lineH * (i + 0.8), { align: 'center' });
+    doc.text(line, cx, startY + name.lineH * (i + 0.8), { align: 'center', charSpace: -0.1 });
   });
 
   // Draw latin (italic) below name
@@ -169,7 +170,7 @@ function drawTitleLabel(doc, x, y, specimen) {
     doc.setFont('helvetica', 'italic');
     doc.setFontSize(latin.fontSize);
     latin.lines.forEach((line, i) => {
-      doc.text(line, cx, latinY + latin.lineH * (i + 0.8), { align: 'center' });
+      doc.text(line, cx, latinY + latin.lineH * (i + 0.8), { align: 'center', charSpace: -0.1 });
     });
   }
 
@@ -242,7 +243,7 @@ function drawDetailsLabel(doc, x, y, specimen) {
     doc.setFont('helvetica', 'normal');
     doc.setFontSize(f.fontSize);
     f.lines.forEach((line, i) => {
-      doc.text(line, cx, curY + f.lineH * (i + 0.8), { align: 'center' });
+      doc.text(line, cx, curY + f.lineH * (i + 0.8), { align: 'center', charSpace: -0.1 });
     });
     curY += f.totalHeight + lineGap;
   });
@@ -263,10 +264,12 @@ function drawDetailsLabel(doc, x, y, specimen) {
  * @param {number}   labelW      label width mm (used for column spacing)
  * @param {number}   baseLabelH  minimum label height mm (used for page-break check)
  * @param {number}   cols        number of columns per page
+ * @param {number}   startY      optional starting Y position (default: MARGIN_V)
+ * @returns {number} final Y position after all labels (for next section)
  */
-function layoutLabels(doc, specimens, drawFn, labelW, baseLabelH, cols) {
+function layoutLabels(doc, specimens, drawFn, labelW, baseLabelH, cols, startY = MARGIN_V) {
   let pageX   = MARGIN_H;
-  let pageY   = MARGIN_V;
+  let pageY   = startY;
   let colIdx  = 0;
   let rowMaxH = 0;
 
@@ -295,6 +298,9 @@ function layoutLabels(doc, specimens, drawFn, labelW, baseLabelH, cols) {
       pageX += labelW + GUTTER;
     }
   });
+
+  // Return final Y position (current row Y + remaining row height if incomplete row)
+  return pageY + rowMaxH;
 }
 
 // ── PDF generation ─────────────────────────────────────────────────────────
@@ -334,11 +340,18 @@ export function generateLabelsPDF(specimens) {
   doc.setTextColor(0, 0, 0);
 
   // ── Title labels ──────────────────────────────────────────────────────────
-  layoutLabels(doc, specimens, drawTitleLabel, TL_W, TL_H_BASE, TL_COLS);
+  const titleEndY = layoutLabels(doc, specimens, drawTitleLabel, TL_W, TL_H_BASE, TL_COLS);
 
-  // ── Details labels ────────────────────────────────────────────────────────
-  doc.addPage();
-  layoutLabels(doc, specimens, drawDetailsLabel, DL_W, DL_H_BASE, DL_COLS);
+  // ── Details labels (start after title labels with some spacing) ───────────
+  const detailsStartY = titleEndY + 10; // 10mm gap between sections
+  
+  // Check if we need a new page for details labels
+  if (detailsStartY + DL_H_BASE > PAGE_H - MARGIN_V) {
+    doc.addPage();
+    layoutLabels(doc, specimens, drawDetailsLabel, DL_W, DL_H_BASE, DL_COLS);
+  } else {
+    layoutLabels(doc, specimens, drawDetailsLabel, DL_W, DL_H_BASE, DL_COLS, detailsStartY);
+  }
 
   // ── Save (manual blob download for Firefox compatibility) ──────────────────
   const today    = new Date().toISOString().slice(0, 10); // YYYY-MM-DD

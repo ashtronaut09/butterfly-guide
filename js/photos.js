@@ -156,7 +156,10 @@ export async function createThumbnail(blob, maxWidth = 300) {
  * @returns {string}  object URL, or empty string if blob is missing
  */
 export function getPhotoURL(photoRecord) {
-  if (!photoRecord || !photoRecord.blob) return '';
+  if (!photoRecord) return '';
+  // If this is an embedded photo (standalone mode), return the data URI directly
+  if (photoRecord._embeddedDataUri) return photoRecord._embeddedDataUri;
+  if (!photoRecord.blob) return '';
   return URL.createObjectURL(photoRecord.blob);
 }
 
@@ -244,7 +247,21 @@ export async function getPhotos(specimenId) {
  */
 export async function getPrimaryPhoto(specimenId) {
   const photos = await getPhotos(specimenId);
-  if (photos.length === 0) return null;
+  if (photos.length === 0) {
+    // Fallback: check embedded photo data (standalone mode)
+    if (window.__PHOTO_DATA && window.__PHOTO_DATA[specimenId]) {
+      return {
+        id: `embedded_${specimenId}`,
+        specimenId,
+        blob: null,
+        thumbnailBlob: null,
+        isPrimary: true,
+        mimeType: 'image/jpeg',
+        _embeddedDataUri: window.__PHOTO_DATA[specimenId],
+      };
+    }
+    return null;
+  }
 
   return photos.find(p => p.isPrimary) || photos[0];
 }
@@ -332,8 +349,12 @@ export async function updateCaption(photoId, caption) {
 export async function getCardThumbnailURL(specimenId) {
   try {
     const primary = await getPrimaryPhoto(specimenId);
-    if (!primary || !primary.thumbnailBlob) return null;
-    return getThumbnailURL(primary);
+    if (primary && primary.thumbnailBlob) return getThumbnailURL(primary);
+    // Fallback: check embedded photo data (standalone mode)
+    if (window.__PHOTO_DATA && window.__PHOTO_DATA[specimenId]) {
+      return window.__PHOTO_DATA[specimenId]; // data URI string
+    }
+    return null;
   } catch (err) {
     console.warn('[photos] getCardThumbnailURL error:', err);
     return null;
