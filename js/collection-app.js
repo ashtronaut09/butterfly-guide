@@ -89,6 +89,7 @@ async function init() {
 
     await updateStats();
     buildFilterOptions();
+    updateStickyOffsets();
     renderView();
     renderFilterChips();
     showStatus(`${specimens.length} specimens loaded`);
@@ -1627,6 +1628,21 @@ function updateSpecimenCountDisplay(total) {
 }
 
 /** Shows a message in the status bar. @param {'info'|'error'} [type] */
+/**
+ * Measures the actual rendered heights of the header and toolbar,
+ * then sets CSS custom properties so sticky elements stack correctly.
+ */
+function updateStickyOffsets() {
+  const header = document.querySelector('.app-header');
+  const toolbar = document.querySelector('.toolbar');
+  if (!header || !toolbar) return;
+  const headerH = header.offsetHeight;
+  const toolbarH = toolbar.offsetHeight;
+  const root = document.documentElement;
+  root.style.setProperty('--header-h', headerH + 'px');
+  root.style.setProperty('--header-toolbar-h', (headerH + toolbarH) + 'px');
+}
+
 function showStatus(message, type = 'info') {
   if (!statusBar) return;
   statusBar.textContent = message;
@@ -1728,6 +1744,9 @@ function fieldLabel(field) {
 
 document.addEventListener('DOMContentLoaded', () => {
   init();
+
+  // Recalculate sticky offsets on resize (header height may change)
+  window.addEventListener('resize', updateStickyOffsets);
 
   // Search — debounced 200 ms
   let searchTimer;
