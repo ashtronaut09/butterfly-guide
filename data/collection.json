@@ -2600,7 +2600,7 @@
   },
   {
     "id": "8307c26c-0080-47d8-9be4-36f9a21048ee",
-    "english_name": "Large White NB photo not of specimen",
+    "english_name": "Large White",
     "sex": "♀",
     "latin_name": "Pieris brassicae",
     "description": null,
@@ -2619,7 +2619,7 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null
+    "notes": "NB photo not of specimen"
   },
   {
     "id": "219abdc3-5540-49ef-ac08-80bbfba5705c",
@@ -4831,10 +4831,10 @@
   },
   {
     "id": "266b53e5-b023-497f-a043-1da1abf69f49",
-    "english_name": "Amanda's Blue NB pic is",
+    "english_name": "Amanda's Blue",
     "sex": "♂",
     "latin_name": "Polyommatus amandus",
-    "description": "another pair",
+    "description": null,
     "location": null,
     "altitude_m": null,
     "supplier_username": "eroides",
@@ -4850,11 +4850,11 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null
+    "notes": "NB pic is (from another pair)"
   },
   {
     "id": "ab5fc0ea-b9f5-442d-aa87-851a76ac62fd",
-    "english_name": "Orange Tip NB photo is of similar",
+    "english_name": "Orange Tip",
     "sex": null,
     "latin_name": "Anthocharis cardamines",
     "description": null,
@@ -4873,7 +4873,7 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null
+    "notes": "NB photo is of similar"
   },
   {
     "id": "57189a6a-c790-4197-9948-e27bdba533ec",
@@ -5176,10 +5176,10 @@
   },
   {
     "id": "09fe6962-fe85-4efd-853d-0ba054ea18b0",
-    "english_name": "Adonis Blue NB pic is",
+    "english_name": "Adonis Blue",
     "sex": "♀",
     "latin_name": "Polyommatus bellargus",
-    "description": "2 f, 1 m; another pair",
+    "description": "2 f, 1 m",
     "location": null,
     "altitude_m": null,
     "supplier_username": "icarusdm15g4",
@@ -5195,7 +5195,7 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null
+    "notes": "NB pic is (from another pair)"
   },
   {
     "id": "2dbb9149-f74e-48ec-a96f-9b4d59949685",
@@ -5222,10 +5222,10 @@
   },
   {
     "id": "be8542eb-fcdf-49f8-beb5-08b314096098",
-    "english_name": "Chalkhill Blue NB pic is",
+    "english_name": "Chalkhill Blue",
     "sex": "♂♀",
     "latin_name": "Lysandra coridon",
-    "description": "another pair",
+    "description": null,
     "location": null,
     "altitude_m": null,
     "supplier_username": "icarusdm15g4",
@@ -5241,11 +5241,11 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null
+    "notes": "NB pic is (from another pair)"
   },
   {
     "id": "3ad6d2c3-8e50-4f90-a2ff-32e1b0cb4506",
-    "english_name": "Cleopatra Photo copy",
+    "english_name": "Cleopatra",
     "sex": "♂",
     "latin_name": "Gonepteryx cleopatra",
     "description": null,
@@ -5264,11 +5264,11 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null
+    "notes": "Photo copy"
   },
   {
     "id": "c14ce2ed-5d63-40d3-a9bd-82a488908f7c",
-    "english_name": "Large Blue NB photo is of similar",
+    "english_name": "Large Blue",
     "sex": "♂",
     "latin_name": "Phengaris arion",
     "description": "2 x m",
@@ -5287,7 +5287,7 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null
+    "notes": "NB photo is of similar"
   },
   {
     "id": "0e030b31-77cf-4c71-9b95-bca70cc55e7a",
@@ -8005,7 +8005,7 @@
   },
   {
     "id": "13fdc1c3-5850-48e6-a37c-759fe8be0c29",
-    "english_name": "Blind Ringlet photo copy of binternet",
+    "english_name": "Blind Ringlet",
     "sex": null,
     "latin_name": "Erebia pharte",
     "description": null,
@@ -8024,7 +8024,7 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null
+    "notes": "Photo of binternet"
   },
   {
     "id": "e3bb1f1f-81ba-47c8-af4a-c0906ce14967",
@@ -10305,7 +10305,7 @@
   },
   {
     "id": "c2a3abc9-54fc-4ed0-9769-d5b11505c2ae",
-    "english_name": "Canary Blue Very local and only found in the Canaries, Can be frequent in its localities. A very special butterfly and one that took me years to obtain",
+    "english_name": "Canary Blue",
     "sex": null,
     "latin_name": "Cyclyrius webbianus",
     "description": null,
@@ -10324,7 +10324,7 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null
+    "notes": "Very local and only found in the Canaries, Can be frequent in its localities. A very special butterfly and one that took me years to obtain"
   },
   {
     "id": "30341c76-518e-4e41-87ca-3c8c42483975",
@@ -16170,7 +16170,7 @@
   },
   {
     "id": "7f4f43bb-aced-4c24-ab43-a6609f78da80",
-    "english_name": "Clouded Appolo This is not photo of actual specimen Copulated females have at the back of their bodies, a shell-like structure called a sfragis. The male creates it during copulation, and it is assumed that it makes it difficult for the female to copulate again",
+    "english_name": "Clouded Appolo",
     "sex": "♀",
     "latin_name": "Parnassius mnemosyne",
     "description": null,
@@ -16189,7 +16189,7 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null
+    "notes": "This is not photo of actual specimen Copulated females have at the back of their bodies, a shell-like structure called a sfragis. The male creates it during copulation, and it is assumed that it makes it difficult for the female to copulate again"
   },
   {
     "id": "ac8d591d-7bff-412d-8fda-71b9b4b987d7",
@@ -16998,7 +16998,7 @@
   },
   {
     "id": "0ba48f9e-f822-4a75-806d-418e60b5bc38",
-    "english_name": "Woodland Brown Photo is not actual specimen",
+    "english_name": "Woodland Brown",
     "sex": null,
     "latin_name": "Lopinga archine",
     "description": null,
@@ -17017,7 +17017,7 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null
+    "notes": "Photo not actual specimen"
   },
   {
     "id": "6f998449-37df-407b-8bea-ccf8e49f4af3",
@@ -20195,7 +20195,7 @@
   },
   {
     "id": "4e017859-3a67-4108-91b6-4066a5a5ec47",
-    "english_name": "Monarch underside photo not of actual specimen",
+    "english_name": "Monarch",
     "sex": "♀",
     "latin_name": "Danaus plexippus",
     "description": null,
@@ -20214,7 +20214,7 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null
+    "notes": "underside; photo not of actual specimen"
   },
   {
     "id": "cb330a06-209c-4a1e-91cb-6cb84115b6e5",
@@ -22587,7 +22587,7 @@
   },
   {
     "id": "dd914322-9b4c-440e-8f2d-88c236299e75",
-    "english_name": "Clouded Appolo ssp shillei This is not photo of actual specimen Copulated females have at the back of their bodies, a shell-like structure called a sfragis. The male creates it during copulation, and it is assumed that it makes it difficult for the female t",
+    "english_name": "Clouded Appolo ssp shillei",
     "sex": "♂",
     "latin_name": "Parnassius mnemosyne ssp shillei",
     "description": null,
@@ -22606,7 +22606,7 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": "This is not actual specimen"
+    "notes": "This is not actual specimen; This is not photo of actual specimen Copulated females have at the back of their bodies, a shell-like structure called a sfragis. The male creates it during copulation, and it is assumed that it makes it difficult for the female t"
   },
   {
     "id": "978f0010-a295-4f08-b440-20e45669f626",
@@ -29993,11 +29993,11 @@
   },
   {
     "id": "2e4a6a30-5ad3-423d-a200-9e669add7b24",
-    "english_name": "Adonis Blue m . Antitransiens-tripuncta This male specimen was caught at Dorking, Surrey, on 7th August 1980 and is set on a modern, un-headed, Stainless steel, pin. Although set upperside (with the pointed end of the pin beneath the thorax), it is best (and quite easily) displayed, as in the photograph, as an example of the underside forewing -tripuncta, in which the submedian spots are erratic in shape and elongated, and there are three basal spots, one of which is elongated. There is a little raggedness to the lower fringe of the right hind-winged (as viewed underside)",
+    "english_name": "Adonis Blue",
     "sex": null,
     "latin_name": "Polyommatus bellargus",
-    "description": "aberration antitransiens, ab",
-    "location": null,
+    "description": "aberration antitransiens, ab; antitransiens-tripuncta aberration",
+    "location": "Dorking, Surrey",
     "altitude_m": null,
     "supplier_username": "milesstribling",
     "supplier_name": "C. R.",
@@ -30012,7 +30012,7 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null
+    "notes": "This male specimen was caught at Dorking, Surrey, on 7th August 1980 and is set on a modern, un-headed, Stainless steel, pin. Although set upperside (with the pointed end of the pin beneath the thorax), it is best (and quite easily) displayed, as in the photograph, as an example of the underside forewing -tripuncta, in which the submedian spots are erratic in shape and elongated, and there are three basal spots, one of which is elongated. There is a little raggedness to the lower fringe of the right hind-winged (as viewed underside)"
   },
   {
     "id": "b14889cf-1b67-4f4d-8058-0ac555e7ddd9",
@@ -33834,7 +33834,7 @@
   },
   {
     "id": "9abe4371-ec78-424a-a6ea-f059cb67125a",
-    "english_name": "Small Tortoiseshell Immaculate condition for it's age and very aberrant. The black forewing costa spots are enlarged and joining and the blue spotting merging with the borders. It is very nearly devoid of the two inner black spots which are just tiny points. The hind wings just have a small orange band with enlarged blue spots. The underside is also aberrant. Good data and the only example in the collection showing this . The actual specimen is slightly paler than the photo, given it's age",
+    "english_name": "Small Tortoiseshell",
     "sex": "♂",
     "latin_name": "Aglais urticae",
     "description": "form",
@@ -33853,7 +33853,7 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null
+    "notes": "Immaculate condition for it's age and very aberrant. The black forewing costa spots are enlarged and joining and the blue spotting merging with the borders. It is very nearly devoid of the two inner black spots which are just tiny points. The hind wings just have a small orange band with enlarged blue spots. The underside is also aberrant. Good data and the only example in the collection showing this . The actual specimen is slightly paler than the photo, given it's age"
   },
   {
     "id": "09dbee11-8820-4043-a799-419b0db20704",
@@ -34616,7 +34616,7 @@
   },
   {
     "id": "e65b8c30-387d-406b-a71c-f5914fcfee71",
-    "english_name": "Canary Blue Very local and only found in the Canaries, Can be frequent in its localities. A very special butterfly and one that took me years to obtain",
+    "english_name": "Canary Blue",
     "sex": "♂",
     "latin_name": "Cyclyrius webbianus",
     "description": null,
@@ -34635,7 +34635,7 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null
+    "notes": "Very local and only found in the Canaries, Can be frequent in its localities. A very special butterfly and one that took me years to obtain"
   },
   {
     "id": "72300ee5-607e-40b3-9d22-33f5115fda9c",
@@ -35950,7 +35950,7 @@
   },
   {
     "id": "39d8ae99-479a-4dee-86f8-c99283e38aca",
-    "english_name": "Lesser Fiery Copper supposedly 'piersica' but I don't think it is, top pic actual recieved ex Danube Delta,",
+    "english_name": "Lesser Fiery Copper",
     "sex": "♂",
     "latin_name": "Thersamonia thersamon",
     "description": "Rumania",
@@ -35969,7 +35969,7 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null
+    "notes": "supposedly 'piersica' but I don't think it is, top pic actual recieved ex Danube Delta,"
   },
   {
     "id": "358f628a-cfb7-4a71-a8bb-d077f987c35d",
@@ -41309,7 +41309,7 @@
   },
   {
     "id": "b87886df-74a6-466f-b4aa-9c6d9bfc075c",
-    "english_name": "Mountain Clouded Yellow NB photo not of specimen",
+    "english_name": "Mountain Clouded Yellow",
     "sex": null,
     "latin_name": "Colias phicomone phicomone",
     "description": null,
@@ -41328,7 +41328,7 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null
+    "notes": "NB photo not of specimen"
   },
   {
     "id": "d00ec6da-3ef0-42c2-b96b-70fe24c1b683",
@@ -41355,11 +41355,11 @@
   },
   {
     "id": "41e84c4a-c187-4e76-a704-bc876fdf1629",
-    "english_name": "Grison's Fritillary note: photo of similar specimen",
+    "english_name": "Grison's Fritillary",
     "sex": null,
     "latin_name": "Melitaea varia",
     "description": null,
-    "location": "David",
+    "location": null,
     "altitude_m": null,
     "supplier_username": "icarusdm15g4",
     "supplier_name": "David Moore",
@@ -41374,7 +41374,7 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null
+    "notes": "photo of similar specimen"
   },
   {
     "id": "5d9d21cd-9a7e-4008-b4bc-c76825fdaf4e",
@@ -42068,8 +42068,8 @@
   },
   {
     "id": "9245a0b8-b185-4a68-b696-0b8014635d0a",
-    "english_name": "Adonis Blue Pair NB this pic is of this pair",
-    "sex": null,
+    "english_name": "Adonis Blue",
+    "sex": "♂♀",
     "latin_name": "Polyommatus bellargus",
     "description": null,
     "location": null,
@@ -42087,7 +42087,7 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null
+    "notes": "NB this pic is of this pair"
   },
   {
     "id": "fc3fc1f8-f2a0-4916-a968-4a688042d4c9",
@@ -42620,10 +42620,10 @@
   },
   {
     "id": "a28e0a53-50a3-4e98-b268-e7175c9e12ba",
-    "english_name": "Sooty Copper (note the photo is",
+    "english_name": "Sooty Copper",
     "sex": "♂♀",
     "latin_name": "Lycaena tityrus",
-    "description": "a similar pair from another seller)",
+    "description": null,
     "location": null,
     "altitude_m": null,
     "supplier_username": "Palexandrae",
@@ -42639,11 +42639,11 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null
+    "notes": "Note: the photo is a similar pair from another seller"
   },
   {
     "id": "809ed14e-5163-4498-9e19-c520658b82dd",
-    "english_name": "Berger's Clouded Yellow NB the photo is not of the specimen",
+    "english_name": "Berger's Clouded Yellow",
     "sex": null,
     "latin_name": "Colias alfacariensis",
     "description": null,
@@ -42662,7 +42662,7 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null
+    "notes": "NB the photo is not of the specimen"
   },
   {
     "id": "32fd7e5b-2615-49d0-9793-5ec7551e2ebb",
@@ -42758,10 +42758,10 @@
   },
   {
     "id": "e4941fec-cbb8-4681-85a7-e73c932279a1",
-    "english_name": "Yellow-banded Skipper (note the photo is",
+    "english_name": "Yellow-banded Skipper",
     "sex": "♀",
     "latin_name": "Pyrgus sidae",
-    "description": "a similar one from another seller)",
+    "description": null,
     "location": null,
     "altitude_m": null,
     "supplier_username": "themothman35     Jason Wright\n1 Crown Cottage      High Street\nSwaton, Sleaford\nLincolnshire NG34 0JP",
@@ -42777,7 +42777,7 @@
     "cat_number": null,
     "collector": null,
     "photos": [],
-    "notes": null
+    "notes": "Note: the photo is a similar one from another seller"
   },
   {
     "id": "ee8134fb-cd89-41a3-b6a1-c31200f93226",
