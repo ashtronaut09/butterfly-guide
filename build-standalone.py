@@ -17,11 +17,14 @@ import ssl
 import time
 import urllib.request
 
+import datetime
+
 # ── Paths ─────────────────────────────────────────────────────────────────────
 
 BASE_DIR      = os.path.dirname(os.path.abspath(__file__))
 OUT_DIR       = os.path.join(BASE_DIR, 'standalone')
-OUT_FILE      = os.path.join(OUT_DIR, 'index.html')
+BUILD_DATE    = datetime.date.today().isoformat()
+OUT_FILE      = os.path.join(OUT_DIR, f'butterfly-collection-{BUILD_DATE}.html')
 OUT_PHOTOS_JS = os.path.join(OUT_DIR, 'photos.js')
 OUT_PHOTOS_DIR= os.path.join(OUT_DIR, 'photos')
 CDN_CACHE_DIR = os.path.join(BASE_DIR, 'data', 'cdn-cache')
@@ -451,6 +454,7 @@ def main():
     ensure_dir(OUT_DIR)
     ensure_dir(OUT_PHOTOS_DIR)
 
+    html_name = os.path.basename(OUT_FILE)
     print(f'\nWriting {OUT_FILE}…')
     with open(OUT_FILE, 'w', encoding='utf-8') as f:
         f.write(html_out)
@@ -476,7 +480,7 @@ def main():
     print('\n' + '=' * 60)
     print('Build complete!')
     print(f'  Output dir:  {OUT_DIR}')
-    print(f'  index.html:  {html_size / 1_048_576:.1f} MB')
+    print(f'  {html_name}:  {html_size / 1_048_576:.1f} MB')
     print(f'  photos/:     {len(photo_data)} files')
     print(f'  Specimens:   {specimen_count}')
     print(f'  Time:        {elapsed:.1f}s')
