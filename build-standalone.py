@@ -22,7 +22,7 @@ import datetime
 # ── Paths ─────────────────────────────────────────────────────────────────────
 
 BASE_DIR      = os.path.dirname(os.path.abspath(__file__))
-OUT_DIR       = os.path.join(BASE_DIR, 'standalone')
+OUT_DIR       = os.path.join(BASE_DIR, 'butterfly-collection-export')
 BUILD_DATE    = datetime.date.today().isoformat()
 OUT_FILE      = os.path.join(OUT_DIR, f'butterfly-collection-{BUILD_DATE}.html')
 OUT_PHOTOS_JS = os.path.join(OUT_DIR, 'photos.js')
