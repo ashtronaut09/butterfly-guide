@@ -25,7 +25,7 @@ from pathlib import Path
 
 # ── Paths ─────────────────────────────────────────────────────────────────────
 
-XLSX_PATH       = Path('/Users/ashley/Downloads/Butterfly Purchases.xlsx')
+XLSX_PATH       = Path('/Users/ashley/Library/CloudStorage/Dropbox/* ProjectsCoding/00.Projects/011.Butterfly-Guide-Photos/Butterfly Purchases.xlsx')
 COLLECTION_JSON = Path('data/collection.json')
 OUTPUT_DIR      = Path('data/specimen-photos')
 MANIFEST_PATH   = OUTPUT_DIR / 'manifest.json'

@@ -215,30 +215,34 @@ def transform_photo_seeder_js(code):
     }'''
 
     new_photo_fetch = '''\
-    // Fetch image — prefer embedded data URI in standalone mode
+    // Fetch image — value in window.__PHOTO_DATA may be either a base64
+    // data URI (legacy embedded mode) or a relative path like "photos/X.jpg"
+    // pointing to a sibling folder next to the HTML file.
     let blob;
     const photoKey = manifest[i].specimenId;
-    if (window.__PHOTO_DATA && window.__PHOTO_DATA[photoKey]) {
-      const dataUri = window.__PHOTO_DATA[photoKey];
-      const commaIdx = dataUri.indexOf(',');
-      const meta = dataUri.slice(0, commaIdx);
-      const b64 = dataUri.slice(commaIdx + 1);
-      const binStr = atob(b64);
-      const bytes = new Uint8Array(binStr.length);
-      for (let j = 0; j < binStr.length; j++) bytes[j] = binStr.charCodeAt(j);
-      const blobType = (meta.match(/data:([^;]+)/) || [])[1] || mimeType;
-      blob = new Blob([bytes], { type: blobType });
-    } else {
-      try {
-        const res = await fetch(PHOTOS_BASE + filename);
-        if (!res.ok) throw new Error(`HTTP ${res.status} fetching ${filename}`);
+    const photoSource = window.__PHOTO_DATA ? window.__PHOTO_DATA[photoKey] : null;
+    try {
+      if (photoSource && photoSource.startsWith('data:')) {
+        const commaIdx = photoSource.indexOf(',');
+        const meta = photoSource.slice(0, commaIdx);
+        const b64  = photoSource.slice(commaIdx + 1);
+        const binStr = atob(b64);
+        const bytes = new Uint8Array(binStr.length);
+        for (let j = 0; j < binStr.length; j++) bytes[j] = binStr.charCodeAt(j);
+        const blobType = (meta.match(/data:([^;]+)/) || [])[1] || mimeType;
+        blob = new Blob([bytes], { type: blobType });
+      } else {
+        // Either a relative path from __PHOTO_DATA, or fall back to manifest filename
+        const url = photoSource || (PHOTOS_BASE + filename);
+        const res = await fetch(url);
+        if (!res.ok) throw new Error(`HTTP ${res.status} fetching ${url}`);
         blob = await res.blob();
-      } catch (fetchErr) {
-        console.warn(`[photo-seeder] Fetch failed for ${filename}:`, fetchErr);
-        failed++;
-        onProgress(seeded + skipped + failed, total);
-        continue;
       }
+    } catch (fetchErr) {
+      console.warn(`[photo-seeder] Fetch failed for ${filename}:`, fetchErr);
+      failed++;
+      onProgress(seeded + skipped + failed, total);
+      continue;
     }'''
 
     if old_photo_fetch not in code:
