@@ -18,8 +18,15 @@
     </div>
   </div>
 
+  <button id="btn-export" class="btn btn-export" type="button"
+          aria-label="Save and export collection as a standalone file you can share">
+    Save &amp; Export Collection
+  </button>
+</header>
+
+<!-- ── Search bar ──────────────────────────────────────────────────────── -->
+<div class="search-bar">
   <div class="search-wrap">
-    <!-- Search icon (inline SVG, no external dependency) -->
     <svg class="search-icon" width="14" height="14" viewBox="0 0 24 24"
          fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
       <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
@@ -30,17 +37,23 @@
            autocomplete="off"
            aria-label="Search specimens">
   </div>
-</header>
+</div>
 
 <!-- ── Toolbar ─────────────────────────────────────────────────────────── -->
 <div class="toolbar" role="toolbar" aria-label="Collection controls">
+
+  <button id="btn-generate-labels" class="btn btn-labels" type="button"
+          aria-label="Generate printable labels for selected specimens">
+    Generate Labels
+  </button>
+
+  <div class="toolbar-divider" aria-hidden="true"></div>
 
   <!-- Filter: Supplier -->
   <div class="filter-group">
     <label for="filter-supplier">Supplier</label>
     <select id="filter-supplier" class="filter-select" aria-label="Filter by supplier">
       <option value="">All Suppliers</option>
-      <!-- Populated dynamically by collection-app.js -->
     </select>
   </div>
 
@@ -49,7 +62,6 @@
     <label for="filter-sex">Sex</label>
     <select id="filter-sex" class="filter-select" aria-label="Filter by sex">
       <option value="">All Sexes</option>
-      <!-- Populated dynamically -->
     </select>
   </div>
 
@@ -58,7 +70,6 @@
     <label for="filter-location">Location</label>
     <select id="filter-location" class="filter-select" aria-label="Filter by location">
       <option value="">All Locations</option>
-      <!-- Populated dynamically -->
     </select>
   </div>
 
@@ -90,22 +101,11 @@
     <option value="date_acquired">By date acquired</option>
   </select>
 
-  <!-- Push action buttons to the right -->
   <div class="toolbar-spacer" aria-hidden="true"></div>
 
   <button id="btn-add-specimen" class="btn btn-primary" type="button"
           aria-label="Add a new specimen">
     + Add Specimen
-  </button>
-
-  <button id="btn-generate-labels" class="btn btn-labels" type="button"
-          aria-label="Generate printable labels for selected specimens">
-    Generate Labels
-  </button>
-
-  <button id="btn-export" class="btn btn-primary" type="button"
-          aria-label="Export collection as a standalone file you can share">
-    Export Collection
   </button>
 
 </div>

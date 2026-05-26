@@ -4,3 +4,6 @@ node_modules/
 *.pyc
 __pycache__/
 data/specimen-photos/
+--- .gitignore ---
+Butterfly-Guide v7.zip
+butterfly-collection-standalone.html

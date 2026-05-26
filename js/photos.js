@@ -245,6 +245,59 @@ export async function getPhotos(specimenId) {
  * @param {string} specimenId
  * @returns {Promise<Object|null>}
  */
+// Tracks original photos the user has explicitly removed. Stored in
+// localStorage as a JSON array of specimenIds. Persisted across reloads,
+// and baked into __PHOTO_DATA on Save & Export.
+const DELETED_ORIGINALS_KEY = 'butterfly_deleted_originals';
+
+export function getDeletedOriginals() {
+  try {
+    const raw = localStorage.getItem(DELETED_ORIGINALS_KEY);
+    if (!raw) return new Set();
+    const arr = JSON.parse(raw);
+    return new Set(Array.isArray(arr) ? arr : []);
+  } catch (_) {
+    return new Set();
+  }
+}
+
+export function markOriginalDeleted(specimenId) {
+  const set = getDeletedOriginals();
+  set.add(specimenId);
+  localStorage.setItem(DELETED_ORIGINALS_KEY, JSON.stringify([...set]));
+}
+
+/**
+ * Returns the full list of photos for a specimen, combining the original
+ * embedded photo (from window.__PHOTO_DATA) with any user-added photos
+ * from IndexedDB. The original comes first; user-added follow in DB order.
+ * Originals the user has deleted are excluded.
+ *
+ * @param {string} specimenId
+ * @returns {Promise<Object[]>}
+ */
+export async function getAllPhotosForSpecimen(specimenId) {
+  const dbPhotos = await getPhotos(specimenId);
+  const deleted = getDeletedOriginals();
+  const out = [];
+  if (window.__PHOTO_DATA && window.__PHOTO_DATA[specimenId] && !deleted.has(specimenId)) {
+    const anyDbPrimary = dbPhotos.some(p => p.isPrimary);
+    out.push({
+      id: `embedded_${specimenId}`,
+      specimenId,
+      blob: null,
+      thumbnailBlob: null,
+      isPrimary: !anyDbPrimary,
+      mimeType: 'image/jpeg',
+      caption: '',
+      _embeddedDataUri: window.__PHOTO_DATA[specimenId],
+      _isOriginal: true,
+    });
+  }
+  for (const p of dbPhotos) out.push(p);
+  return out;
+}
+
 export async function getPrimaryPhoto(specimenId) {
   const photos = await getPhotos(specimenId);
   if (photos.length === 0) {
@@ -412,64 +465,106 @@ let _lightbox = null;
 let _lightboxKeyHandler = null;
 
 /**
- * Opens a full-size lightbox overlay for a given photo record.
- * The overlay is appended to `document.body`.
+ * Opens a full-size lightbox overlay. Accepts either a single photo record
+ * or an array of photos with a starting index, in which case prev/next
+ * arrows appear and keyboard arrows navigate.
  *
- * @param {Object} photo       — photo record with `blob` property
- * @param {string} specimenId  — used for context (not currently displayed)
+ * @param {Object|Array} photoOrList — single record, or photo array
+ * @param {number}       [startIdx]  — index into the array (default 0)
  */
-function openLightbox(photo) {
+export function openLightbox(photoOrList, startIdx = 0) {
   closeLightbox(); // ensure only one lightbox at a time
+
+  const photos = Array.isArray(photoOrList) ? photoOrList : [photoOrList];
+  let idx = Math.max(0, Math.min(startIdx, photos.length - 1));
 
   const overlay = document.createElement('div');
   overlay.className = 'lightbox';
-
-  const url = getPhotoURL(photo);
 
   const content = document.createElement('div');
   content.className = 'lightbox-content';
 
   const img = document.createElement('img');
   img.className = 'lightbox-img';
-  img.src    = url;
-  img.alt    = photo.caption || 'Butterfly photo';
+  content.appendChild(img);
 
   const closeBtn = document.createElement('button');
   closeBtn.className = 'lightbox-close';
   closeBtn.type  = 'button';
   closeBtn.innerHTML = '✕';
   closeBtn.setAttribute('aria-label', 'Close lightbox');
-
-  content.appendChild(img);
   content.appendChild(closeBtn);
 
-  if (photo.caption) {
-    const cap = document.createElement('div');
-    cap.className = 'lightbox-caption';
-    cap.textContent = photo.caption;
-    content.appendChild(cap);
+  const caption = document.createElement('div');
+  caption.className = 'lightbox-caption';
+  content.appendChild(caption);
+
+  // Prev/next arrows + counter (only shown when there are multiple photos)
+  const prevBtn = document.createElement('button');
+  prevBtn.className = 'lightbox-nav lightbox-nav--prev';
+  prevBtn.type = 'button';
+  prevBtn.innerHTML = '‹';
+  prevBtn.setAttribute('aria-label', 'Previous photo');
+  content.appendChild(prevBtn);
+
+  const nextBtn = document.createElement('button');
+  nextBtn.className = 'lightbox-nav lightbox-nav--next';
+  nextBtn.type = 'button';
+  nextBtn.innerHTML = '›';
+  nextBtn.setAttribute('aria-label', 'Next photo');
+  content.appendChild(nextBtn);
+
+  const counter = document.createElement('div');
+  counter.className = 'lightbox-counter';
+  content.appendChild(counter);
+
+  if (photos.length < 2) {
+    prevBtn.style.display = 'none';
+    nextBtn.style.display = 'none';
+    counter.style.display = 'none';
   }
 
   overlay.appendChild(content);
   document.body.appendChild(overlay);
 
-  // Stash for cleanup
-  _lightbox = { overlay, url };
+  // Track the currently-active object URL so we can revoke it on swap/close
+  let currentUrl = null;
+
+  function showAt(i) {
+    idx = (i + photos.length) % photos.length;
+    const photo = photos[idx];
+    // Revoke the previously shown object URL (if any)
+    if (currentUrl && currentUrl.startsWith('blob:')) {
+      URL.revokeObjectURL(currentUrl);
+    }
+    currentUrl = getPhotoURL(photo);
+    img.src = currentUrl;
+    img.alt = photo.caption || 'Butterfly photo';
+    caption.textContent = photo.caption || '';
+    caption.style.display = photo.caption ? '' : 'none';
+    counter.textContent = `${idx + 1} / ${photos.length}`;
+    _lightbox.url = currentUrl;
+  }
+
+  _lightbox = { overlay, url: null };
+  showAt(idx);
 
   // Trigger CSS transition on next frame
   requestAnimationFrame(() => overlay.classList.add('lightbox--open'));
 
-  // Close handlers
   const close = () => closeLightbox();
-
   closeBtn.addEventListener('click', close);
-
   overlay.addEventListener('click', (e) => {
     if (e.target === overlay) close();
   });
 
+  prevBtn.addEventListener('click', (e) => { e.stopPropagation(); showAt(idx - 1); });
+  nextBtn.addEventListener('click', (e) => { e.stopPropagation(); showAt(idx + 1); });
+
   _lightboxKeyHandler = (e) => {
     if (e.key === 'Escape') close();
+    else if (e.key === 'ArrowLeft' && photos.length > 1) showAt(idx - 1);
+    else if (e.key === 'ArrowRight' && photos.length > 1) showAt(idx + 1);
   };
   document.addEventListener('keydown', _lightboxKeyHandler);
 }
@@ -480,7 +575,9 @@ function openLightbox(photo) {
  */
 function closeLightbox() {
   if (_lightbox) {
-    URL.revokeObjectURL(_lightbox.url);
+    if (_lightbox.url && _lightbox.url.startsWith('blob:')) {
+      URL.revokeObjectURL(_lightbox.url);
+    }
     _lightbox.overlay.remove();
 
     if (_lightboxKeyHandler) {
@@ -621,7 +718,7 @@ export function renderPhotoGallery(specimenId, containerElement) {
   // ── Load photos from DB and build thumbnails ──────────────────────────
   async function loadGallery() {
     try {
-      const photos = await getPhotos(specimenId);
+      const photos = await getAllPhotosForSpecimen(specimenId);
       grid.innerHTML = '';
 
       if (photos.length === 0) {
@@ -636,8 +733,8 @@ export function renderPhotoGallery(specimenId, containerElement) {
         if (photo.isPrimary) item.classList.add('photo-thumb--primary');
 
         // Thumbnail image
-        const thumbUrl = getThumbnailURL(photo);
-        registerURL(containerElement, thumbUrl);
+        const thumbUrl = getThumbnailURL(photo) || (photo._embeddedDataUri ? photo._embeddedDataUri : '');
+        if (thumbUrl && !thumbUrl.startsWith('data:')) registerURL(containerElement, thumbUrl);
 
         const img = document.createElement('img');
         img.className = 'photo-thumb-img';
@@ -660,8 +757,9 @@ export function renderPhotoGallery(specimenId, containerElement) {
         delBtn.className = 'photo-delete';
         delBtn.type  = 'button';
         delBtn.title = 'Delete photo';
-        delBtn.innerHTML = '\u2715'; // ✕
-        delBtn.setAttribute('aria-label', 'Delete photo');
+        delBtn.textContent = '🗑'; // 🗑 trash can
+        delBtn.title = photo._isOriginal ? 'Remove original photo' : 'Delete photo';
+        delBtn.setAttribute('aria-label', delBtn.title);
         item.appendChild(delBtn);
 
         // Caption (if present)
@@ -672,8 +770,9 @@ export function renderPhotoGallery(specimenId, containerElement) {
           item.appendChild(cap);
         }
 
-        // ── Event: thumbnail click → lightbox ──────────────────────────
-        img.addEventListener('click', () => openLightbox(photo));
+        // ── Event: thumbnail click → lightbox (with prev/next nav) ───
+        const photoIdx = photos.indexOf(photo);
+        img.addEventListener('click', () => openLightbox(photos, photoIdx));
 
         // ── Event: set as primary ──────────────────────────────────────
         starBtn.addEventListener('click', async (e) => {
@@ -690,6 +789,19 @@ export function renderPhotoGallery(specimenId, containerElement) {
         // ── Event: delete photo ────────────────────────────────────────
         delBtn.addEventListener('click', async (e) => {
           e.stopPropagation();
+          if (photo._isOriginal) {
+            const ok = confirm(
+              'Remove the original photo for this specimen?\n\n' +
+              'The image file stays in the photos folder on disk, but the ' +
+              'app will no longer show it. Save & Export to make this ' +
+              'permanent.'
+            );
+            if (!ok) return;
+            markOriginalDeleted(specimenId);
+            renderPhotoGallery(specimenId, containerElement);
+            showToast('Original photo removed');
+            return;
+          }
           if (!confirm('Delete this photo? This cannot be undone.')) return;
           try {
             await deletePhoto(photo.id);

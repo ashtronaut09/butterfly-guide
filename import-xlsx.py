@@ -473,21 +473,30 @@ def clean_latin_name(text):
 #  SUPPLIER PARSING
 # ══════════════════════════════════════════════════════════════════════════
 
+EMAIL_RE = re.compile(r'[\w.+-]+@[\w.-]+\.[a-zA-Z]{2,}')
+
+
 def parse_supplier(text):
-    """Parse supplier field into username, name, and address.
+    """Parse supplier field into username, name, address, and email.
 
-    Format:  \ufeff...'username' Name, Address lines
+    Format:  \ufeff...'username' Name, Address lines [email@example.com]
 
-    Returns (username, name, address).
+    Returns (username, name, address, email).
     """
     if not text or not text.strip():
-        return None, None, None
+        return None, None, None, None
 
     raw = str(text)
 
     # Strip BOM characters (\ufeff)
     raw = raw.replace("\ufeff", "")
     raw = raw.strip()
+
+    # Extract email before collapsing whitespace
+    email_match = EMAIL_RE.search(raw)
+    email = email_match.group(0).lower() if email_match else None
+    if email_match:
+        raw = raw[:email_match.start()] + raw[email_match.end():]
 
     # Extract username from first pair of single quotes
     m = re.match(r"'([^']+)'\s*", raw)
@@ -498,28 +507,23 @@ def parse_supplier(text):
     rest = re.sub(r'\s+', ' ', rest).strip()
 
     if not rest:
-        return username, None, None
+        return username, None, None, email
 
     # Split name from address.
     # Strategy: name is the part before the first comma that looks like a person name.
     # If no comma, take the first 1-2 tokens as name.
     comma_idx = rest.find(",")
     if comma_idx > 0 and comma_idx < 50:
-        # Comma early enough — use it as name/address boundary
         potential_name = rest[:comma_idx].strip()
         address = rest[comma_idx + 1:].strip()
 
-        # Clean potential name: if it's long, take only the first 2-3 words
         name_tokens = potential_name.split()
         if len(name_tokens) <= 3:
             name = potential_name
         else:
-            # The name is probably just the first 2 tokens
             name = " ".join(name_tokens[:2])
-            # Put the rest back into address
             address = " ".join(name_tokens[2:]) + ", " + address
     else:
-        # No early comma — take first 1-2 tokens as name, rest as address
         tokens = rest.split()
         if len(tokens) == 1:
             name = tokens[0]
@@ -528,24 +532,21 @@ def parse_supplier(text):
             name = " ".join(tokens[:2])
             address = None
         else:
-            # Try splitting at newlines first
             raw_no_bom = raw[m.end():].strip() if m else raw
             if "\n" in raw_no_bom:
                 lines = raw_no_bom.split("\n")
                 name = lines[0].strip()
                 address = " ".join(l.strip() for l in lines[1:] if l.strip())
             else:
-                # First 2 tokens = name, rest = address
                 name = " ".join(tokens[:2])
                 address = " ".join(tokens[2:])
 
-    # Clean up
     if name:
         name = re.sub(r'\s+', ' ', name).strip().rstrip(",")
     if address:
         address = re.sub(r'\s+', ' ', address).strip().rstrip(",")
 
-    return username, name, address
+    return username, name, address, email
 
 
 # ══════════════════════════════════════════════════════════════════════════
@@ -734,7 +735,7 @@ def parse_specimen(row_idx, row_cells):
             location = colon_loc
 
     # ── Parse supplier ──────────────────────────────────────────────────
-    supplier_username, supplier_name, supplier_address = parse_supplier(sup_raw)
+    supplier_username, supplier_name, supplier_address, supplier_email = parse_supplier(sup_raw)
 
     # ── Detect collector ────────────────────────────────────────────────
     collector = None
@@ -800,6 +801,7 @@ def parse_specimen(row_idx, row_cells):
         "supplier_username": supplier_username,
         "supplier_name": supplier_name,
         "supplier_address": supplier_address,
+        "supplier_email": supplier_email,
         "price": price_num,
         "price_is_collected": is_collected,
         "currency": "£",

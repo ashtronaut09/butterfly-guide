@@ -145,9 +145,9 @@ export async function seedPhotos(onProgress = () => {}) {
   // ── 1. Ensure the DB is open ──────────────────────────────────────────────
   const db = await initPhotoDB();
 
-  // ── 1b. Skip seeding if photos are embedded (standalone mode) ─────────
+  // ── 1b. Skip seeding if photos are referenced by path (standalone mode) ─
   if (window.__PHOTO_DATA) {
-    console.info('[photo-seeder] Embedded photo data found — skipping IndexedDB seeding.');
+    console.info('[photo-seeder] Photo paths present — skipping IndexedDB seeding.');
     return { seeded: 0, skipped: 0, failed: 0 };
   }
 

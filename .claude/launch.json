@@ -2,10 +2,10 @@
   "version": "0.0.1",
   "configurations": [
     {
-      "name": "butterfly-guide",
+      "name": "butterfly",
       "runtimeExecutable": "python3",
-      "runtimeArgs": ["-m", "http.server", "7832"],
-      "port": 7832
+      "runtimeArgs": ["-m", "http.server", "8765"],
+      "port": 8765
     }
   ]
 }

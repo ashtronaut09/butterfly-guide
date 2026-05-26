@@ -136,11 +136,32 @@ body.panel-open { overflow: hidden; }
   white-space: nowrap;
 }
 
+/* Export button in header */
+.btn-export {
+  background:    var(--accent);
+  color:         #fff;
+  border:        1.5px solid var(--accent);
+  font-weight:   600;
+  white-space:   nowrap;
+  flex-shrink:   0;
+}
+.btn-export:hover { background: var(--accent-hover); border-color: var(--accent-hover); }
+
+/* Search bar row */
+.search-bar {
+  background:    var(--bg-toolbar);
+  border-bottom: 1px solid var(--border);
+  padding:       8px 24px;
+  position:      sticky;
+  top:           var(--header-h, 54px);
+  z-index:       195;
+}
+
 /* Search (mirrors styles.css pattern) */
 .search-wrap {
   position: relative;
   flex:     1;
-  max-width: 360px;
+  max-width: 100%;
 }
 
 .search-wrap .search-icon {
@@ -148,7 +169,7 @@ body.panel-open { overflow: hidden; }
   left:            10px;
   top:             50%;
   transform:       translateY(-50%);
-  color:           #9ab8a0;
+  color:           var(--text-muted);
   pointer-events:  none;
 }
 
@@ -156,20 +177,20 @@ body.panel-open { overflow: hidden; }
   width:         100%;
   padding:       8px 12px 8px 34px;
   border-radius: 20px;
-  border:        1.5px solid #3d5c3f;
-  background:    rgba(255,255,255,0.08);
-  color:         var(--text-header);
+  border:        1.5px solid var(--border);
+  background:    var(--bg-card);
+  color:         var(--text);
   font-size:     0.88rem;
   font-family:   var(--font);
   outline:       none;
   transition:    border-color var(--transition), background var(--transition);
 }
 
-#collection-search::placeholder { color: #7a9b80; }
+#collection-search::placeholder { color: var(--text-muted); }
 
 #collection-search:focus {
-  border-color: #6aaa78;
-  background:   rgba(255,255,255,0.13);
+  border-color: var(--accent);
+  background:   #fff;
 }
 
 /* ── Toolbar ─────────────────────────────────────────────────────────────── */
@@ -182,7 +203,7 @@ body.panel-open { overflow: hidden; }
   gap:             10px;
   flex-wrap:       wrap;
   position:        sticky;
-  top:             var(--header-h, 54px);
+  top:             var(--header-search-h, 90px);
   z-index:         190;
   box-shadow:      0 2px 4px rgba(0,0,0,0.05);
 }
@@ -646,6 +667,13 @@ body.panel-open .collection-main {
   background:      var(--bg);
 }
 
+.table-editable {
+  display:     inline-block;
+  width:       100%;
+  padding:     2px 4px;
+  box-sizing:  border-box;
+}
+
 /* Active editing state — the element holds a live <input> or <textarea> */
 .editing {
   cursor:      text;
@@ -793,11 +821,9 @@ body.panel-open .status-bar { right: var(--panel-width); }
 
   .header-brand h1 { font-size: 1.05rem; }
 
-  .search-wrap {
-    flex:      1 1 100%;
-    max-width: 100%;
-    order:     3;
-  }
+  .btn-export { font-size: 0.78rem; padding: 6px 12px; }
+
+  .search-bar { padding: 8px 14px; }
 
   .toolbar { padding: 8px 14px; gap: 8px; }
 
@@ -902,15 +928,15 @@ body.panel-open .status-bar { right: var(--panel-width); }
 /* Delete button */
 .photo-delete {
   position: absolute;
-  top: 2px;
-  right: 2px;
+  top: 4px;
+  right: 4px;
   background: rgba(0, 0, 0, 0.55);
   color: #fff;
   border: none;
   border-radius: 50%;
-  width: 20px;
-  height: 20px;
-  font-size: 0.6rem;
+  width: 26px;
+  height: 26px;
+  font-size: 0.85rem;
   line-height: 1;
   cursor: pointer;
   display: flex;
@@ -1014,6 +1040,46 @@ body.panel-open .status-bar { right: var(--panel-width); }
   color: rgba(255, 255, 255, 0.75);
   font-size: 0.88rem;
   padding: 10px 0 0;
+}
+
+.lightbox-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  border: none;
+  width: 48px;
+  height: 64px;
+  font-size: 2.6rem;
+  line-height: 1;
+  cursor: pointer;
+  border-radius: 4px;
+  user-select: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background var(--transition);
+}
+.lightbox-nav:hover { background: rgba(0, 0, 0, 0.8); }
+.lightbox-nav--prev { left: -64px; }
+.lightbox-nav--next { right: -64px; }
+
+.lightbox-counter {
+  position: absolute;
+  top: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: rgba(255, 255, 255, 0.85);
+  background: rgba(0, 0, 0, 0.4);
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 0.82rem;
+}
+
+@media (max-width: 700px) {
+  .lightbox-nav--prev { left: 4px; }
+  .lightbox-nav--next { right: 4px; }
 }
 
 /* ── WP3 additions ────────────────────────────────────────────────────────── */
@@ -1138,10 +1204,11 @@ body.panel-open .status-bar { right: var(--panel-width); }
 }
 
 .specimen-table {
-  width: 100%;
+  width: max-content;
+  max-width: 100%;
   border-collapse: collapse;
   font-size: 0.84rem;
-  table-layout: fixed;
+  table-layout: auto;
 }
 
 .specimen-table thead {
@@ -1172,7 +1239,6 @@ body.panel-open .status-bar { right: var(--panel-width); }
   padding: 6px 10px;
   border-bottom: 1px solid var(--border);
   vertical-align: middle;
-  max-width: 200px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -1182,21 +1248,22 @@ body.panel-open .status-bar { right: var(--panel-width); }
   cursor: pointer;
   transition: background var(--transition);
 }
+.specimen-table tbody tr { cursor: pointer; }
 .specimen-table tbody tr:hover { background: var(--accent-light); }
 .specimen-table tbody tr:nth-child(even) { background: rgba(0,0,0,0.02); }
 .specimen-table tbody tr:nth-child(even):hover { background: var(--accent-light); }
 .specimen-table tbody tr.selected { background: var(--amber-light); }
 
-/* Column widths */
-.col-select { width: 30px; text-align: center; }
-.col-photo { width: 170px; }
-.col-name { min-width: 160px; }
-.col-latin { min-width: 140px; font-style: italic; }
-.col-supplier { width: 120px; }
-.col-price { width: 80px; text-align: right; }
-.col-location { width: 120px; max-width: 150px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.col-date { width: 90px; }
-.col-desc { min-width: 120px; color: var(--text-muted); font-size: 0.78rem; }
+/* Column widths — use .specimen-table prefix for specificity over td rule */
+.specimen-table .col-select { width: 30px; text-align: center; }
+.specimen-table .col-photo { width: 150px; }
+.specimen-table .col-name { max-width: 220px; }
+.specimen-table .col-latin { max-width: 200px; font-style: italic; }
+.specimen-table .col-supplier { max-width: 130px; }
+.specimen-table .col-price { max-width: 80px; text-align: right; }
+.specimen-table .col-location { max-width: 140px; }
+.specimen-table .col-date { max-width: 100px; }
+.specimen-table .col-desc { max-width: 160px; color: var(--text-muted); font-size: 0.78rem; }
 
 /* Table thumbnail */
 .table-thumb {

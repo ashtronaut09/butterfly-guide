@@ -10,7 +10,7 @@
 
 import { openDB, getAllSpecimens, putSpecimen, deleteSpecimen,
          searchSpecimens, getStats, seedFromJSON, exportJSON } from './db.js';
-import { initPhotoDB, renderPhotoGallery, getCardThumbnailURL, getPrimaryPhoto, getPhotoURL, getPhotos, createThumbnail } from './photos.js';
+import { initPhotoDB, renderPhotoGallery, getCardThumbnailURL, getPrimaryPhoto, getPhotoURL, getPhotos, createThumbnail, getAllPhotosForSpecimen, openLightbox } from './photos.js';
 import { generateLabelsPDF, generatePreview } from './labels.js';
 import { seedPhotos } from './photo-seeder.js';
 import { exportCollection } from './export-html.js';
@@ -634,26 +634,26 @@ function makeTableRow(s) {
     <td class="col-photo">
       <div class="table-thumb" data-specimen-id="${s.id}">🦋</div>
     </td>
-    <td class="col-name editable" data-field="english_name" data-id="${s.id}" data-type="text">
-      ${escHtml(s.english_name || '(Unnamed)')}${sexSym}
+    <td class="col-name">
+      <span class="editable table-editable" data-field="english_name" data-id="${s.id}" data-type="text">${escHtml(s.english_name || '(Unnamed)')}</span>${sexSym}
     </td>
-    <td class="col-latin editable" data-field="latin_name" data-id="${s.id}" data-type="text">
-      <em>${escHtml(s.latin_name || '–')}</em>
+    <td class="col-latin">
+      <span class="editable table-editable" data-field="latin_name" data-id="${s.id}" data-type="text"><em>${escHtml(s.latin_name || '–')}</em></span>
     </td>
-    <td class="col-supplier editable" data-field="supplier_username" data-id="${s.id}" data-type="text">
-      ${supplierDisplay}
+    <td class="col-supplier">
+      <span class="editable table-editable" data-field="supplier_username" data-id="${s.id}" data-type="text">${supplierDisplay}</span>
     </td>
-    <td class="col-price editable" data-field="price" data-id="${s.id}" data-type="price">
-      ${priceText}
+    <td class="col-price">
+      <span class="editable table-editable" data-field="price" data-id="${s.id}" data-type="price">${priceText}</span>
     </td>
-    <td class="col-location editable" data-field="location" data-id="${s.id}" data-type="text" title="${escHtml(s.location || '')}">
-      ${locationDisplay}
+    <td class="col-location" title="${escHtml(s.location || '')}">
+      <span class="editable table-editable" data-field="location" data-id="${s.id}" data-type="text">${locationDisplay}</span>
     </td>
-    <td class="col-date editable" data-field="date_bought" data-id="${s.id}" data-type="date">
-      ${dateDisplay}
+    <td class="col-date">
+      <span class="editable table-editable" data-field="date_bought" data-id="${s.id}" data-type="date">${dateDisplay}</span>
     </td>
-    <td class="col-desc editable" data-field="description" data-id="${s.id}" data-type="text">
-      ${descDisplay}
+    <td class="col-desc">
+      <span class="editable table-editable" data-field="description" data-id="${s.id}" data-type="text">${descDisplay}</span>
     </td>
   `;
 
@@ -745,40 +745,10 @@ async function loadCardThumbnails() {
  */
 async function openSpecimenPhoto(specimenId) {
   try {
-    const photo = await getPrimaryPhoto(specimenId);
-    if (!photo) return;
-
-    const url = getPhotoURL(photo);
-
-    // Create lightbox overlay
-    const overlay = document.createElement('div');
-    overlay.className = 'lightbox';
-    overlay.innerHTML = `
-      <div class="lightbox-content">
-        <img class="lightbox-img" src="${url}" alt="Specimen photo">
-        <button class="lightbox-close" type="button" aria-label="Close">✕</button>
-      </div>
-    `;
-    document.body.appendChild(overlay);
-    requestAnimationFrame(() => overlay.classList.add('lightbox--open'));
-
-    const closeLightbox = () => {
-      overlay.remove();
-      URL.revokeObjectURL(url);
-    };
-
-    overlay.querySelector('.lightbox-close').addEventListener('click', closeLightbox);
-    overlay.addEventListener('click', (e) => {
-      if (e.target === overlay) closeLightbox();
-    });
-
-    const escHandler = (e) => {
-      if (e.key === 'Escape') {
-        closeLightbox();
-        document.removeEventListener('keydown', escHandler);
-      }
-    };
-    document.addEventListener('keydown', escHandler);
+    const photos = await getAllPhotosForSpecimen(specimenId);
+    if (photos.length === 0) return;
+    const startIdx = Math.max(0, photos.findIndex(p => p.isPrimary));
+    openLightbox(photos, startIdx);
   } catch (err) {
     console.error('[app] openSpecimenPhoto failed:', err);
   }
@@ -899,6 +869,12 @@ async function renderDetailPanel(id) {
           <span class="detail-label">Address</span>
           <span class="detail-value editable detail-notes" data-field="supplier_address"
                 data-id="${s.id}" data-type="textarea">${escHtml(s.supplier_address || '–')}</span>
+        </div>
+
+        <div class="detail-row">
+          <span class="detail-label">Email</span>
+          <span class="detail-value editable" data-field="supplier_email" data-id="${s.id}"
+                data-type="text">${escHtml(s.supplier_email || '–')}</span>
         </div>
 
       </div>
@@ -1226,7 +1202,7 @@ function makeEditable(element, field, specimenId, fieldType = 'text') {
           applyFiltersAndSort();
         }
 
-        showToast(`${fieldLabel(field)} saved`);
+        showToast(`${fieldLabel(field)} updated`);
         pushHashState();
       }
 
@@ -1315,6 +1291,20 @@ function refreshCard(id) {
   if (card) {
     const newCard = makeCard(s);
     card.replaceWith(newCard);
+    // Load thumbnail for the new card
+    const placeholder = newCard.querySelector('.card-photo--placeholder');
+    if (placeholder) {
+      getCardThumbnailURL(id).then(url => {
+        if (url) {
+          const img = document.createElement('img');
+          img.className = 'card-photo';
+          img.src = url;
+          img.alt = '';
+          img.loading = 'lazy';
+          placeholder.replaceWith(img);
+        }
+      }).catch(() => {});
+    }
     return;
   }
 
@@ -1327,6 +1317,22 @@ function refreshCard(id) {
     newRow.querySelectorAll('.editable').forEach(el => {
       makeEditable(el, el.dataset.field, el.dataset.id, el.dataset.type || 'text');
     });
+    // Load thumbnail for the new row
+    const thumbCell = newRow.querySelector('.table-thumb[data-specimen-id]');
+    if (thumbCell) {
+      getCardThumbnailURL(id).then(url => {
+        if (url) {
+          thumbCell.innerHTML = `<img src="${url}" alt="" loading="lazy" style="cursor: zoom-in" title="Click to enlarge">`;
+          const img = thumbCell.querySelector('img');
+          if (img) {
+            img.addEventListener('click', (e) => {
+              e.stopPropagation();
+              openSpecimenPhoto(id);
+            });
+          }
+        }
+      }).catch(() => {});
+    }
   }
 }
 
@@ -1354,7 +1360,7 @@ function normalise(str) {
 function specimenMatchesQuery(specimen, normQuery) {
   const SEARCH_FIELDS = [
     'english_name', 'latin_name', 'description', 'location',
-    'supplier_name', 'supplier_username', 'notes', 'setting_board',
+    'supplier_name', 'supplier_username', 'supplier_email', 'notes', 'setting_board',
     'collector', 'cat_number',
   ];
   return SEARCH_FIELDS.some(f => {
@@ -1753,13 +1759,16 @@ function updateSpecimenCountDisplay(total) {
  */
 function updateStickyOffsets() {
   const header = document.querySelector('.app-header');
+  const searchBar = document.querySelector('.search-bar');
   const toolbar = document.querySelector('.toolbar');
   if (!header || !toolbar) return;
   const headerH = header.offsetHeight;
+  const searchBarH = searchBar ? searchBar.offsetHeight : 0;
   const toolbarH = toolbar.offsetHeight;
   const root = document.documentElement;
   root.style.setProperty('--header-h', headerH + 'px');
-  root.style.setProperty('--header-toolbar-h', (headerH + toolbarH) + 'px');
+  root.style.setProperty('--header-search-h', (headerH + searchBarH) + 'px');
+  root.style.setProperty('--header-toolbar-h', (headerH + searchBarH + toolbarH) + 'px');
 }
 
 function showStatus(message, type = 'info') {
