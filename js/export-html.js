@@ -117,7 +117,8 @@ export async function exportCollection(onStatus = () => {}) {
   const url = URL.createObjectURL(htmlBlob);
   const a = document.createElement('a');
   a.href = url;
-  a.download = 'index.html';
+  const today = new Date().toISOString().slice(0, 10);
+  a.download = `butterfly-collection-${today}.html`;
   document.body.appendChild(a);
   a.click();
   document.body.removeChild(a);
