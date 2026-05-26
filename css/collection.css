@@ -86,7 +86,6 @@ body {
   background:    var(--bg);
   color:         var(--text);
   min-height:    100vh;
-  overflow-x:    hidden;
 }
 
 /* When the detail panel is open, prevent main scroll on mobile */
@@ -664,7 +663,7 @@ body.panel-open .collection-main {
 
 .editable:hover {
   text-decoration: underline dotted var(--text-muted);
-  background:      var(--bg);
+  background:      var(--accent-light);
 }
 
 .table-editable {
@@ -1142,6 +1141,54 @@ body.panel-open .status-bar { right: var(--panel-width); }
 }
 .filter-chip-remove:hover { opacity: 1; color: var(--danger); }
 
+/* ── Text filter inputs ──────────────────────────────────────────────────── */
+.filter-text-input {
+  width:         110px;
+  padding:       4px 8px;
+  border:        1.5px solid var(--border);
+  border-radius: 20px;
+  background:    var(--bg-card);
+  color:         var(--text);
+  font-size:     0.82rem;
+  font-family:   var(--font);
+  outline:       none;
+  transition:    border-color var(--transition);
+}
+.filter-text-input::placeholder { color: var(--text-muted); }
+.filter-text-input:hover  { border-color: var(--accent); }
+.filter-text-input:focus  { border-color: var(--border-focus); }
+
+/* ── Date range filter ───────────────────────────────────────────────────── */
+.filter-group--date {
+  gap: 4px;
+}
+
+.filter-date-input {
+  padding:       4px 6px;
+  border:        1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  background:    var(--bg-card);
+  color:         var(--text);
+  font-size:     0.78rem;
+  font-family:   var(--font);
+  outline:       none;
+  transition:    border-color var(--transition);
+  max-width:     130px;
+}
+.filter-date-input:focus { border-color: var(--border-focus); }
+
+/* Custom date range (shown when "Custom range…" is selected) */
+.custom-date-range {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* When hidden, maintain display:none override */
+.custom-date-range[hidden] {
+  display: none;
+}
+
 /* ── Price range filter ──────────────────────────────────────────────────── */
 .filter-group--price {
   gap: 4px;
@@ -1194,18 +1241,21 @@ body.panel-open .status-bar { right: var(--panel-width); }
 
 /* ── Table view ──────────────────────────────────────────────────────────── */
 
-/* When the grid container holds a table, override the CSS grid layout */
-#specimen-grid:has(.specimen-table) {
-  display: block;
-}
-/* Class-based fallback for browsers without :has() support */
 #specimen-grid.specimen-grid--table {
   display: block;
+  overflow: auto;
+  /* Fill the viewport below all sticky header rows */
+  height: calc(100vh - var(--sticky-all-h, 108px));
+}
+
+.collection-main--table {
+  padding: 0;
+  overflow: hidden; /* grid handles all scrolling */
 }
 
 .specimen-table {
   width: max-content;
-  max-width: 100%;
+  min-width: 100%;
   border-collapse: collapse;
   font-size: 0.84rem;
   table-layout: auto;
@@ -1213,7 +1263,7 @@ body.panel-open .status-bar { right: var(--panel-width); }
 
 .specimen-table thead {
   position: sticky;
-  top: var(--header-toolbar-h, 108px);
+  top: 0; /* relative to the scroll container (#specimen-grid) */
   z-index: 50;
   background: var(--bg-toolbar);
 }
@@ -1254,16 +1304,25 @@ body.panel-open .status-bar { right: var(--panel-width); }
 .specimen-table tbody tr:nth-child(even):hover { background: var(--accent-light); }
 .specimen-table tbody tr.selected { background: var(--amber-light); }
 
-/* Column widths — use .specimen-table prefix for specificity over td rule */
+/* Column widths — no min-widths; table-layout:auto sizes to content */
 .specimen-table .col-select { width: 30px; text-align: center; }
 .specimen-table .col-photo { width: 150px; }
-.specimen-table .col-name { max-width: 220px; }
-.specimen-table .col-latin { max-width: 200px; font-style: italic; }
-.specimen-table .col-supplier { max-width: 130px; }
-.specimen-table .col-price { max-width: 80px; text-align: right; }
-.specimen-table .col-location { max-width: 140px; }
-.specimen-table .col-date { max-width: 100px; }
-.specimen-table .col-desc { max-width: 160px; color: var(--text-muted); font-size: 0.78rem; }
+.specimen-table .col-name { max-width: 160px; white-space: normal; line-height: 1.3; }
+.specimen-table .col-latin { max-width: 220px; font-style: italic; }
+.specimen-table .col-desc { max-width: 220px; color: var(--text-muted); font-size: 0.78rem; }
+.specimen-table .col-place { max-width: 160px; }
+.specimen-table .col-supplier { max-width: 160px; white-space: normal; line-height: 1.3; }
+.specimen-table .col-price { text-align: right; }
+.specimen-table .col-setting-board { max-width: 100px; }
+.specimen-table .col-cat-number { max-width: 100px; }
+
+/* Allow these short-column headers to wrap onto two lines so the labels
+   fit without pushing into the next column. Data cells stay nowrap. */
+.specimen-table thead th.col-setting-board,
+.specimen-table thead th.col-cat-number {
+  white-space: normal;
+  line-height: 1.15;
+}
 
 /* Table thumbnail */
 .table-thumb {
@@ -1321,10 +1380,13 @@ body.panel-open .status-bar { right: var(--panel-width); }
 }
 
 /* Responsive: hide less important columns on small screens */
+@media (max-width: 1100px) {
+  .col-setting-board, .col-cat-number { display: none; }
+}
 @media (max-width: 900px) {
-  .col-desc, .col-date { display: none; }
+  .col-desc, .col-taken, .col-sent, .col-collector { display: none; }
 }
 @media (max-width: 600px) {
-  .col-supplier, .col-location { display: none; }
+  .col-supplier, .col-place, .col-altitude { display: none; }
   .specimen-table td { padding: 5px 6px; }
 }

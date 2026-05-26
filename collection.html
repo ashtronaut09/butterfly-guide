@@ -49,27 +49,25 @@
 
   <div class="toolbar-divider" aria-hidden="true"></div>
 
+  <!-- Filter: Name -->
+  <div class="filter-group">
+    <label for="filter-name">Name</label>
+    <input id="filter-name" type="search" class="filter-text-input"
+           placeholder="Filter name…" autocomplete="off" aria-label="Filter by name">
+  </div>
+
+  <!-- Filter: Latin name -->
+  <div class="filter-group">
+    <label for="filter-latin">Latin name</label>
+    <input id="filter-latin" type="search" class="filter-text-input"
+           placeholder="Filter latin…" autocomplete="off" aria-label="Filter by latin name">
+  </div>
+
   <!-- Filter: Supplier -->
   <div class="filter-group">
     <label for="filter-supplier">Supplier</label>
     <select id="filter-supplier" class="filter-select" aria-label="Filter by supplier">
       <option value="">All Suppliers</option>
-    </select>
-  </div>
-
-  <!-- Filter: Sex -->
-  <div class="filter-group">
-    <label for="filter-sex">Sex</label>
-    <select id="filter-sex" class="filter-select" aria-label="Filter by sex">
-      <option value="">All Sexes</option>
-    </select>
-  </div>
-
-  <!-- Filter: Location -->
-  <div class="filter-group">
-    <label for="filter-location">Location</label>
-    <select id="filter-location" class="filter-select" aria-label="Filter by location">
-      <option value="">All Locations</option>
     </select>
   </div>
 
@@ -81,6 +79,42 @@
     <span class="filter-price-sep">–</span>
     <input id="filter-price-max" type="number" min="0" step="0.01"
            class="filter-price-input" placeholder="max" aria-label="Maximum price">
+  </div>
+
+  <!-- Filter: Date Bought range -->
+  <div class="filter-group filter-group--date">
+    <label>Date Bought</label>
+    <select id="filter-date-bought-preset" class="filter-select" aria-label="Date bought filter preset">
+      <option value="">All time</option>
+      <option value="last-month">Last month</option>
+      <option value="last-year">Last year</option>
+      <option value="last-5-years">Last 5 years</option>
+      <option value="last-10-years">Last 10 years</option>
+      <option value="custom">Custom range…</option>
+    </select>
+    <div class="custom-date-range" id="date-bought-custom" hidden>
+      <input id="filter-date-bought-min" type="text" class="filter-date-input" placeholder="DD.MM.YYYY" aria-label="Date bought from" autocomplete="off">
+      <span class="filter-price-sep">–</span>
+      <input id="filter-date-bought-max" type="text" class="filter-date-input" placeholder="DD.MM.YYYY" aria-label="Date bought to" autocomplete="off">
+    </div>
+  </div>
+
+  <!-- Filter: Received range -->
+  <div class="filter-group filter-group--date">
+    <label>Received</label>
+    <select id="filter-received-preset" class="filter-select" aria-label="Received filter preset">
+      <option value="">All time</option>
+      <option value="last-month">Last month</option>
+      <option value="last-year">Last year</option>
+      <option value="last-5-years">Last 5 years</option>
+      <option value="last-10-years">Last 10 years</option>
+      <option value="custom">Custom range…</option>
+    </select>
+    <div class="custom-date-range" id="date-received-custom" hidden>
+      <input id="filter-received-min" type="text" class="filter-date-input" placeholder="DD.MM.YYYY" aria-label="Received from" autocomplete="off">
+      <span class="filter-price-sep">–</span>
+      <input id="filter-received-max" type="text" class="filter-date-input" placeholder="DD.MM.YYYY" aria-label="Received to" autocomplete="off">
+    </div>
   </div>
 
   <div class="toolbar-divider" aria-hidden="true"></div>

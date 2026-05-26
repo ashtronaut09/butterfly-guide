@@ -27,20 +27,28 @@ let filteredSpecimens = [];
 /** IDs of cards checked for label generation. */
 let selectedIds = new Set();
 
+/** IDs of specimens with unsaved (in-memory-only) changes. */
+let dirtySpecimenIds = new Set();
+
 /** ID of the specimen currently shown in the detail panel (null = closed). */
 let currentSpecimenId = null;
 
 /**
  * Active filter values.
- * supplier / sex / location are arrays (OR within each, AND across).
- * priceMin / priceMax are numbers or null.
+ * supplier is an array (OR within, AND across).
+ * text filters are strings (empty = inactive).
+ * date/price ranges are strings/numbers or null.
  */
 let activeFilters = {
-  supplier: [],
-  sex:      [],
-  location: [],
-  priceMin: null,
-  priceMax: null,
+  supplier:       [],
+  name:           '',
+  latinName:      '',
+  priceMin:       null,
+  priceMax:       null,
+  dateBoughtMin:  null,
+  dateBoughtMax:  null,
+  receivedMin:    null,
+  receivedMax:    null,
 };
 
 /** Current sort key. */
@@ -106,7 +114,7 @@ async function init() {
     renderFilterChips();
 
     document.title = `Butterfly Collection (${specimens.length})`;
-    showStatus(`${specimens.length} specimens loaded`);
+    updateDirtyStatus();
 
     // Seed photos in the background — don't block the UI
     seedPhotosInBackground();
@@ -204,11 +212,15 @@ function pushHashState() {
   if (q)                           params.set('q',        q);
   if (currentSort !== 'english_name') params.set('sort',  currentSort);
   if (currentView !== 'table')     params.set('view',     currentView);
-  if (activeFilters.supplier.length)  params.set('supplier', activeFilters.supplier.join('|'));
-  if (activeFilters.sex.length)       params.set('sex',      activeFilters.sex.join('|'));
-  if (activeFilters.location.length)  params.set('location', activeFilters.location.join('|'));
-  if (activeFilters.priceMin != null) params.set('pmin',  String(activeFilters.priceMin));
-  if (activeFilters.priceMax != null) params.set('pmax',  String(activeFilters.priceMax));
+  if (activeFilters.supplier.length)      params.set('supplier', activeFilters.supplier.join('|'));
+  if (activeFilters.name)                 params.set('fname',    activeFilters.name);
+  if (activeFilters.latinName)            params.set('flatin',   activeFilters.latinName);
+  if (activeFilters.priceMin != null)     params.set('pmin',     String(activeFilters.priceMin));
+  if (activeFilters.priceMax != null)     params.set('pmax',     String(activeFilters.priceMax));
+  if (activeFilters.dateBoughtMin)        params.set('dbmin',    activeFilters.dateBoughtMin);
+  if (activeFilters.dateBoughtMax)        params.set('dbmax',    activeFilters.dateBoughtMax);
+  if (activeFilters.receivedMin)          params.set('recmin',   activeFilters.receivedMin);
+  if (activeFilters.receivedMax)          params.set('recmax',   activeFilters.receivedMax);
 
   const hash = params.toString();
   // Use replaceState equivalent — history.replaceState is not available on
@@ -258,10 +270,16 @@ function restoreHashState() {
 
   if (params.has('supplier'))
     activeFilters.supplier = params.get('supplier').split('|').filter(Boolean);
-  if (params.has('sex'))
-    activeFilters.sex      = params.get('sex').split('|').filter(Boolean);
-  if (params.has('location'))
-    activeFilters.location = params.get('location').split('|').filter(Boolean);
+  if (params.has('fname')) {
+    activeFilters.name = params.get('fname');
+    const el = $('filter-name');
+    if (el) el.value = activeFilters.name;
+  }
+  if (params.has('flatin')) {
+    activeFilters.latinName = params.get('flatin');
+    const el = $('filter-latin');
+    if (el) el.value = activeFilters.latinName;
+  }
 
   const pmin = params.get('pmin');
   const pmax = params.get('pmax');
@@ -274,6 +292,28 @@ function restoreHashState() {
     activeFilters.priceMax = parseFloat(pmax);
     const el = $('filter-price-max');
     if (el) el.value = pmax;
+  }
+
+  const dbmin = params.get('dbmin');
+  const dbmax = params.get('dbmax');
+  if (dbmin || dbmax) {
+    const presetEl = $('filter-date-bought-preset');
+    if (presetEl) presetEl.value = 'custom';
+    const custom = $('date-bought-custom');
+    if (custom) custom.removeAttribute('hidden');
+    if (dbmin) { activeFilters.dateBoughtMin = dbmin; const el = $('filter-date-bought-min'); if (el) el.value = formatDateDisplay(dbmin); }
+    if (dbmax) { activeFilters.dateBoughtMax = dbmax; const el = $('filter-date-bought-max'); if (el) el.value = formatDateDisplay(dbmax); }
+  }
+
+  const recmin = params.get('recmin');
+  const recmax = params.get('recmax');
+  if (recmin || recmax) {
+    const presetEl = $('filter-received-preset');
+    if (presetEl) presetEl.value = 'custom';
+    const custom = $('date-received-custom');
+    if (custom) custom.removeAttribute('hidden');
+    if (recmin) { activeFilters.receivedMin = recmin; const el = $('filter-received-min'); if (el) el.value = formatDateDisplay(recmin); }
+    if (recmax) { activeFilters.receivedMax = recmax; const el = $('filter-received-max'); if (el) el.value = formatDateDisplay(recmax); }
   }
 }
 
@@ -289,18 +329,10 @@ function buildFilterOptions() {
     specimens.map(s => s.supplier_username || s.supplier_name).filter(Boolean)
   )].sort((a, b) => a.toLowerCase().localeCompare(b.toLowerCase()));
 
-  const sexValues     = [...new Set(specimens.map(s => s.sex).filter(Boolean))].sort();
-  const locationValues = [...new Set(specimens.map(s => s.location_country).filter(Boolean))]
-                          .sort((a, b) => a.localeCompare(b));
-
   populateSelect('filter-supplier', supplierKeys, 'All Suppliers');
-  populateSelect('filter-sex',      sexValues,    'All Sexes');
-  populateSelect('filter-location', locationValues, 'All Locations');
 
-  // Restore multi-select state from activeFilters
+  // Restore select state from activeFilters
   syncSelectToFilter('filter-supplier', activeFilters.supplier);
-  syncSelectToFilter('filter-sex',      activeFilters.sex);
-  syncSelectToFilter('filter-location', activeFilters.location);
 }
 
 /** Fills a <select> element with option values; prepends a blank "all" option. */
@@ -331,6 +363,8 @@ function syncSelectToFilter(id, values) {
 function renderGrid() {
   if (!specimenGrid) return;
   specimenGrid.innerHTML = '';
+  specimenGrid.classList.remove('specimen-grid--table');
+  document.getElementById('collection-main')?.classList.remove('collection-main--table');
 
   if (filteredSpecimens.length === 0) {
     specimenGrid.innerHTML = `
@@ -464,6 +498,31 @@ function renderView() {
   else renderGrid();
 }
 
+// ── Supplier helpers ──────────────────────────────────────────────────────────
+
+/**
+ * Returns the combined supplier display string (newline-separated, blanks skipped).
+ * Used in both the table column and the detail panel.
+ */
+function buildSupplierDisplay(s) {
+  return [s.supplier_username, s.supplier_email, s.supplier_address]
+    .filter(v => v != null && v !== '')
+    .join('\n') || '–';
+}
+
+/**
+ * Parses a newline-separated supplier textarea value back into the three fields.
+ * Line 1 → supplier_username, line 2 → supplier_email, rest → supplier_address.
+ */
+function parseSupplierValue(str) {
+  const lines = (str || '').split('\n').map(l => l.trim());
+  return {
+    supplier_username: lines[0] || null,
+    supplier_email:    lines[1] || null,
+    supplier_address:  lines.slice(2).join('\n') || null,
+  };
+}
+
 // ── Date formatting helper ────────────────────────────────────────────────────
 
 /**
@@ -478,6 +537,49 @@ function formatDateDisplay(iso) {
   return `${d}.${m}.${y}`;
 }
 
+/**
+ * Parses a custom date string (DD.MM.YYYY or YYYY-MM-DD) to ISO YYYY-MM-DD.
+ * Returns null for invalid input.
+ * @param {string} str
+ * @returns {string|null}
+ */
+function parseCustomDate(str) {
+  if (!str) return null;
+  const m = str.match(/^(\d{1,2})\.(\d{1,2})\.(\d{4})$/);
+  if (m) return `${m[3]}-${m[2].padStart(2, '0')}-${m[1].padStart(2, '0')}`;
+  if (/^\d{4}-\d{2}-\d{2}$/.test(str)) return str;
+  return null;
+}
+
+/**
+ * Converts a date preset value to a {min, max} ISO date range.
+ * @param {string} preset
+ * @returns {{min: string|null, max: string|null}}
+ */
+function datePresetToRange(preset) {
+  if (!preset) return { min: null, max: null };
+  const now = new Date();
+  const max = now.toISOString().split('T')[0];
+  let min;
+  switch (preset) {
+    case 'last-month':
+      min = new Date(now.getFullYear(), now.getMonth() - 1, now.getDate());
+      break;
+    case 'last-year':
+      min = new Date(now.getFullYear() - 1, now.getMonth(), now.getDate());
+      break;
+    case 'last-5-years':
+      min = new Date(now.getFullYear() - 5, now.getMonth(), now.getDate());
+      break;
+    case 'last-10-years':
+      min = new Date(now.getFullYear() - 10, now.getMonth(), now.getDate());
+      break;
+    default:
+      return { min: null, max: null };
+  }
+  return { min: min.toISOString().split('T')[0], max };
+}
+
 // ── Table rendering ──────────────────────────────────────────────────────────
 
 /**
@@ -488,6 +590,7 @@ function renderTable() {
   if (!specimenGrid) return;
   specimenGrid.innerHTML = '';
   specimenGrid.classList.add('specimen-grid--table');
+  document.getElementById('collection-main')?.classList.add('collection-main--table');
 
   if (filteredSpecimens.length === 0) {
     specimenGrid.innerHTML = `
@@ -526,11 +629,18 @@ function renderTable() {
         <th class="col-photo">Photo</th>
         <th class="col-name sortable${activeCls('english_name')}" data-sort="english_name">Name${sortArrow('english_name')}</th>
         <th class="col-latin sortable${activeCls('latin_name')}" data-sort="latin_name">Latin Name${sortArrow('latin_name')}</th>
+        <th class="col-desc">Description</th>
+        <th class="col-taken">Taken</th>
+        <th class="col-altitude">Altitude</th>
+        <th class="col-place sortable${activeCls('location')}" data-sort="location">Place of capture${sortArrow('location')}</th>
+        <th class="col-collector sortable${activeCls('collector')}" data-sort="collector">Col${sortArrow('collector')}</th>
         <th class="col-supplier sortable${activeCls('supplier_name')}" data-sort="supplier_name">Supplier${sortArrow('supplier_name')}</th>
         <th class="col-price sortable${activeCls('price_asc')}" data-sort="price_asc">Price${sortArrow('price_asc')}</th>
-        <th class="col-location sortable${activeCls('location')}" data-sort="location">Location${sortArrow('location')}</th>
-        <th class="col-date sortable${activeCls('date_acquired')}" data-sort="date_acquired">Date${sortArrow('date_acquired')}</th>
-        <th class="col-desc">Description</th>
+        <th class="col-date-bought sortable${activeCls('date_acquired')}" data-sort="date_acquired">Date Bought${sortArrow('date_acquired')}</th>
+        <th class="col-sent">Sent</th>
+        <th class="col-received">Received</th>
+        <th class="col-setting-board">Setting board</th>
+        <th class="col-cat-number">Cat number</th>
       </tr>
     </thead>
     <tbody></tbody>
@@ -543,6 +653,7 @@ function renderTable() {
   }
   tbody.appendChild(frag);
 
+  // Wrap table in scrollable container
   specimenGrid.appendChild(table);
 
   // Wire sortable column headers
@@ -619,11 +730,16 @@ function makeTableRow(s) {
     priceText = '–';
   }
 
-  const sexSym = s.sex ? `<span class="sex-sym">${escHtml(s.sex)}</span>` : '';
-  const supplierDisplay = escHtml(s.supplier_username || s.supplier_name || '–');
-  const locationDisplay = escHtml(s.location || '–');
-  const descDisplay = escHtml((s.description || '').slice(0, 80) + ((s.description || '').length > 80 ? '…' : '')) || '–';
-  const dateDisplay = formatDateDisplay(s.date_bought || s.date_received || '');
+  // Supplier: combine username, email, address (non-empty values)
+  const supplierParts = [
+    s.supplier_username,
+    s.supplier_email,
+    s.supplier_address,
+  ].filter(v => v != null && v !== '');
+  const supplierDisplay = supplierParts.map(escHtml).join('<br>') || '–';
+
+  const descRaw = s.description || '';
+  const descDisplay = escHtml(descRaw.slice(0, 80) + (descRaw.length > 80 ? '…' : '')) || '–';
 
   tr.innerHTML = `
     <td class="col-select">
@@ -635,25 +751,46 @@ function makeTableRow(s) {
       <div class="table-thumb" data-specimen-id="${s.id}">🦋</div>
     </td>
     <td class="col-name">
-      <span class="editable table-editable" data-field="english_name" data-id="${s.id}" data-type="text">${escHtml(s.english_name || '(Unnamed)')}</span>${sexSym}
+      <span class="editable table-editable" data-field="english_name" data-id="${s.id}" data-type="text">${escHtml(s.english_name || '(Unnamed)')}</span>
     </td>
     <td class="col-latin">
       <span class="editable table-editable" data-field="latin_name" data-id="${s.id}" data-type="text"><em>${escHtml(s.latin_name || '–')}</em></span>
     </td>
+    <td class="col-desc">
+      <span class="editable table-editable" data-field="description" data-id="${s.id}" data-type="text">${descDisplay}</span>
+    </td>
+    <td class="col-taken">
+      <span class="editable table-editable" data-field="date_taken" data-id="${s.id}" data-type="date">${formatDateDisplay(s.date_taken || '')}</span>
+    </td>
+    <td class="col-altitude">
+      <span class="editable table-editable" data-field="altitude_m" data-id="${s.id}" data-type="altitude">${s.altitude_m != null ? escHtml(String(s.altitude_m)) + ' m' : '–'}</span>
+    </td>
+    <td class="col-place" title="${escHtml(s.location || '')}">
+      <span class="editable table-editable" data-field="location" data-id="${s.id}" data-type="text">${escHtml(s.location || '–')}</span>
+    </td>
+    <td class="col-collector">
+      <span class="editable table-editable" data-field="collector" data-id="${s.id}" data-type="text">${escHtml(s.collector || '–')}</span>
+    </td>
     <td class="col-supplier">
-      <span class="editable table-editable" data-field="supplier_username" data-id="${s.id}" data-type="text">${supplierDisplay}</span>
+      ${supplierDisplay}
     </td>
     <td class="col-price">
       <span class="editable table-editable" data-field="price" data-id="${s.id}" data-type="price">${priceText}</span>
     </td>
-    <td class="col-location" title="${escHtml(s.location || '')}">
-      <span class="editable table-editable" data-field="location" data-id="${s.id}" data-type="text">${locationDisplay}</span>
+    <td class="col-date-bought">
+      <span class="editable table-editable" data-field="date_bought" data-id="${s.id}" data-type="date">${formatDateDisplay(s.date_bought || '')}</span>
     </td>
-    <td class="col-date">
-      <span class="editable table-editable" data-field="date_bought" data-id="${s.id}" data-type="date">${dateDisplay}</span>
+    <td class="col-sent">
+      <span class="editable table-editable" data-field="date_sent" data-id="${s.id}" data-type="date">${formatDateDisplay(s.date_sent || '')}</span>
     </td>
-    <td class="col-desc">
-      <span class="editable table-editable" data-field="description" data-id="${s.id}" data-type="text">${descDisplay}</span>
+    <td class="col-received">
+      <span class="editable table-editable" data-field="date_received" data-id="${s.id}" data-type="date">${formatDateDisplay(s.date_received || '')}</span>
+    </td>
+    <td class="col-setting-board">
+      <span class="editable table-editable" data-field="setting_board" data-id="${s.id}" data-type="text">${escHtml(s.setting_board || '–')}</span>
+    </td>
+    <td class="col-cat-number">
+      <span class="editable table-editable" data-field="cat_number" data-id="${s.id}" data-type="text">${escHtml(s.cat_number || '–')}</span>
     </td>
   `;
 
@@ -805,14 +942,15 @@ async function renderDetailPanel(id) {
         </div>
 
         <div class="detail-row">
-          <span class="detail-label">Location</span>
-          <span class="detail-value editable" data-field="location" data-id="${s.id}"
-                data-type="text">${escHtml(s.location || '–')}</span>
+          <span class="detail-label">Taken</span>
+          <span class="detail-value editable" data-field="date_taken" data-id="${s.id}"
+                data-type="date">${escHtml(s.date_taken || '–')}</span>
         </div>
 
         <div class="detail-row">
-          <span class="detail-label">Country</span>
-          <span class="detail-value">${escHtml(s.location_country || '–')}</span>
+          <span class="detail-label">Place of capture</span>
+          <span class="detail-value editable" data-field="location" data-id="${s.id}"
+                data-type="text">${escHtml(s.location || '–')}</span>
         </div>
 
         <div class="detail-row">
@@ -853,28 +991,10 @@ async function renderDetailPanel(id) {
       <div class="detail-section-title">Supplier</div>
       <div class="detail-fields">
 
-        <div class="detail-row">
-          <span class="detail-label">Username</span>
-          <span class="detail-value editable" data-field="supplier_username" data-id="${s.id}"
-                data-type="text">${escHtml(s.supplier_username || '–')}</span>
-        </div>
-
-        <div class="detail-row">
-          <span class="detail-label">Name</span>
-          <span class="detail-value editable" data-field="supplier_name" data-id="${s.id}"
-                data-type="text">${escHtml(s.supplier_name || '–')}</span>
-        </div>
-
         <div class="detail-row detail-row--full">
-          <span class="detail-label">Address</span>
-          <span class="detail-value editable detail-notes" data-field="supplier_address"
-                data-id="${s.id}" data-type="textarea">${escHtml(s.supplier_address || '–')}</span>
-        </div>
-
-        <div class="detail-row">
-          <span class="detail-label">Email</span>
-          <span class="detail-value editable" data-field="supplier_email" data-id="${s.id}"
-                data-type="text">${escHtml(s.supplier_email || '–')}</span>
+          <span class="detail-label">Supplier <span style="font-weight:400;font-size:0.7em;opacity:0.7">(username · email · address)</span></span>
+          <span class="detail-value editable detail-notes" data-field="supplier_combined"
+                data-id="${s.id}" data-type="supplier">${escHtml(buildSupplierDisplay(s))}</span>
         </div>
 
       </div>
@@ -950,11 +1070,13 @@ async function renderDetailPanel(id) {
     if (!confirm(`Delete "${s.english_name || s.latin_name || 'this specimen'}"?\nThis cannot be undone.`)) return;
     try {
       await deleteSpecimen(s.id);
+      dirtySpecimenIds.delete(s.id);
       incrementChanges();
       specimens = await getAllSpecimens();
       applyFiltersAndSort();
       closeDetailPanel();
       await updateStats();
+      updateDirtyStatus();
       showToast('Specimen deleted');
     } catch (err) {
       console.error('[app] deleteSpecimen failed:', err);
@@ -1089,6 +1211,15 @@ function makeEditable(element, field, specimenId, fieldType = 'text') {
       attachSaveCancel();
       return; // handled separately because of wrapper
 
+    } else if (fieldType === 'supplier') {
+      // Textarea for combined supplier: username / email / address on separate lines
+      inputEl = document.createElement('textarea');
+      inputEl.className = 'edit-input';
+      inputEl.rows = 3;
+      const currentVal = buildSupplierDisplay(specimen);
+      inputEl.value = currentVal === '–' ? '' : currentVal;
+      getNewValue = () => inputEl.value.trim();
+
     } else if (fieldType === 'textarea') {
       inputEl = document.createElement('textarea');
       inputEl.className = 'edit-input';
@@ -1099,28 +1230,38 @@ function makeEditable(element, field, specimenId, fieldType = 'text') {
 
     } else if (fieldType === 'date') {
       inputEl = document.createElement('input');
-      inputEl.type = 'date';
+      inputEl.type = 'text';
       inputEl.className = 'edit-input';
+      inputEl.placeholder = 'DD.MM.YYYY';
       const raw = specimen[field];
-      // Only set value if it looks like YYYY-MM-DD
-      inputEl.value = (raw && /^\d{4}-\d{2}-\d{2}$/.test(raw)) ? raw : '';
-      getNewValue = () => inputEl.value || null;
+      inputEl.value = raw && /^\d{4}-\d{2}-\d{2}$/.test(raw) ? formatDateDisplay(raw) : '';
+      getNewValue = () => {
+        const val = inputEl.value.trim();
+        if (!val) return null;
+        const dmy = val.match(/^(\d{1,2})\.(\d{1,2})\.(\d{4})$/);
+        if (dmy) return `${dmy[3]}-${dmy[2].padStart(2, '0')}-${dmy[1].padStart(2, '0')}`;
+        if (/^\d{4}-\d{2}-\d{2}$/.test(val)) return val;
+        return null;
+      };
 
     } else if (fieldType === 'altitude') {
       const wrapper = document.createElement('span');
       wrapper.style.cssText = 'display:inline-flex;align-items:center;gap:4px;';
       inputEl = document.createElement('input');
-      inputEl.type = 'number';
-      inputEl.min  = '0';
+      inputEl.type = 'text';
       inputEl.className = 'edit-input';
       inputEl.style.width = '70px';
+      inputEl.inputMode = 'decimal';
       inputEl.value = specimen[field] != null ? String(specimen[field]) : '';
       const suffix = document.createElement('span');
       suffix.textContent = 'm';
       suffix.style.fontSize = '0.85em';
       wrapper.appendChild(inputEl);
       wrapper.appendChild(suffix);
-      getNewValue = () => inputEl.value !== '' ? parseFloat(inputEl.value) : null;
+      getNewValue = () => {
+        const cleaned = (inputEl.value || '').replace(/[^\d.-]/g, '');
+        return cleaned !== '' ? parseFloat(cleaned) : null;
+      };
 
       element.textContent = '';
       element.appendChild(wrapper);
@@ -1168,26 +1309,21 @@ function makeEditable(element, field, specimenId, fieldType = 'text') {
         if (fieldType === 'price' && typeof newValue === 'object' && newValue !== null) {
           specimen.price = newValue.price;
           specimen.price_is_collected = newValue.price_is_collected;
+        } else if (fieldType === 'supplier') {
+          const parsed = parseSupplierValue(newValue);
+          specimen.supplier_username = parsed.supplier_username;
+          specimen.supplier_email    = parsed.supplier_email;
+          specimen.supplier_address  = parsed.supplier_address;
         } else {
           specimen[field] = newValue !== '' ? newValue : null;
         }
 
-        // Persist
-        try {
-          await putSpecimen(specimen);
-          incrementChanges();
-        } catch (err) {
-          console.error('[app] putSpecimen failed:', err);
-          showToast('Save failed — see console', 'error');
-        }
+        // Draft mode: mark dirty, skip IndexedDB write until explicit save
+        dirtySpecimenIds.add(specimen.id);
 
         // Update display
         element.classList.remove('editing');
         element.textContent = formatFieldDisplay(specimen, field);
-
-        // Flash confirmation
-        element.classList.add('edit-saved');
-        setTimeout(() => element.classList.remove('edit-saved'), 600);
 
         // Re-attach click handler
         element.addEventListener('click', onEditClick);
@@ -1195,15 +1331,7 @@ function makeEditable(element, field, specimenId, fieldType = 'text') {
         // Sync the grid card
         refreshCard(specimenId);
 
-        // Update filter options & stats if name/supplier changed
-        if (['english_name', 'latin_name', 'supplier_name', 'supplier_username',
-             'location', 'sex'].includes(field)) {
-          buildFilterOptions();
-          applyFiltersAndSort();
-        }
-
-        showToast(`${fieldLabel(field)} updated`);
-        pushHashState();
+        updateDirtyStatus();
       }
 
       function cancelEdit() {
@@ -1274,6 +1402,8 @@ function formatFieldDisplay(specimen, field) {
     }
     case 'altitude_m':
       return specimen.altitude_m != null ? `${specimen.altitude_m} m` : '–';
+    case 'supplier_combined':
+      return buildSupplierDisplay(specimen);
     default: {
       const v = specimen[field];
       return (v != null && v !== '') ? String(v) : '–';
@@ -1399,7 +1529,16 @@ function handleSearch(query) {
  * @returns {Object[]}
  */
 function applyFilters(list) {
+  const normName   = activeFilters.name      ? normalise(activeFilters.name)      : '';
+  const normLatin  = activeFilters.latinName ? normalise(activeFilters.latinName) : '';
+
   return list.filter(s => {
+    // Name text filter
+    if (normName && !normalise(s.english_name || '').includes(normName)) return false;
+
+    // Latin name text filter
+    if (normLatin && !normalise(s.latin_name || '').includes(normLatin)) return false;
+
     // Supplier: match username or name
     if (activeFilters.supplier.length) {
       const matches = activeFilters.supplier.some(v =>
@@ -1408,24 +1547,29 @@ function applyFilters(list) {
       if (!matches) return false;
     }
 
-    // Sex
-    if (activeFilters.sex.length && !activeFilters.sex.includes(s.sex)) {
-      return false;
-    }
-
-    // Location
-    if (activeFilters.location.length && !activeFilters.location.includes(s.location_country)) {
-      return false;
-    }
-
     // Price range (collected specimens count as price=0 for range purposes)
     const effectivePrice = s.price_is_collected ? 0 : (s.price ?? null);
-
     if (activeFilters.priceMin != null && effectivePrice != null) {
       if (effectivePrice < activeFilters.priceMin) return false;
     }
     if (activeFilters.priceMax != null && effectivePrice != null) {
       if (effectivePrice > activeFilters.priceMax) return false;
+    }
+
+    // Date bought range (ISO YYYY-MM-DD strings compare correctly lexicographically)
+    if (activeFilters.dateBoughtMin && s.date_bought) {
+      if (s.date_bought < activeFilters.dateBoughtMin) return false;
+    }
+    if (activeFilters.dateBoughtMax && s.date_bought) {
+      if (s.date_bought > activeFilters.dateBoughtMax) return false;
+    }
+
+    // Received range
+    if (activeFilters.receivedMin && s.date_received) {
+      if (s.date_received < activeFilters.receivedMin) return false;
+    }
+    if (activeFilters.receivedMax && s.date_received) {
+      if (s.date_received > activeFilters.receivedMax) return false;
     }
 
     return true;
@@ -1442,16 +1586,50 @@ function handleFilter(overrides) {
   if (overrides) {
     activeFilters = { ...activeFilters, ...overrides };
   } else {
-    // Read single-select dropdowns
-    activeFilters.supplier = valueFromSelect('filter-supplier');
-    activeFilters.sex      = valueFromSelect('filter-sex');
-    activeFilters.location = valueFromSelect('filter-location');
+    // Text filters
+    activeFilters.name      = ($('filter-name')  || {}).value?.trim()  || '';
+    activeFilters.latinName = ($('filter-latin') || {}).value?.trim()  || '';
 
-    // Read price range inputs
+    // Supplier dropdown
+    activeFilters.supplier = valueFromSelect('filter-supplier');
+
+    // Price range
     const pmin = $('filter-price-min');
     const pmax = $('filter-price-max');
     activeFilters.priceMin = pmin && pmin.value !== '' ? parseFloat(pmin.value) : null;
     activeFilters.priceMax = pmax && pmax.value !== '' ? parseFloat(pmax.value) : null;
+
+    // Date bought preset or custom range
+    const dbPreset = $('filter-date-bought-preset');
+    if (dbPreset && dbPreset.value === 'custom') {
+      const dbmin = $('filter-date-bought-min');
+      const dbmax = $('filter-date-bought-max');
+      activeFilters.dateBoughtMin = dbmin && dbmin.value ? parseCustomDate(dbmin.value) : null;
+      activeFilters.dateBoughtMax = dbmax && dbmax.value ? parseCustomDate(dbmax.value) : null;
+    } else if (dbPreset && dbPreset.value) {
+      const range = datePresetToRange(dbPreset.value);
+      activeFilters.dateBoughtMin = range.min;
+      activeFilters.dateBoughtMax = range.max;
+    } else {
+      activeFilters.dateBoughtMin = null;
+      activeFilters.dateBoughtMax = null;
+    }
+
+    // Received preset or custom range
+    const recPreset = $('filter-received-preset');
+    if (recPreset && recPreset.value === 'custom') {
+      const recmin = $('filter-received-min');
+      const recmax = $('filter-received-max');
+      activeFilters.receivedMin = recmin && recmin.value ? parseCustomDate(recmin.value) : null;
+      activeFilters.receivedMax = recmax && recmax.value ? parseCustomDate(recmax.value) : null;
+    } else if (recPreset && recPreset.value) {
+      const range = datePresetToRange(recPreset.value);
+      activeFilters.receivedMin = range.min;
+      activeFilters.receivedMax = range.max;
+    } else {
+      activeFilters.receivedMin = null;
+      activeFilters.receivedMax = null;
+    }
   }
 
   applyFiltersAndSort();
@@ -1488,71 +1666,62 @@ function renderFilterChips() {
 
   const chips = [];
 
+  function makeChip(label, removeFn) {
+    chips.push({ label, remove: () => { removeFn(); applyFiltersAndSort(); renderFilterChips(); pushHashState(); } });
+  }
+
+  if (activeFilters.name) {
+    makeChip(`Name: ${activeFilters.name}`, () => { activeFilters.name = ''; const el = $('filter-name'); if (el) el.value = ''; });
+  }
+
+  if (activeFilters.latinName) {
+    makeChip(`Latin: ${activeFilters.latinName}`, () => { activeFilters.latinName = ''; const el = $('filter-latin'); if (el) el.value = ''; });
+  }
+
   for (const sup of activeFilters.supplier) {
-    chips.push({ label: `Supplier: ${sup}`, remove: () => {
+    makeChip(`Supplier: ${sup}`, () => {
       activeFilters.supplier = activeFilters.supplier.filter(v => v !== sup);
       syncSelectToFilter('filter-supplier', activeFilters.supplier);
-      if (!activeFilters.supplier.length) {
-        const el = $('filter-supplier');
-        if (el) el.value = '';
-      }
-      applyFiltersAndSort();
-      renderFilterChips();
-      pushHashState();
-    }});
-  }
-
-  for (const sex of activeFilters.sex) {
-    chips.push({ label: `Sex: ${sex}`, remove: () => {
-      activeFilters.sex = activeFilters.sex.filter(v => v !== sex);
-      if (!activeFilters.sex.length) {
-        const el = $('filter-sex');
-        if (el) el.value = '';
-      }
-      applyFiltersAndSort();
-      renderFilterChips();
-      pushHashState();
-    }});
-  }
-
-  for (const loc of activeFilters.location) {
-    chips.push({ label: `Location: ${loc}`, remove: () => {
-      activeFilters.location = activeFilters.location.filter(v => v !== loc);
-      if (!activeFilters.location.length) {
-        const el = $('filter-location');
-        if (el) el.value = '';
-      }
-      applyFiltersAndSort();
-      renderFilterChips();
-      pushHashState();
-    }});
+      if (!activeFilters.supplier.length) { const el = $('filter-supplier'); if (el) el.value = ''; }
+    });
   }
 
   if (activeFilters.priceMin != null) {
-    chips.push({ label: `Price ≥ £${activeFilters.priceMin.toFixed(2)}`, remove: () => {
-      activeFilters.priceMin = null;
-      const el = $('filter-price-min');
-      if (el) el.value = '';
-      applyFiltersAndSort();
-      renderFilterChips();
-      pushHashState();
-    }});
+    makeChip(`Price ≥ £${activeFilters.priceMin.toFixed(2)}`, () => { activeFilters.priceMin = null; const el = $('filter-price-min'); if (el) el.value = ''; });
   }
 
   if (activeFilters.priceMax != null) {
-    chips.push({ label: `Price ≤ £${activeFilters.priceMax.toFixed(2)}`, remove: () => {
-      activeFilters.priceMax = null;
-      const el = $('filter-price-max');
-      if (el) el.value = '';
-      applyFiltersAndSort();
-      renderFilterChips();
-      pushHashState();
-    }});
+    makeChip(`Price ≤ £${activeFilters.priceMax.toFixed(2)}`, () => { activeFilters.priceMax = null; const el = $('filter-price-max'); if (el) el.value = ''; });
+  }
+
+  const dbPreset = $('filter-date-bought-preset');
+  if (dbPreset && dbPreset.value && dbPreset.value !== '') {
+    const presetLabel = dbPreset.options[dbPreset.selectedIndex]?.text || dbPreset.value;
+    makeChip(`Bought: ${presetLabel}`, () => {
+      dbPreset.value = '';
+      const custom = $('date-bought-custom');
+      if (custom) custom.setAttribute('hidden', '');
+      activeFilters.dateBoughtMin = null;
+      activeFilters.dateBoughtMax = null;
+    });
+  }
+
+  const recPreset = $('filter-received-preset');
+  if (recPreset && recPreset.value && recPreset.value !== '') {
+    const presetLabel = recPreset.options[recPreset.selectedIndex]?.text || recPreset.value;
+    makeChip(`Received: ${presetLabel}`, () => {
+      recPreset.value = '';
+      const custom = $('date-received-custom');
+      if (custom) custom.setAttribute('hidden', '');
+      activeFilters.receivedMin = null;
+      activeFilters.receivedMax = null;
+    });
   }
 
   if (chips.length === 0) {
     container.innerHTML = '';
     container.hidden = true;
+    updateStickyOffsets();
     return;
   }
 
@@ -1580,14 +1749,26 @@ function renderFilterChips() {
     clearBtn.className = 'filter-chip filter-chip--clear';
     clearBtn.textContent = 'Clear all';
     clearBtn.addEventListener('click', () => {
-      activeFilters = { supplier: [], sex: [], location: [], priceMin: null, priceMax: null };
-      ['filter-supplier', 'filter-sex', 'filter-location'].forEach(id => {
-        const el = $(id);
-        if (el) el.value = '';
-      });
+      activeFilters = {
+        supplier: [], name: '', latinName: '',
+        priceMin: null, priceMax: null,
+        dateBoughtMin: null, dateBoughtMax: null,
+        receivedMin: null, receivedMax: null,
+      };
+      ['filter-supplier'].forEach(id => { const el = $(id); if (el) el.value = ''; });
+      ['filter-name', 'filter-latin'].forEach(id => { const el = $(id); if (el) el.value = ''; });
       ['filter-price-min', 'filter-price-max'].forEach(id => {
         const el = $(id);
         if (el) el.value = '';
+      });
+      // Reset date presets
+      ['filter-date-bought-preset', 'filter-received-preset'].forEach(id => {
+        const el = $(id);
+        if (el) el.value = '';
+      });
+      ['date-bought-custom', 'date-received-custom'].forEach(id => {
+        const el = $(id);
+        if (el) el.setAttribute('hidden', '');
       });
       applyFiltersAndSort();
       renderFilterChips();
@@ -1595,6 +1776,8 @@ function renderFilterChips() {
     });
     container.appendChild(clearBtn);
   }
+
+  updateStickyOffsets();
 }
 
 // ── Sort ──────────────────────────────────────────────────────────────────────
@@ -1618,6 +1801,10 @@ function sortSpecimens() {
       case 'supplier_name':
         return ((a.supplier_username || a.supplier_name) || '').localeCompare(
                (b.supplier_username || b.supplier_name) || '');
+      case 'collector':
+        return (a.collector || '').localeCompare(b.collector || '');
+      case 'location':
+        return (a.location || '').localeCompare(b.location || '');
       case 'price_asc': {
         const pa = a.price_is_collected ? 0 : (a.price ?? Infinity);
         const pb = b.price_is_collected ? 0 : (b.price ?? Infinity);
@@ -1680,11 +1867,13 @@ async function addSpecimen() {
     latin_name:          '',
     sex:                 '',
     description:         null,
+    date_taken:          '',
     location:            '',
     altitude_m:          null,
     supplier_username:   '',
     supplier_name:       '',
     supplier_address:    null,
+    supplier_email:      null,
     price:               null,
     price_is_collected:  false,
     currency:            '£',
@@ -1761,14 +1950,17 @@ function updateStickyOffsets() {
   const header = document.querySelector('.app-header');
   const searchBar = document.querySelector('.search-bar');
   const toolbar = document.querySelector('.toolbar');
+  const filterChips = document.getElementById('filter-chips');
   if (!header || !toolbar) return;
   const headerH = header.offsetHeight;
   const searchBarH = searchBar ? searchBar.offsetHeight : 0;
   const toolbarH = toolbar.offsetHeight;
+  const chipsH = (filterChips && !filterChips.hidden) ? filterChips.offsetHeight : 0;
   const root = document.documentElement;
   root.style.setProperty('--header-h', headerH + 'px');
   root.style.setProperty('--header-search-h', (headerH + searchBarH) + 'px');
   root.style.setProperty('--header-toolbar-h', (headerH + searchBarH + toolbarH) + 'px');
+  root.style.setProperty('--sticky-all-h', (headerH + searchBarH + toolbarH + chipsH) + 'px');
 }
 
 function showStatus(message, type = 'info') {
@@ -1798,16 +1990,71 @@ function showToast(message, type = 'info') {
 
 async function handleExport() {
   try {
+    // Save any dirty specimens first, then export
+    await saveDirtySpecimens();
     await exportCollection((msg, current, total) => {
       showStatus(msg);
     });
     resetChanges();
     updateChangeBadge();
+    updateDirtyStatus();
     showToast('Collection exported — share the ZIP file');
   } catch (err) {
     console.error('[app] export failed:', err);
     showStatus('Export failed — see console');
     showToast(err.message || 'Export failed', 'error');
+  }
+}
+
+async function saveDirtySpecimens() {
+  if (dirtySpecimenIds.size === 0) return;
+  const ids = [...dirtySpecimenIds];
+  for (const id of ids) {
+    const s = specimens.find(sp => String(sp.id) === String(id));
+    if (s) {
+      try {
+        await putSpecimen(s);
+        incrementChanges();
+      } catch (err) {
+        console.error('[app] saveDirtySpecimens failed for', id, err);
+      }
+    }
+  }
+  dirtySpecimenIds.clear();
+  updateChangeBadge();
+}
+
+async function handleSave() {
+  const count = dirtySpecimenIds.size;
+  if (count === 0) return;
+  try {
+    await saveDirtySpecimens();
+    updateDirtyStatus();
+    showToast(`Changes saved (${count} specimen${count !== 1 ? 's' : ''})`);
+  } catch (err) {
+    console.error('[app] save failed:', err);
+    showToast('Save failed — see console', 'error');
+  }
+}
+
+function updateDirtyStatus() {
+  const n = dirtySpecimenIds.size;
+  showStatus(n > 0 ? `${n} unsaved change${n !== 1 ? 's' : ''}` : `${specimens.length} specimens loaded`);
+  const saveBtn = document.getElementById('btn-save');
+  if (saveBtn) saveBtn.disabled = n === 0;
+  // Show a subtle visual indicator in the header
+  let badge = document.getElementById('dirty-badge');
+  if (n > 0) {
+    if (!badge) {
+      badge = document.createElement('span');
+      badge.id = 'dirty-badge';
+      badge.style.cssText = 'font-size:0.72rem;color:#c4a035;font-weight:500;margin-left:8px;';
+      document.getElementById('specimen-count')?.parentElement?.appendChild(badge);
+    }
+    badge.textContent = `${n} unsaved`;
+    badge.hidden = false;
+  } else if (badge) {
+    badge.hidden = true;
   }
 }
 
@@ -1833,6 +2080,7 @@ function fieldLabel(field) {
     description:       'Description',
     location:          'Location',
     altitude_m:        'Altitude',
+    supplier_combined: 'Supplier',
     supplier_username: 'Supplier username',
     supplier_name:     'Supplier name',
     supplier_address:  'Supplier address',
@@ -1867,10 +2115,20 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Filter dropdowns (single-select)
-  ['filter-supplier', 'filter-sex', 'filter-location'].forEach(id => {
+  // Supplier dropdown
+  const supplierEl = $('filter-supplier');
+  if (supplierEl) supplierEl.addEventListener('change', () => handleFilter());
+
+  // Name / Latin name text filters — debounced 250ms
+  let textFilterTimer;
+  ['filter-name', 'filter-latin'].forEach(id => {
     const el = $(id);
-    if (el) el.addEventListener('change', () => handleFilter());
+    if (el) {
+      el.addEventListener('input', () => {
+        clearTimeout(textFilterTimer);
+        textFilterTimer = setTimeout(() => handleFilter(), 250);
+      });
+    }
   });
 
   // Price range inputs — debounced 300ms
@@ -1883,6 +2141,30 @@ document.addEventListener('DOMContentLoaded', () => {
         priceTimer = setTimeout(() => handleFilter(), 300);
       });
     }
+  });
+
+  // Date preset selects — toggle custom range visibility and re-filter
+  ['filter-date-bought-preset', 'filter-received-preset'].forEach(id => {
+    const el = $(id);
+    if (el) {
+      el.addEventListener('change', () => {
+        // Show/hide the custom date range inputs
+        const customId = id === 'filter-date-bought-preset' ? 'date-bought-custom' : 'date-received-custom';
+        const custom = $(customId);
+        if (custom) {
+          if (el.value === 'custom') custom.removeAttribute('hidden');
+          else custom.setAttribute('hidden', '');
+        }
+        handleFilter();
+      });
+    }
+  });
+
+  // Custom date text inputs — filter on change
+  ['filter-date-bought-min', 'filter-date-bought-max',
+   'filter-received-min', 'filter-received-max'].forEach(id => {
+    const el = $(id);
+    if (el) el.addEventListener('change', () => handleFilter());
   });
 
   // Sort dropdown
@@ -1900,6 +2182,18 @@ document.addEventListener('DOMContentLoaded', () => {
   // Export button
   const exportBtn = $('btn-export');
   if (exportBtn) exportBtn.addEventListener('click', handleExport);
+
+  // Save Changes button (draft mode)
+  const saveBtn = $('btn-save');
+  if (saveBtn) saveBtn.addEventListener('click', handleSave);
+
+  // Warn on page leave if there are unsaved changes
+  window.addEventListener('beforeunload', e => {
+    if (dirtySpecimenIds.size > 0) {
+      e.preventDefault();
+      e.returnValue = '';
+    }
+  });
 
   // View toggle buttons
   document.querySelectorAll('.view-btn').forEach(btn => {

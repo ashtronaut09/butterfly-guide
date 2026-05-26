@@ -4,7 +4,7 @@
     {
       "name": "butterfly",
       "runtimeExecutable": "python3",
-      "runtimeArgs": ["-m", "http.server", "8765"],
+      "runtimeArgs": ["-m", "http.server", "8765", "--directory", "/Users/ashley/Documents/Butterfly-Guide"],
       "port": 8765
     }
   ]

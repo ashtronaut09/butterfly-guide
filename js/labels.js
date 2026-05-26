@@ -40,14 +40,29 @@ const TL_H_MAX  = 12;    // max height mm when text wraps
 
 // Details label
 const DL_W      = 15;    // mm
-const DL_H_BASE = 12;    // base height mm
-const DL_H_MAX  = 15;    // max height mm when text wraps
+const DL_H_BASE = 13;    // base height mm
+const DL_H_MAX  = 16;    // max height mm when text wraps
 
 // Columns per page — derived from constants
 const TL_COLS  = Math.floor((PAGE_W - 2 * MARGIN_H) / (TL_W + GUTTER)); // 6
 const DL_COLS  = Math.floor((PAGE_W - 2 * MARGIN_H) / (DL_W + GUTTER)); // 11
 
 const PT_TO_MM = 0.3528;  // 1 pt ≈ 0.3528 mm
+
+// ── Text cleanup ──────────────────────────────────────────────────────────
+
+/**
+ * Collapses "s p a c e d" text (single letters separated by spaces) into
+ * normal words. E.g. "B r i s t o l" → "Bristol".
+ */
+function cleanSpacedText(str) {
+  if (!str) return str;
+  return str.replace(/(?:^|(?<=\s))([A-Za-z]) (?:[A-Za-z] )*[A-Za-z](?=\s|$)/g, (match) => {
+    const chars = match.split(' ');
+    if (chars.every(c => c.length === 1)) return chars.join('');
+    return match;
+  });
+}
 
 // ── Date helpers ───────────────────────────────────────────────────────────
 
@@ -200,7 +215,7 @@ function drawDetailsLabel(doc, x, y, specimen) {
     textLines.push(specimen.location);
   }
   if (specimen.altitude_m != null) {
-    textLines.push(`${specimen.altitude_m}m`);
+    textLines.push(`Alt ${specimen.altitude_m}m`);
   }
   const dateFmt = formatDate(specimen.date_bought);
   if (dateFmt) {
@@ -209,6 +224,11 @@ function drawDetailsLabel(doc, x, y, specimen) {
   // Collector: only if explicitly set, never default
   if (specimen.collector != null && specimen.collector !== '') {
     textLines.push(specimen.collector);
+  }
+
+  // Clean up spaced-out text on all lines
+  for (let i = 0; i < textLines.length; i++) {
+    textLines[i] = cleanSpacedText(textLines[i]);
   }
 
   // No content — draw border at base height and return
